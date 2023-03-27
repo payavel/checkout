@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Contracts;
+namespace Payavel\Checkout\Contracts;
 
 interface PaymentResponder
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel;
+namespace Payavel\Checkout;
 
 class PaymentStatus
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Payavel\Database\Factories;
+namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Payavel\Models\Wallet;
-use Payavel\Models\PaymentMethod;
-use Payavel\Models\PaymentType;
+use Payavel\Checkout\Models\Wallet;
+use Payavel\Checkout\Models\PaymentMethod;
+use Payavel\Checkout\Models\PaymentType;
 
 class PaymentMethodFactory extends Factory
 {

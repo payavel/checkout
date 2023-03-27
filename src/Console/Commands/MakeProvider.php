@@ -1,11 +1,11 @@
 <?php
 
-namespace Payavel\Console\Commands;
+namespace Payavel\Checkout\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Payavel\Traits\GeneratesFiles;
-use Payavel\Traits\Questionable;
+use Payavel\Checkout\Traits\GeneratesFiles;
+use Payavel\Checkout\Traits\Questionable;
 
 class MakeProvider extends Command
 {

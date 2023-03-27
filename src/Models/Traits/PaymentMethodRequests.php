@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Models\Traits;
+namespace Payavel\Checkout\Models\Traits;
 
 trait PaymentMethodRequests
 {
@@ -9,7 +9,7 @@ trait PaymentMethodRequests
     /**
      * Fetch the payment method details from the provider.
      *
-     * @return \Payavel\PaymentResponse
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function fetch()
     {
@@ -20,7 +20,7 @@ trait PaymentMethodRequests
      * Request the provider to update the payment method's details.
      *
      * @param array|mixed $data
-     * @return \Payavel\PaymentResponse
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function patch($data)
     {
@@ -30,7 +30,7 @@ trait PaymentMethodRequests
     /**
      * Request the provider to remove the payment method from their system.
      *
-     * @return \Payavel\PaymentResponse
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function disable()
     {

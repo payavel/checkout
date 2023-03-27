@@ -1,9 +1,9 @@
 <?php
 
-namespace Payavel\Tests;
+namespace Payavel\Checkout\Tests;
 
-use Payavel\Models\PaymentMerchant;
-use Payavel\Models\PaymentProvider;
+use Payavel\Checkout\Models\PaymentMerchant;
+use Payavel\Checkout\Models\PaymentProvider;
 
 class InstallCommandTest extends TestCase
 {    

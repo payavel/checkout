@@ -13,21 +13,21 @@
     },
     "autoload": {
         "psr-4": {
-            "Payavel\\": "src/",
-            "Payavel\\Database\\Factories\\": "src/database/factories/",
-            "Payavel\\Database\\Seeders\\": "src/database/seeders/"
+            "Payavel\\Checkout\\": "src/",
+            "Payavel\\Checkout\\Database\\Factories\\": "src/database/factories/",
+            "Payavel\\Checkout\\Database\\Seeders\\": "src/database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Payavel\\Tests\\": "tests/",
-            "Payavel\\Tests\\App\\": "tests/app/"
+            "Payavel\\Checkout\\Tests\\": "tests/",
+            "Payavel\\Checkout\\Tests\\App\\": "tests/app/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Payavel\\PaymentServiceProvider"
+                "Payavel\\Checkout\\PaymentServiceProvider"
             ]
         }
     }

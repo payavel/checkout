@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Tests\Unit;
+namespace Payavel\Checkout\Tests\Unit;
 
 class ConfigDriverTest extends TestPaymentGateway
 {

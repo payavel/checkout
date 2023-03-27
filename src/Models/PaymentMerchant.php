@@ -1,11 +1,11 @@
 <?php
 
-namespace Payavel\Models;
+namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Contracts\Merchantable;
-use Payavel\Database\Factories\PaymentMerchantFactory;
+use Payavel\Checkout\Contracts\Merchantable;
+use Payavel\Checkout\Database\Factories\PaymentMerchantFactory;
 
 class PaymentMerchant extends Model implements Merchantable
 {

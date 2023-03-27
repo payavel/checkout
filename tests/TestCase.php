@@ -1,10 +1,10 @@
 <?php
 
-namespace Payavel\Tests;
+namespace Payavel\Checkout\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Payavel\PaymentServiceProvider;
+use Payavel\Checkout\PaymentServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -34,7 +34,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     protected function afterRefreshingDatabase()
     {
         if (! class_exists('CreateBasePaymentTables')) {
-            $this->artisan('vendor:publish', ['--provider' => 'Payavel\PaymentServiceProvider', '--tag' => 'migrations']);
+            $this->artisan('vendor:publish', ['--provider' => 'Payavel\Checkout\PaymentServiceProvider', '--tag' => 'migrations']);
 
             $this->artisan('migrate');
         }

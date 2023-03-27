@@ -1,10 +1,10 @@
 <?php
 
-namespace Payavel;
+namespace Payavel\Checkout;
 
 use Illuminate\Support\ServiceProvider;
-use Payavel\Console\Commands\Install;
-use Payavel\Console\Commands\MakeProvider;
+use Payavel\Checkout\Console\Commands\Install;
+use Payavel\Checkout\Console\Commands\MakeProvider;
 
 class PaymentServiceProvider extends ServiceProvider
 {

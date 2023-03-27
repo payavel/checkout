@@ -1,10 +1,10 @@
 <?php
 
-namespace Payavel\Database\Factories;
+namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Payavel\Models\PaymentMerchant;
+use Payavel\Checkout\Models\PaymentMerchant;
 
 class PaymentMerchantFactory extends Factory
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Payavel\Models;
+namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Contracts\Providable;
-use Payavel\Database\Factories\PaymentProviderFactory;
+use Payavel\Checkout\Contracts\Providable;
+use Payavel\Checkout\Database\Factories\PaymentProviderFactory;
 
 class PaymentProvider extends Model implements Providable
 {

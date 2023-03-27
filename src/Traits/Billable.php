@@ -1,8 +1,8 @@
 <?php
 
-namespace Payavel\Traits;
+namespace Payavel\Checkout\Traits;
 
-use Payavel\Models\Wallet;
+use Payavel\Checkout\Models\Wallet;
 
 trait Billable
 {

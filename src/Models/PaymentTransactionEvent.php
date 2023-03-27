@@ -1,10 +1,10 @@
 <?php
 
-namespace Payavel\Models;
+namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Database\Factories\PaymentTransactionEventFactory;
+use Payavel\Checkout\Database\Factories\PaymentTransactionEventFactory;
 
 class PaymentTransactionEvent extends Model
 {

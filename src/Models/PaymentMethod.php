@@ -1,11 +1,11 @@
 <?php
 
-namespace Payavel\Models;
+namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Database\Factories\PaymentMethodFactory;
-use Payavel\Models\Traits\PaymentMethodRequests;
+use Payavel\Checkout\Database\Factories\PaymentMethodFactory;
+use Payavel\Checkout\Models\Traits\PaymentMethodRequests;
 
 class PaymentMethod extends Model
 {
@@ -51,7 +51,7 @@ class PaymentMethod extends Model
     /**
      * Get the payment method's provider.
      *
-     * @return \Payavel\Models\PaymentProvider
+     * @return \Payavel\Checkout\Models\PaymentProvider
      */
     public function getProviderAttribute()
     {
@@ -61,7 +61,7 @@ class PaymentMethod extends Model
     /**
      * Get the payment method's merchant.
      *
-     * @return \Payavel\Models\PaymentMerchant
+     * @return \Payavel\Checkout\Models\PaymentMerchant
      */
     public function getMerchantAttribute()
     {

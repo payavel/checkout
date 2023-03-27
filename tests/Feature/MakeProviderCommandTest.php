@@ -1,9 +1,9 @@
 <?php
 
-namespace Payavel\Tests;
+namespace Payavel\Checkout\Tests;
 
 use Illuminate\Support\Str;
-use Payavel\Models\PaymentProvider;
+use Payavel\Checkout\Models\PaymentProvider;
 
 class MakeProviderCommandTest extends TestCase
 {

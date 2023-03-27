@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Models\Traits;
+namespace Payavel\Checkout\Models\Traits;
 
 trait WalletRequests
 {
@@ -9,7 +9,7 @@ trait WalletRequests
     /**
      * Fetch the wallet details from the provider.
      *
-     * @return \Payavel\PaymentResponse
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function fetch()
     {

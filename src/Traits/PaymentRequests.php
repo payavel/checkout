@@ -1,11 +1,11 @@
 <?php
 
-namespace Payavel\Traits;
+namespace Payavel\Checkout\Traits;
 
-use Payavel\Contracts\Billable;
-use Payavel\Models\PaymentMethod;
-use Payavel\Models\PaymentTransaction;
-use Payavel\Models\Wallet;
+use Payavel\Checkout\Contracts\Billable;
+use Payavel\Checkout\Models\PaymentMethod;
+use Payavel\Checkout\Models\PaymentTransaction;
+use Payavel\Checkout\Models\Wallet;
 
 trait PaymentRequests
 {
@@ -14,8 +14,8 @@ trait PaymentRequests
     /**
      * Retrieve the wallet's details from the provider.
      *
-     * @param \Payavel\Models\Wallet $wallet
-     * @return \Payavel\PaymentResponse
+     * @param \Payavel\Checkout\Models\Wallet $wallet
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function getWallet(Wallet $wallet)
     {
@@ -25,8 +25,8 @@ trait PaymentRequests
     /**
      * Retrieve the payment method's details from the provider.
      * 
-     * @param \Payavel\Models\PaymentMethod $paymentMethod
-     * @return \Payavel\PaymentResponse
+     * @param \Payavel\Checkout\Models\PaymentMethod $paymentMethod
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function getPaymentMethod(PaymentMethod $paymentMethod)
     {
@@ -36,9 +36,9 @@ trait PaymentRequests
     /**
      * Store the payment method details at the provider.
      * 
-     * @param \Payavel\Contracts\Billable $billable
+     * @param \Payavel\Checkout\Contracts\Billable $billable
      * @param array|mixed $data
-     * @return \Payavel\PaymentResponse
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function tokenizePaymentMethod(Billable $billable, $data)
     {
@@ -48,9 +48,9 @@ trait PaymentRequests
     /**
      * Update the payment method's details at the provider.
      * 
-     * @param \Payavel\Models\PaymentMethod $paymentMethod
+     * @param \Payavel\Checkout\Models\PaymentMethod $paymentMethod
      * @param array|mixed $data
-     * @return \Payavel\PaymentResponse
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function updatePaymentMethod(PaymentMethod $paymentMethod, $data)
     {
@@ -60,8 +60,8 @@ trait PaymentRequests
     /**
      * Delete the payment method at the provider.
      * 
-     * @param \Payavel\Models\PaymentMethod $paymentMethod
-     * @return \Payavel\PaymentResponse
+     * @param \Payavel\Checkout\Models\PaymentMethod $paymentMethod
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function deletePaymentMethod(PaymentMethod $paymentMethod)
     {
@@ -72,8 +72,8 @@ trait PaymentRequests
      * Authorize a transaction.
      * 
      * @param array|mixed $data
-     * @param \Payavel\Contracts\Billable|null $billable
-     * @return \Payavel\PaymentResponse
+     * @param \Payavel\Checkout\Contracts\Billable|null $billable
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function authorize($data, Billable $billable = null)
     {
@@ -83,9 +83,9 @@ trait PaymentRequests
     /**
      * Capture a previously authorized transaction.
      * 
-     * @param \Payavel\Models\PaymentTransaction $transaction
+     * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
      * @param array|mixed $data
-     * @return \Payavel\PaymentResponse
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function capture(PaymentTransaction $transaction, $data = [])
     {
@@ -95,9 +95,9 @@ trait PaymentRequests
     /**
      * Void a previously authorized transaction.
      * 
-     * @param \Payavel\Models\PaymentTransaction $paymentTransaction
+     * @param \Payavel\Checkout\Models\PaymentTransaction $paymentTransaction
      * @param array|mixed $data
-     * @return \Payavel\PaymentResponse
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function void(PaymentTransaction $paymentTransaction, $data = [])
     {
@@ -107,9 +107,9 @@ trait PaymentRequests
     /**
      * Refund a previously captured transaction.
      * 
-     * @param \Payavel\Models\PaymentTransaction $paymentTransaction
+     * @param \Payavel\Checkout\Models\PaymentTransaction $paymentTransaction
      * @param array|mixed $data
-     * @return \Payavel\PaymentResponse
+     * @return \Payavel\Checkout\PaymentResponse
      */
     public function refund(PaymentTransaction $paymentTransaction, $data = [])
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Payavel\DataTransferObjects;
+namespace Payavel\Checkout\DataTransferObjects;
 
-use Payavel\Contracts\Providable;
-use Payavel\Traits\SimulateAttributes;
+use Payavel\Checkout\Contracts\Providable;
+use Payavel\Checkout\Traits\SimulateAttributes;
 
 class Provider implements Providable
 {

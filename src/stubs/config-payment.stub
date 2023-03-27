@@ -69,8 +69,8 @@ return [
     |
     */
     // 'models' => [
-    //     \Payavel\Models\PaymentMethod::class => \App\Models\Payment\PaymentMethod::class,
-    //     \Payavel\Models\Wallet::class => \App\Models\Payment\Wallet::class,
+    //     \Payavel\Checkout\Models\PaymentMethod::class => \App\Models\Payment\PaymentMethod::class,
+    //     \Payavel\Checkout\Models\Wallet::class => \App\Models\Payment\Wallet::class,
     // ],
 
 ];

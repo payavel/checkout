@@ -1,11 +1,11 @@
 <?php
 
-namespace Payavel\Models;
+namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Database\Factories\WalletFactory;
-use Payavel\Models\Traits\WalletRequests;
+use Payavel\Checkout\Database\Factories\WalletFactory;
+use Payavel\Checkout\Models\Traits\WalletRequests;
 
 class Wallet extends Model
 {

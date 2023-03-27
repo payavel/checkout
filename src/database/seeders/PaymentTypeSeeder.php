@@ -1,10 +1,10 @@
 <?php
 
-namespace Payavel\Database\Seeders;
+namespace Payavel\Checkout\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Payavel\Database\Factories\PaymentTypeFactory;
-use Payavel\Models\PaymentType;
+use Payavel\Checkout\Database\Factories\PaymentTypeFactory;
+use Payavel\Checkout\Models\PaymentType;
 
 class PaymentTypeSeeder extends Seeder
 {

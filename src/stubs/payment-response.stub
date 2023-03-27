@@ -2,7 +2,7 @@
 
 namespace App\Services\Payment;
 
-use Payavel\PaymentResponse;
+use Payavel\Checkout\PaymentResponse;
 
 class {{ name }}PaymentResponse extends PaymentResponse
 {

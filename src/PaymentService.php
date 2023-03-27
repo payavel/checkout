@@ -1,9 +1,9 @@
 <?php
 
-namespace Payavel;
+namespace Payavel\Checkout;
 
 use Exception;
-use Payavel\Traits\SimulateAttributes;
+use Payavel\Checkout\Traits\SimulateAttributes;
 
 class PaymentService
 {
@@ -12,28 +12,28 @@ class PaymentService
     /**
      * The payment service driver that will handle provider & merchant configurations.
      *
-     * @var \Payavel\PaymentServiceDriver
+     * @var \Payavel\Checkout\PaymentServiceDriver
      */
     private $driver;
 
     /**
      * The payment provider requests will be forwarded to.
      *
-     * @var \Payavel\Contracts\Providable
+     * @var \Payavel\Checkout\Contracts\Providable
      */
     private $provider;
 
     /**
      * The merchant that will be passed to the provider's gateway.
      *
-     * @var \Payavel\Contracts\Merchantable
+     * @var \Payavel\Checkout\Contracts\Merchantable
      */
     private $merchant;
 
     /**
      * The gateway class where requests will be executed.
      *
-     * @var \Payavel\PaymentRequest
+     * @var \Payavel\Checkout\PaymentRequest
      */
     private $gateway;
 
@@ -56,8 +56,8 @@ class PaymentService
     /**
      * Fluent provider setter.
      *
-     * @param \Payavel\Contracts\Providable|string|int $provider
-     * @return \Payavel\PaymentService
+     * @param \Payavel\Checkout\Contracts\Providable|string|int $provider
+     * @return \Payavel\Checkout\PaymentService
      */
     public function provider($provider)
     {
@@ -69,7 +69,7 @@ class PaymentService
     /**
      * Get the current payment provider.
      *
-     * @return \Payavel\Contracts\Providable
+     * @return \Payavel\Checkout\Contracts\Providable
      */
     public function getProvider()
     {
@@ -83,7 +83,7 @@ class PaymentService
     /**
      * Set the payment provider.
      *
-     * @param \Payavel\Contracts\Providable|string|int $provider
+     * @param \Payavel\Checkout\Contracts\Providable|string|int $provider
      * @return void
      *
      * @throws Exception
@@ -102,7 +102,7 @@ class PaymentService
     /**
      * Get the default payment provider.
      *
-     * @return string|int|\Payavel\Contracts\Providable
+     * @return string|int|\Payavel\Checkout\Contracts\Providable
      */
     public function getDefaultProvider()
     {
@@ -112,8 +112,8 @@ class PaymentService
     /**
      * Fluent merchant setter.
      *
-     * @param \Payavel\Contracts\Merchantable|string|int $merchant
-     * @return \Payavel\PaymentService
+     * @param \Payavel\Checkout\Contracts\Merchantable|string|int $merchant
+     * @return \Payavel\Checkout\PaymentService
      */
     public function merchant($merchant)
     {
@@ -125,7 +125,7 @@ class PaymentService
     /**
      * Get the current merchant.
      *
-     * @return \Payavel\Contracts\Merchantable
+     * @return \Payavel\Checkout\Contracts\Merchantable
      */
     public function getMerchant()
     {
@@ -139,7 +139,7 @@ class PaymentService
     /**
      * Set the specified merchant.
      *
-     * @param \Payavel\Contracts\Merchantable|string|int $merchant
+     * @param \Payavel\Checkout\Contracts\Merchantable|string|int $merchant
      * @return void
      *
      * @throws Exception
@@ -158,7 +158,7 @@ class PaymentService
     /**
      * Get the default merchant.
      *
-     * @return string|int|\Payavel\Contracts\Merchantable
+     * @return string|int|\Payavel\Checkout\Contracts\Merchantable
      */
     public function getDefaultMerchant()
     {
@@ -168,7 +168,7 @@ class PaymentService
     /**
      * Get the payment gateway service.
      *
-     * @return \Payavel\PaymentRequest
+     * @return \Payavel\Checkout\PaymentRequest
      */
     protected function getGateway()
     {

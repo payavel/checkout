@@ -1,10 +1,10 @@
 <?php
 
-namespace Payavel\DataTransferObjects;
+namespace Payavel\Checkout\DataTransferObjects;
 
 use Illuminate\Support\Collection;
-use Payavel\Contracts\Merchantable;
-use Payavel\Traits\SimulateAttributes;
+use Payavel\Checkout\Contracts\Merchantable;
+use Payavel\Checkout\Traits\SimulateAttributes;
 
 class Merchant implements Merchantable
 {

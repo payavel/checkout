@@ -1,11 +1,11 @@
 <?php
 
-namespace Payavel\Console\Commands;
+namespace Payavel\Checkout\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Payavel\Traits\GeneratesFiles;
-use Payavel\Traits\Questionable;
+use Payavel\Checkout\Traits\GeneratesFiles;
+use Payavel\Checkout\Traits\Questionable;
 
 class Install extends Command
 {
@@ -54,7 +54,7 @@ class Install extends Command
     public function handle()
     {
         if (! class_exists('CreateBasePaymentTables')) {
-            $this->call('vendor:publish', ['--provider' => 'Payavel\PaymentServiceProvider', '--tag' => 'migrations']);
+            $this->call('vendor:publish', ['--provider' => 'Payavel\Checkout\PaymentServiceProvider', '--tag' => 'migrations']);
         }
 
         $this->installProviders();

@@ -1,14 +1,14 @@
 <?php
 
-namespace Payavel\Tests\Unit;
+namespace Payavel\Checkout\Tests\Unit;
 
-use Payavel\Facades\Payment;
-use Payavel\Models\PaymentMethod;
-use Payavel\Models\PaymentTransaction;
-use Payavel\Models\Wallet;
-use Payavel\PaymentResponse;
-use Payavel\Tests\GatewayTestCase;
-use Payavel\Tests\User;
+use Payavel\Checkout\Facades\Payment;
+use Payavel\Checkout\Models\PaymentMethod;
+use Payavel\Checkout\Models\PaymentTransaction;
+use Payavel\Checkout\Models\Wallet;
+use Payavel\Checkout\PaymentResponse;
+use Payavel\Checkout\Tests\GatewayTestCase;
+use Payavel\Checkout\Tests\User;
 
 class TestPaymentGateway extends GatewayTestCase
 {
@@ -155,7 +155,7 @@ class TestPaymentGateway extends GatewayTestCase
      * Assert the response is configured automatically.
      *
      * @param string $requestMethod
-     * @param \Payavel\PaymentResponse $response
+     * @param \Payavel\Checkout\PaymentResponse $response
      * @return void
      */
     protected function assertResponseIsConfigured(PaymentResponse $response)

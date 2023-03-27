@@ -1,22 +1,22 @@
 <?php
 
-namespace Payavel\Tests;
+namespace Payavel\Checkout\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use Payavel\Contracts\Billable;
-use Payavel\Models\PaymentMerchant;
-use Payavel\Models\PaymentMethod;
-use Payavel\Models\PaymentProvider;
-use Payavel\Models\PaymentTransaction;
-use Payavel\Models\Wallet;
-use Payavel\PaymentRequest;
-use Payavel\PaymentResponse;
-use Payavel\PaymentStatus;
-use Payavel\Traits\Billable as BillableTrait;
+use Payavel\Checkout\Contracts\Billable;
+use Payavel\Checkout\Models\PaymentMerchant;
+use Payavel\Checkout\Models\PaymentMethod;
+use Payavel\Checkout\Models\PaymentProvider;
+use Payavel\Checkout\Models\PaymentTransaction;
+use Payavel\Checkout\Models\Wallet;
+use Payavel\Checkout\PaymentRequest;
+use Payavel\Checkout\PaymentResponse;
+use Payavel\Checkout\PaymentStatus;
+use Payavel\Checkout\Traits\Billable as BillableTrait;
 
 abstract class GatewayTestCase extends TestCase
 {

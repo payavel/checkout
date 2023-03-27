@@ -1,12 +1,12 @@
 <?php
 
-namespace Payavel\Database\Factories;
+namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Payavel\Models\PaymentMerchant;
-use Payavel\Models\PaymentProvider;
-use Payavel\Models\PaymentTransaction;
-use Payavel\PaymentStatus;
+use Payavel\Checkout\Models\PaymentMerchant;
+use Payavel\Checkout\Models\PaymentProvider;
+use Payavel\Checkout\Models\PaymentTransaction;
+use Payavel\Checkout\PaymentStatus;
 
 class PaymentTransactionFactory extends Factory
 {

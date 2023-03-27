@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Traits;
+namespace Payavel\Checkout\Traits;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;

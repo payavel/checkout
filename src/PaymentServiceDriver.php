@@ -1,24 +1,24 @@
 <?php
 
-namespace Payavel;
+namespace Payavel\Checkout;
 
-use Payavel\Contracts\Merchantable;
-use Payavel\Contracts\Providable;
+use Payavel\Checkout\Contracts\Merchantable;
+use Payavel\Checkout\Contracts\Providable;
 
 abstract class PaymentServiceDriver
 {
     /**
      * Resolve the providable instance.
      *
-     * @param \Payavel\Contracts\Providable|string|int $provider
-     * @return \Payavel\Contracts\Providable|null
+     * @param \Payavel\Checkout\Contracts\Providable|string|int $provider
+     * @return \Payavel\Checkout\Contracts\Providable|null
      */
     abstract public function resolveProvider($provider);
 
     /**
      * Get the default providable identifier.
      *
-     * @param \Payavel\Contracts\Merchantable|null $merchant
+     * @param \Payavel\Checkout\Contracts\Merchantable|null $merchant
      * @return string|int
      */
     public function getDefaultProvider(Merchantable $merchant = null)
@@ -29,15 +29,15 @@ abstract class PaymentServiceDriver
     /**
      * Resolve the merchantable intance.
      *
-     * @param \Payavel\Contracts\Merchantable|string|int $merchant
-     * @return \Payavel\Contracts\Merchantable|null
+     * @param \Payavel\Checkout\Contracts\Merchantable|string|int $merchant
+     * @return \Payavel\Checkout\Contracts\Merchantable|null
      */
     abstract public function resolveMerchant($merchant);
 
     /**
      * Get the default merchantable identifier.
      *
-     * @param \Payavel\Contracts\Providable|null $provider
+     * @param \Payavel\Checkout\Contracts\Providable|null $provider
      * @return string|int
      */
     public function getDefaultMerchant(Providable $provider = null)
@@ -48,8 +48,8 @@ abstract class PaymentServiceDriver
     /**
      * Verify that the merchant is compatible with the provider.
      *
-     * @param \Payavel\Contracts\Providable
-     * @param \Payavel\Contracts\Merchantable
+     * @param \Payavel\Checkout\Contracts\Providable
+     * @param \Payavel\Checkout\Contracts\Merchantable
      * @return bool
      */
     abstract public function check($provider, $merchant);
@@ -57,7 +57,7 @@ abstract class PaymentServiceDriver
     /**
      * Resolve the gateway class.
      *
-     * @param \Payavel\Contracts\Providable $provider
+     * @param \Payavel\Checkout\Contracts\Providable $provider
      * @return string
      */
     abstract public function resolveGatewayClass($provider);

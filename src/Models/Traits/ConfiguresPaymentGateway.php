@@ -1,22 +1,22 @@
 <?php
 
-namespace Payavel\Models\Traits;
+namespace Payavel\Checkout\Models\Traits;
 
-use Payavel\PaymentGateway;
+use Payavel\Checkout\PaymentGateway;
 
 trait ConfiguresPaymentGateway
 {
     /**
      * The payment method's pre-configured gateway.
      *
-     * @var \Payavel\PaymentGateway
+     * @var \Payavel\Checkout\PaymentGateway
      */
     private $paymentGateway;
 
     /**
      * Retrieve the payment method's configured gateway.
      *
-     * @return \Payavel\PaymentGateway
+     * @return \Payavel\Checkout\PaymentGateway
      */
     public function getGatewayAttribute()
     {
