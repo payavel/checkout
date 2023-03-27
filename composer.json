@@ -1,6 +1,6 @@
 {
-    "name": "payavel/payavel",
-    "description": "A robust gateway that integrates with any payment processor and Laravel.",
+    "name": "payavel/checkout",
+    "description": "The best checkout solution that integrates with any payment processor and Laravel.",
     "license": "MIT",
     "authors": [
         {
