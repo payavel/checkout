@@ -11,9 +11,9 @@
 Payavel Checkout is a package that integrates seamlessly within the Laravel ecosystem that simplifies the way you integrate & process payments via your preferred payment service provider.
 
 ---
-`payavel/checkout` is the re-branded version of the legacy [r-kujawa/laravel-payment-gateway](https://github.com/r-kujawa/laravel-payment-gateway) package.
+[payavel/checkout](https://github.com/payavel/checkout) is the re-branded version of the legacy [r-kujawa/laravel-payment-gateway](https://github.com/r-kujawa/laravel-payment-gateway) package.
 
-Please reference the [Payavel documentation](https://payavel.com) to get started.
+Please reference the [payavel documentation](https://payavel.com) to get started.
 ## Contributing
 All contributions are welcome! If you are not sure how to contribute, please feel free to [start a discussion](https://github.com/payavel/checkout/discussions) to suggest an idea or ask any relevant questions regarding this package.
 
