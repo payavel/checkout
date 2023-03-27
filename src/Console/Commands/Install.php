@@ -16,7 +16,7 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'payavel:install';
+    protected $signature = 'checkout:install';
 
     /**
      * The console command description.
@@ -84,7 +84,7 @@ class Install extends Command
      */
     protected function installProviders()
     {
-        $this->call('payavel:provider', ['--fake' => true]);
+        $this->call('checkout:provider', ['--fake' => true]);
 
         $this->providers = collect([]);
 
@@ -95,7 +95,7 @@ class Install extends Command
                 'provider' => Str::studly($id),
             ]);
 
-            $this->call('payavel:provider', ['provider' => $name, '--id' => $id]);
+            $this->call('checkout:provider', ['provider' => $name, '--id' => $id]);
         } while ($this->confirm('Would you like to add another payment provider?', false));
 
         $this->config['providers'] = $this->providers->reduce(function ($config, $provider) {

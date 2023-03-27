@@ -16,7 +16,7 @@ class MakeProvider extends Command
      *
      * @var string
      */
-    protected $signature = 'payavel:provider
+    protected $signature = 'checkout:provider
                             {provider? : The payment provider name}
                             {--id= : The payment provider identifier}
                             {--fake : Generates a gateway to be used for testing purposes}';

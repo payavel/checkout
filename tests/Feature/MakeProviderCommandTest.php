@@ -12,7 +12,7 @@ class MakeProviderCommandTest extends TestCase
     {
         $provider = PaymentProvider::factory()->make();
 
-        $this->artisan('payavel:provider')
+        $this->artisan('checkout:provider')
             ->expectsQuestion('What payment provider would you like to add?', $provider->name)
             ->expectsQuestion("How would you like to identify the {$provider->name} payment provider?", $provider->id)
             ->expectsOutput("{$provider->name} payment gateway generated successfully!")
@@ -26,7 +26,7 @@ class MakeProviderCommandTest extends TestCase
     {
         $provider = PaymentProvider::factory()->make();
 
-        $this->artisan('payavel:provider', [
+        $this->artisan('checkout:provider', [
                 'provider' => $provider->name,
                 '--id' => $provider->id,
             ])
@@ -43,7 +43,7 @@ class MakeProviderCommandTest extends TestCase
             '--fake' => true,
         ];
 
-        $this->artisan('payavel:provider', $arguments)
+        $this->artisan('checkout:provider', $arguments)
             ->expectsOutput('Fake payment gateway generated successfully!')
             ->assertExitCode(0);
 
