@@ -132,6 +132,11 @@ class FakePaymentRequest extends PaymentRequest
         return new FakePaymentResponse([]);
     }
 
+    public function getTransaction(PaymentTransaction $transaction)
+    {
+        return new FakePaymentResponse([]);
+    }
+
     public function void(PaymentTransaction $paymentTransaction, $data =[])
     {
         return new FakePaymentResponse([]);
@@ -188,6 +193,13 @@ class FakePaymentResponse extends PaymentResponse
     }
 
     public function captureResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+
+    public function getTransactionResponse()
     {
         return [
             'requestMethod' => $this->requestMethod,

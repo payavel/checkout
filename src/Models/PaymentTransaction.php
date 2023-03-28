@@ -5,10 +5,12 @@ namespace Payavel\Checkout\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Payavel\Checkout\Database\Factories\PaymentTransactionFactory;
+use Payavel\Checkout\Models\Traits\PaymentTransactionRequests;
 
 class PaymentTransaction extends Model
 {
-    use HasFactory;
+    use HasFactory,
+        PaymentTransactionRequests;
 
     /**
      * The attributes that aren't mass assignable.

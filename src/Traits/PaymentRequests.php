@@ -93,6 +93,17 @@ trait PaymentRequests
     }
 
     /**
+     * Retrieve the transaction details from the provider.
+     *
+     * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
+     * @return \Payavel\Checkout\PaymentResponse
+     */
+    public function getTransaction(PaymentTransaction $transaction)
+    {
+        $this->throwRuntimeException(__FUNCTION__);
+    }
+
+    /**
      * Void a previously authorized transaction.
      * 
      * @param \Payavel\Checkout\Models\PaymentTransaction $paymentTransaction
