@@ -21,6 +21,7 @@ use Payavel\Checkout\PaymentGateway;
  * @method static \Payavel\Checkout\PaymentResponse deletePaymentMethod(\Payavel\Checkout\Models\PaymentMethod $paymentMethod)
  * @method static \Payavel\Checkout\PaymentResponse authorize($data, \Payavel\Checkout\Contracts\Billable $billable = null)
  * @method static \Payavel\Checkout\PaymentResponse capture(\Payavel\Checkout\Models\PaymentTransaction $transaction, $data = [])
+ * @method static \Payavel\Checkout\PaymentResponse getTransaction(\Payavel\Checkout\Models\PaymentTransaction $transaction)
  * @method static \Payavel\Checkout\PaymentResponse void(\Payavel\Checkout\Models\PaymentTransaction $transaction, $data = [])
  * @method static \Payavel\Checkout\PaymentResponse refund(\Payavel\Checkout\Models\PaymentTransaction $transaction, $data = [])
  * 

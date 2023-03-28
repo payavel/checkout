@@ -70,6 +70,14 @@ interface PaymentRequestor
     public function capture(PaymentTransaction $transaction, $data = []);
 
     /**
+     * Retrieve the transaction details from the provider.
+     *
+     * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
+     * @return \Payavel\Checkout\PaymentResponse
+     */
+    public function getTransaction(PaymentTransaction $transaction);
+
+    /**
      * Void a previously authorized transaction.
      * 
      * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
