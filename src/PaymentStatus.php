@@ -16,6 +16,11 @@ class PaymentStatus
     const REFUND_SETTLED = 214;
     const REFUND_FAILED = 215;
     const REFUND_REVERSED = 216;
+    const CHARGEBACK = 220;
+    const CHARGEBACK_WON = 221;
+    const CHARGEBACK_LOST = 222;
+    const CHARGEBACK_REVERSED = 223;
+    const SECOND_CHARGEBACK = 224;
     const PENDING = 300;
     const PROCESSING_ASYNC = 301;
     const REFUSED = 400;
@@ -70,6 +75,11 @@ class PaymentStatus
         self::REFUND_SETTLED => 'Refund settled',
         self::REFUND_FAILED => 'Refund failed',
         self::REFUND_REVERSED => 'Refund reversed',
+        self::CHARGEBACK => 'Charged back',
+        self::CHARGEBACK_WON => 'Prearbitration won',
+        self::CHARGEBACK_LOST => 'Prearbitration lost',
+        self::CHARGEBACK_REVERSED => 'Chargeback reversed',
+        self::SECOND_CHARGEBACK => 'Charged back again',
         self::PENDING => 'Pending',
         self::PROCESSING_ASYNC => 'Processing asynchronously',
         self::REFUSED => 'Refused',
@@ -125,6 +135,11 @@ class PaymentStatus
         self::REFUND_SETTLED => 'The refund was settled.',
         self::REFUND_FAILED => 'The refund failed to be processed.',
         self::REFUND_REVERSED => 'The refund was reversed and settled.',
+        self::CHARGEBACK => 'The transaction was charged back.',
+        self::CHARGEBACK_WON => 'The chargeback prearbitration was won.',
+        self::CHARGEBACK_LOST => 'The chargeback prearbitration was lost.',
+        self::CHARGEBACK_REVERSED => 'The chargeback was reversed.',
+        self::SECOND_CHARGEBACK => 'The transaction was charged back again.',
         self::PENDING => 'The transaction is pending.',
         self::PROCESSING_ASYNC => 'The transaction is being completed asynchronously.',
         self::REFUSED => 'The transaction was refused.',
