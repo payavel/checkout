@@ -1,8 +1,8 @@
 ---
-name: Feature request
-about: Suggest a new feature for this project.
+name: Enhancement
+about: Suggest a new feature or improvement.
 title: "Title"
-labels: 'feature'
+labels: 'enhancement'
 assignees: ''
 
 ---
@@ -14,7 +14,7 @@ A description of what you want to happen.
 A description of what the problem this would solve.
 
 ### **Additional context** :speech_balloon:
-Add any other context or screenshots about the feature request here.
+Add any other context or screenshots about the enhancement here.
 
-### **Is this feature request related to any existing issues?** :link:
+### **Is this request related to any existing issues?** :link:
 Link any issues this could possibly be related to.
