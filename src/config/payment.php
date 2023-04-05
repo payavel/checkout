@@ -9,7 +9,7 @@ return [
     |
     | When set to true, it will pass the provider & merchant into the testing
     | gateway so you can mock your requests as you wish. This is very
-    | usefull when you are running tests in a CI/CD environment.
+    | useful when you are running tests in a CI/CD environment.
     |
     */
     'test_mode' => false,
