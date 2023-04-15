@@ -35,11 +35,11 @@ class PaymentServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/database/migrations/2021_01_01_000000_create_base_payment_tables.php' => database_path('migrations/2021_01_01_000000_create_base_payment_tables.php'),
-        ], 'migrations');
+        ], 'payavel-migrations');
 
         $this->publishes([
             __DIR__ . '/stubs/config-publish.stub' => config_path('payment.php'),
-        ], 'config');
+        ], 'payavel-config');
     }
 
     protected function registerCommands()
