@@ -30,7 +30,7 @@ class Merchant implements Merchantable
                 );
             }
 
-            return config('payment.providers.' . $provider);
+            return array_merge(['id' => $provider], config('payment.providers.' . $provider));
         });
     }
 
