@@ -10,24 +10,9 @@ class PaymentServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        if ($this->app->runningInConsole()) {
-            $this->vendorPublish();
-            $this->commands([
-                MakeProvider::class,
-                Install::class,
-            ]);
-        }
-    }
+        $this->registerPublishableAssets();
 
-    protected function vendorPublish()
-    {
-        $this->publishes([
-            __DIR__ . '/database/migrations/2021_01_01_000000_create_base_payment_tables.php' => database_path('migrations/' . now()->format('Y_m_d_His') . '_create_base_payment_tables.php'),
-        ], 'migrations');
-
-        $this->publishes([
-            __DIR__ . '/stubs/config-publish.stub' => config_path('payment.php'),
-        ], 'config');
+        $this->registerCommands();
     }
 
     public function register()
@@ -40,5 +25,32 @@ class PaymentServiceProvider extends ServiceProvider
             __DIR__ . '/config/payment.php',
             'payment'
         );
+    }
+
+    protected function registerPublishableAssets()
+    {
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+
+        $this->publishes([
+            __DIR__ . '/database/migrations/2021_01_01_000000_create_base_payment_tables.php' => database_path('migrations/2021_01_01_000000_create_base_payment_tables.php'),
+        ], 'migrations');
+
+        $this->publishes([
+            __DIR__ . '/stubs/config-publish.stub' => config_path('payment.php'),
+        ], 'config');
+    }
+
+    protected function registerCommands()
+    {
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+
+        $this->commands([
+            MakeProvider::class,
+            Install::class,
+        ]);
     }
 }
