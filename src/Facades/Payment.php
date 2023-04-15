@@ -7,13 +7,13 @@ use Payavel\Checkout\PaymentGateway;
 
 /**
  * @method static \Payavel\Checkout\PaymentGateway provider($provider)
- * @method static \Payavel\Checkout\Models\PaymentProvider getProvider()
+ * @method static \Payavel\Checkout\Contracts\Providable getProvider()
  * @method static void setProvider($provider)
- * @method static string|int|\Payavel\Checkout\Models\PaymentProvider getDefaultProvider()
+ * @method static string|int|\Payavel\Checkout\Contracts\Providable getDefaultProvider()
  * @method static \Payavel\Checkout\PaymentGateway merchant($merchant)
- * @method static \Payavel\Checkout\Models\PaymentMerchant getMerchant()
+ * @method static \Payavel\Checkout\Contracts\Merchantable getMerchant()
  * @method static void setMerchant($merchant, $strict = true)
- * @method static string|int getDefaultMerchant()
+ * @method static string|int|\Payavel\Checkout\Contracts\Merchantable getDefaultMerchant()
  * @method static \Payavel\Checkout\PaymentResponse getWallet(\Payavel\Checkout\Models\Wallet $wallet)
  * @method static \Payavel\Checkout\PaymentResponse getPaymentMethod(\Payavel\Checkout\Models\PaymentMethod $paymentMethod)
  * @method static \Payavel\Checkout\PaymentResponse tokenizePaymentMethod(\Payavel\Checkout\Contracts\Billable $billable, $data)
