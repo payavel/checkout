@@ -73,9 +73,7 @@ abstract class GatewayTestCase extends TestCase
                 $this->merchant => [
                     'name' => Str::headline($this->merchant),
                     'providers' => [
-                        $this->provider => [
-                            'is_default' => true,
-                        ],
+                        $this->provider,
                     ],
                 ],
                 'alternate' => [
