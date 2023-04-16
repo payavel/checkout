@@ -5,6 +5,7 @@
 <a href="https://packagist.org/packages/payavel/checkout"><img src="https://img.shields.io/packagist/dt/payavel/checkout" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/payavel/checkout"><img src="https://img.shields.io/packagist/l/payavel/checkout" alt="License"></a>
 <a href="https://github.com/payavel/checkout/actions/workflows/run-tests.yml"><img src="https://github.com/payavel/checkout/actions/workflows/run-tests.yml/badge.svg" alt="Build Status"></a>
+<a href="https://codecov.io/github/payavel/checkout"><img src="https://codecov.io/github/payavel/checkout/branch/1.x/graph/badge.svg?token=41K71NIV9P" alt="Codecov"/></a>
 </p>
 
 ## About
