@@ -12,10 +12,15 @@
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
     </testsuites>
-    <coverage processUncoveredFiles="true">
+    <coverage>
         <include>
-            <directory suffix=".php">./app</directory>
+            <directory suffix=".php">./src</directory>
         </include>
+        <report>
+            <html outputDirectory="build/coverage" lowUpperBound="50" highLowerBound="90"/>
+            <text outputFile="build/coverage.txt" showUncoveredFiles="false" showOnlySummary="true"/>
+            <clover outputFile="build/clover.xml"/>
+        </report>
     </coverage>
     <php>
         <server name="APP_ENV" value="testing"/>
