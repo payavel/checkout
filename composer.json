@@ -24,6 +24,9 @@
             "Payavel\\Checkout\\Tests\\App\\": "tests/app/"
         }
     },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
     "extra": {
         "laravel": {
             "providers": [
