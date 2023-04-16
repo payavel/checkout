@@ -1,11 +1,11 @@
 <p align="center"><a href="https://payavel.com" target="_blank"><img src="https://user-images.githubusercontent.com/13485445/223704901-8c2754c6-0890-486f-ab4a-6bf551119374.svg" width="400"></a></p>
 
 <p align="center">
-<a href="https://packagist.org/packages/payavel/checkout"><img src="https://img.shields.io/packagist/v/payavel/checkout" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/payavel/checkout"><img src="https://img.shields.io/packagist/dt/payavel/checkout" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/payavel/checkout"><img src="https://img.shields.io/packagist/l/payavel/checkout" alt="License"></a>
+<a href="https://packagist.org/packages/payavel/checkout" target="_blank"><img src="https://img.shields.io/packagist/v/payavel/checkout" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/payavel/checkout" target="_blank"><img src="https://img.shields.io/packagist/dt/payavel/checkout" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/payavel/checkout" target="_blank"><img src="https://img.shields.io/packagist/l/payavel/checkout" alt="License"></a>
 <a href="https://github.com/payavel/checkout/actions/workflows/run-tests.yml"><img src="https://github.com/payavel/checkout/actions/workflows/run-tests.yml/badge.svg" alt="Build Status"></a>
-<a href="https://codecov.io/github/payavel/checkout"><img src="https://codecov.io/github/payavel/checkout/branch/1.x/graph/badge.svg?token=41K71NIV9P" alt="Codecov"/></a>
+<a href="https://codecov.io/github/payavel/checkout" target="_blank"><img src="https://codecov.io/github/payavel/checkout/branch/1.x/graph/badge.svg?token=41K71NIV9P" alt="Codecov"/></a>
 </p>
 
 ## About
