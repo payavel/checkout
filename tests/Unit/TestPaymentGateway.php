@@ -59,6 +59,17 @@ class TestPaymentGateway extends GatewayTestCase
         Payment::setProvider('alternative');
         Payment::authorize([]);
     }
+
+    /** @test */
+    public function payment_service_throws_exception_when_test_mode_gateway_does_not_exist()
+    {
+        config(['payment.test_mode' => true]);
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('The \\App\\Services\\Payment\\FakePaymentRequest::class does not exist.');
+
+        Payment::authorize([]);
+    }
     
     /** @test */
     public function get_wallet_method_returns_configured_response()
