@@ -79,10 +79,8 @@ abstract class GatewayTestCase extends TestCase
                 'alternate' => [
                     'name' => 'Alternate',
                     'providers' => [
-                        'alternative' => [
-                            'is_default' => true,
-                        ],
-                        $this->provider => [],
+                        'alternative',
+                        $this->provider,
                     ],
                 ],
             ],
