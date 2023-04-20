@@ -147,7 +147,7 @@ class PaymentService
     public function setMerchant($merchant)
     {
         if (is_null($merchant = $this->driver->resolveMerchant($merchant))) {
-            throw new Exception('Invalid merchant.');
+            throw new Exception('Invalid checkout merchant.');
         }
 
         $this->merchant = $merchant;
