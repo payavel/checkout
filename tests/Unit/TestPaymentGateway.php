@@ -26,9 +26,10 @@ class TestPaymentGateway extends GatewayTestCase
     {
         config(['payment.defaults.driver' => 'fake']);
 
-        $this->assertThrows(function () {
-            Payment::authorize([]);
-        }, Exception::class, 'Invalid checkout driver provided.');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid checkout driver provided.');
+
+        Payment::authorize([]);
     }
     
     /** @test */
