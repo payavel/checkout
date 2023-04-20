@@ -47,7 +47,7 @@ class PaymentService
     public function __construct()
     {
         if (! class_exists($driver = config('payment.drivers.' . config('payment.defaults.driver', 'config')))) {
-            throw new Exception('The ' . $driver . '::class does not exist.');
+            throw new Exception('Invalid checkout driver provided.');
         }
 
         $this->driver = new $driver;

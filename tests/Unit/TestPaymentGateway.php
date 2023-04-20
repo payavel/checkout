@@ -2,6 +2,7 @@
 
 namespace Payavel\Checkout\Tests\Unit;
 
+use Exception;
 use Payavel\Checkout\Facades\Payment;
 use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Checkout\Models\PaymentTransaction;
@@ -18,6 +19,16 @@ class TestPaymentGateway extends GatewayTestCase
         $response = Payment::provider('alternative')->merchant('alternate')->authorize([]);
 
         $this->assertResponseIsConfigured($response);
+    }
+
+    /** @test */
+    public function setting_invalid_driver_throws_exception()
+    {
+        config(['payment.defaults.driver' => 'fake']);
+
+        $this->assertThrows(function () {
+            Payment::authorize([]);
+        }, Exception::class, 'Invalid checkout driver provided.');
     }
     
     /** @test */
