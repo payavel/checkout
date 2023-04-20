@@ -60,9 +60,14 @@ abstract class GatewayTestCase extends TestCase
             'payment.providers' => [
                 $this->provider => [
                     'name' => Str::headline($this->provider),
-                    'request_class' => FakePaymentRequest::class,
-                    'response_class' => FakePaymentResponse::class,
-                ],
+                    'request_class' => TestPaymentRequest::class,
+                    'response_class' => TestPaymentResponse::class,
+                ], 
+                'alternative' => [
+                    'name' => 'Alternative',
+                    'request_class' => AlternativePaymentRequest::class,
+                    'response_class' => AlternativePaymentResponse::class, 
+                ]
             ],
             'payment.merchants' => [
                 $this->merchant => [
@@ -73,6 +78,15 @@ abstract class GatewayTestCase extends TestCase
                         ],
                     ],
                 ],
+                'alternate' => [
+                    'name' => 'Alternate',
+                    'providers' => [
+                        'alternative' => [
+                            'is_default' => true,
+                        ],
+                        $this->provider => [],
+                    ],
+                ],
             ],
         ]);
     }
@@ -80,10 +94,10 @@ abstract class GatewayTestCase extends TestCase
     protected function databaseDriverSetUp()
     {
         $provider = PaymentProvider::create([
-            'id' => 'test',
-            'name' => 'Test',
-            'request_class' => FakePaymentRequest::class,
-            'response_class' => FakePaymentResponse::class,
+            'id' => $this->provider,
+            'name' => Str::headline($this->provider),
+            'request_class' => TestPaymentRequest::class,
+            'response_class' => TestPaymentResponse::class,
         ]);
 
         $merchant = PaymentMerchant::create([
@@ -92,63 +106,79 @@ abstract class GatewayTestCase extends TestCase
         ]);
 
         $merchant->providers()->attach($provider->id, ['is_default' => true]);
+
+        $alternativeProvider = PaymentProvider::create([
+            'id' => 'alternative',
+            'name' => 'Alternative',
+            'request_class' => AlternativePaymentRequest::class,
+            'response_class' => AlternativePaymentResponse::class,
+        ]);
+
+        $alternateMerchant = PaymentMerchant::create([
+            'id' => 'alternate',
+            'name' => 'Alternate',
+        ]);
+
+        $alternateMerchant->providers()->attach($alternativeProvider->id, ['is_default' => true]);
+        $alternateMerchant->providers()->attach($provider->id);
+
     }
 }
 
-class FakePaymentRequest extends PaymentRequest
+class TestPaymentRequest extends PaymentRequest
 {
     public function getWallet(Wallet $wallet)
     {
-        return new FakePaymentResponse([]);
+        return new TestPaymentResponse([]);
     }
 
     public function getPaymentMethod(PaymentMethod $paymentMethod)
     {
-        return new FakePaymentResponse([]);
+        return new TestPaymentResponse([]);
     }
 
     public function tokenizePaymentMethod(Billable $billable, $data)
     {
-        return new FakePaymentResponse([]);
+        return new TestPaymentResponse([]);
     }
 
     public function updatePaymentMethod(PaymentMethod $paymentMethod, $data)
     {
-        return new FakePaymentResponse([]);
+        return new TestPaymentResponse([]);
     }
 
     public function deletePaymentMethod(PaymentMethod $paymentMethod)
     {
-        return new FakePaymentResponse([]);
+        return new TestPaymentResponse([]);
     }
 
     public function authorize($data, Billable $billable = null)
     {
-        return new FakePaymentResponse([]);
+        return new TestPaymentResponse([]);
     }
 
     public function capture(PaymentTransaction $transaction, $data = [])
     {
-        return new FakePaymentResponse([]);
+        return new TestPaymentResponse([]);
     }
 
     public function getTransaction(PaymentTransaction $transaction)
     {
-        return new FakePaymentResponse([]);
+        return new TestPaymentResponse([]);
     }
 
     public function void(PaymentTransaction $paymentTransaction, $data =[])
     {
-        return new FakePaymentResponse([]);
+        return new TestPaymentResponse([]);
     }
 
     public function refund(PaymentTransaction $paymentTransaction, $data = [])
     {
-        return new FakePaymentResponse([]);
+        return new TestPaymentResponse([]);
     }
 }
 
-class FakePaymentResponse extends PaymentResponse
+class TestPaymentResponse extends PaymentResponse
 {
     public function getWalletResponse()
     {
@@ -223,6 +253,29 @@ class FakePaymentResponse extends PaymentResponse
     public function getStatusCode()
     {
         return PaymentStatus::AUTHORIZED;
+    }
+}
+
+class AlternativePaymentRequest extends PaymentRequest
+{
+    public function authorize($data, Billable $billable = null)
+    {
+        return new TestPaymentResponse([]);
+    }
+}
+
+class AlternativePaymentResponse extends PaymentResponse
+{
+    public function authorizeResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+    
+    public function getStatusCode()
+    {
+        return PaymentStatus::DECLINED;
     }
 }
 
