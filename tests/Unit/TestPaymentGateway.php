@@ -49,6 +49,16 @@ class TestPaymentGateway extends GatewayTestCase
 
         Payment::setMerchant('faker');
     }
+
+    /** @test */
+    public function setting_incompatible_merchant_provider_throws_exception()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('The Tester merchant is not supported by the Alternative provider.');
+
+        Payment::setProvider('alternative');
+        Payment::authorize([]);
+    }
     
     /** @test */
     public function get_wallet_method_returns_configured_response()
