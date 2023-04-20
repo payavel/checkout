@@ -31,6 +31,15 @@ class TestPaymentGateway extends GatewayTestCase
 
         Payment::authorize([]);
     }
+
+    /** @test */
+    public function setting_invalid_provider_throws_exception()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid checkout provider.');
+
+        Payment::setProvider('fake');
+    }
     
     /** @test */
     public function get_wallet_method_returns_configured_response()
