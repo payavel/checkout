@@ -13,6 +13,14 @@ use Payavel\Checkout\Tests\User;
 class TestPaymentGateway extends GatewayTestCase
 {
     /** @test */
+    public function set_provider_and_merchant_fluently()
+    {
+        $response = Payment::provider('alternative')->merchant('alternate')->authorize([]);
+
+        $this->assertResponseIsConfigured($response);
+    }
+    
+    /** @test */
     public function get_wallet_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
