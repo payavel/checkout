@@ -91,7 +91,7 @@ class PaymentService
     public function setProvider($provider)
     {
         if (is_null($provider = $this->driver->resolveProvider($provider))) {
-            throw new Exception('Invalid provider.');
+            throw new Exception('Invalid checkout provider.');
         }
 
         $this->provider = $provider;
