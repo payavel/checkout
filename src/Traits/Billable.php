@@ -13,6 +13,6 @@ trait Billable
      */
     public function wallets()
     {
-        return $this->morphMany(Wallet::class, 'billable');
+        return $this->morphMany(config('payment.models.' . Wallet::class, Wallet::class), 'billable');
     }
 }
