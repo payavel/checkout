@@ -2,10 +2,6 @@
 
 namespace Payavel\Checkout\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\Models\PaymentMerchant;
@@ -16,7 +12,6 @@ use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\PaymentRequest;
 use Payavel\Checkout\PaymentResponse;
 use Payavel\Checkout\PaymentStatus;
-use Payavel\Checkout\Traits\Billable as BillableTrait;
 
 abstract class GatewayTestCase extends TestCase
 {
@@ -34,13 +29,6 @@ abstract class GatewayTestCase extends TestCase
         parent::setUp();
 
         $this->{"{$this->driver}DriverSetUp"}();
-
-        Schema::create('users', function ($table) {
-            $table->id();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->timestamps();
-        });
     }
 
     protected function getEnvironmentSetUp($app)
@@ -276,29 +264,5 @@ class AlternativePaymentResponse extends PaymentResponse
     public function getStatusCode()
     {
         return PaymentStatus::DECLINED;
-    }
-}
-
-class User extends Model implements Billable
-{
-    use BillableTrait,
-        HasFactory;
-
-    protected static function newFactory()
-    {
-        return UserFactory::new();
-    }
-}
-
-class UserFactory extends Factory
-{
-    protected $model = User::class;
-
-    public function definition()
-    {
-        return [
-            'email' => $this->faker->email(),
-            'password' => $this->faker->password(),
-        ];
     }
 }
