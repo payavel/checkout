@@ -10,9 +10,15 @@ class PaymentServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+
         $this->registerPublishableAssets();
 
         $this->registerCommands();
+
+        $this->registerMigrations();
     }
 
     public function register()
@@ -29,10 +35,6 @@ class PaymentServiceProvider extends ServiceProvider
 
     protected function registerPublishableAssets()
     {
-        if (! $this->app->runningInConsole()) {
-            return;
-        }
-
         $this->publishes([
             __DIR__ . '/database/migrations/2021_01_01_000000_create_base_payment_tables.php' => database_path('migrations/2021_01_01_000000_create_base_payment_tables.php'),
         ], 'payavel-migrations');
@@ -44,13 +46,14 @@ class PaymentServiceProvider extends ServiceProvider
 
     protected function registerCommands()
     {
-        if (! $this->app->runningInConsole()) {
-            return;
-        }
-
         $this->commands([
             MakeProvider::class,
             Install::class,
         ]);
+    }
+
+    protected function registerMigrations()
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
     }
 }
