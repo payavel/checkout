@@ -93,6 +93,18 @@ abstract class PaymentResponse implements PaymentResponder
     {
         $this->rawResponse = $rawResponse;
         $this->additionalInformation = $additionalInformation;
+
+        $this->setUp();
+    }
+
+    /**
+     * Set up the response.
+     *
+     * @return void
+     */
+    protected function setUp()
+    {
+        //
     }
 
     /**
