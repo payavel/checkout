@@ -7,6 +7,16 @@ use Payavel\Checkout\PaymentResponse;
 class {{ name }}PaymentResponse extends PaymentResponse
 {
     /**
+     * Set up the response.
+     *
+     * @return void
+     */
+    protected function setUp()
+    {
+        //
+    }
+
+    /**
      * Determines the status code based on the request's raw response.
      *
      * @return int
