@@ -20,8 +20,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | You may register custom payment drivers and/or remove the default ones.
-    | Please note that in order for the driver to be compatible it must extend
-    | the \Payavel\Checkout\PaymentServiceDriver::class.
+    | Please note that in order for the driver to be compatible it must
+    | extend the \Payavel\Checkout\PaymentServiceDriver::class.
     |
     */
     'drivers' => [
