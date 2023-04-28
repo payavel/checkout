@@ -244,7 +244,7 @@ class AlternativePaymentRequest extends PaymentRequest
 {
     public function authorize($data, Billable $billable = null)
     {
-        return new TestPaymentResponse([]);
+        return new AlternativePaymentResponse([]);
     }
 }
 
