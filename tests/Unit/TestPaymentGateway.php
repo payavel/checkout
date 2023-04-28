@@ -66,7 +66,7 @@ class TestPaymentGateway extends GatewayTestCase
         config(['payment.test_mode' => true]);
 
         $this->expectException(Exception::class);
-        $this->expectExceptionMessage('The \\App\\Services\\Payment\\FakePaymentRequest::class does not exist.');
+        $this->expectExceptionMessage('The App\\Services\\Payment\\FakePaymentRequest::class does not exist.');
 
         Payment::authorize([]);
     }
