@@ -26,8 +26,8 @@ return [
     |
     */
     'mocking' => [
-        'request_class' => App\Services\Payment\FakePaymentRequest::class,
-        'response_class' => App\Services\Payment\FakePaymentResponse::class,
+        'request_class' => \App\Services\Payment\FakePaymentRequest::class,
+        'response_class' => \App\Services\Payment\FakePaymentResponse::class,
     ],
 
     /*
