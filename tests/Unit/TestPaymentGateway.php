@@ -8,7 +8,9 @@ use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\PaymentResponse;
+use Payavel\Checkout\Tests\AlternativePaymentResponse;
 use Payavel\Checkout\Tests\GatewayTestCase;
+use Payavel\Checkout\Tests\TestPaymentResponse;
 use Payavel\Checkout\Tests\User;
 
 class TestPaymentGateway extends GatewayTestCase
@@ -24,7 +26,7 @@ class TestPaymentGateway extends GatewayTestCase
     /** @test */
     public function setting_invalid_driver_throws_exception()
     {
-        config(['payment.defaults.driver' => 'fake']);
+        config(['payment.defaults.driver' => 'invalid']);
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid checkout driver provided.');
@@ -38,7 +40,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid checkout provider.');
 
-        Payment::setProvider('fake');
+        Payment::setProvider('invalid');
     }
 
     /** @test */
@@ -47,7 +49,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid checkout merchant.');
 
-        Payment::setMerchant('faker');
+        Payment::setMerchant('invalid');
     }
 
     /** @test */
@@ -58,6 +60,18 @@ class TestPaymentGateway extends GatewayTestCase
 
         Payment::setProvider('alternative');
         Payment::authorize([]);
+    }
+
+    /** @test */
+    public function resetting_payment_service_to_default_configuration()
+    {
+        Payment::provider('alternative')->merchant('alternate');
+
+        $this->assertEquals(AlternativePaymentResponse::class, get_class(Payment::authorize([])));
+
+        Payment::reset();
+
+        $this->assertEquals(TestPaymentResponse::class, get_class(Payment::authorize([])));
     }
 
     /** @test */
