@@ -13,6 +13,7 @@ use Payavel\Checkout\PaymentGateway;
  * @method static \Payavel\Checkout\PaymentGateway merchant($merchant)
  * @method static \Payavel\Checkout\Contracts\Merchantable getMerchant()
  * @method static void setMerchant($merchant, $strict = true)
+ * @method static void reset()
  * @method static string|int|\Payavel\Checkout\Contracts\Merchantable getDefaultMerchant()
  * @method static \Payavel\Checkout\PaymentResponse getWallet(\Payavel\Checkout\Models\Wallet $wallet)
  * @method static \Payavel\Checkout\PaymentResponse getPaymentMethod(\Payavel\Checkout\Models\PaymentMethod $paymentMethod)

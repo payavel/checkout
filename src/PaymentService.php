@@ -205,4 +205,16 @@ class PaymentService
 
         $this->gateway = new $gateway($provider, $merchant);
     }
+
+    /**
+     * Reset the payment service to it's defaults.
+     *
+     * @return void
+     */
+    public function reset()
+    {
+        $this->provider = null;
+        $this->merchant = null;
+        $this->gateway = null;
+    }
 }
