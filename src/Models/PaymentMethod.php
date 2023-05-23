@@ -51,6 +51,7 @@ class PaymentMethod extends Model
     /**
      * Get the payment method's provider.
      *
+     * @deprecated 1.1.0 No longer used by internal code.
      * @return \Payavel\Checkout\Models\PaymentProvider
      */
     public function getProviderAttribute()
@@ -61,9 +62,30 @@ class PaymentMethod extends Model
     /**
      * Get the payment method's merchant.
      *
+     * @deprecated 1.1.0 No longer used by internal code.
      * @return \Payavel\Checkout\Models\PaymentMerchant
      */
     public function getMerchantAttribute()
+    {
+        return $this->wallet->merchant;
+    }
+
+    /**
+     * Get the payment method's provider id.
+     *
+     * @return string|int
+     */
+    public function getProviderIdAttribute()
+    {
+        return $this->wallet->provider;
+    }
+
+    /**
+     * Get the payment method's merchant id.
+     *
+     * @return string|int
+     */
+    public function getMerchantIdAttribute()
     {
         return $this->wallet->merchant;
     }
