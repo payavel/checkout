@@ -11,7 +11,7 @@ use Payavel\Checkout\Tests\GatewayTestCase;
 class TestPaymentMethodRequestsTrait extends GatewayTestCase
 {
     /** @test */
-    public function payment_method_requests_auto_configure_payment_gateway()
+    public function fetch_payment_method_request_auto_configures_payment_gateway()
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => $this->provider,
@@ -25,6 +25,7 @@ class TestPaymentMethodRequestsTrait extends GatewayTestCase
         $response = $paymentMethod->fetch();
 
         $this->assertModelMatchesResponse($paymentMethod, $response);
+        $this->assertEquals('getPaymentMethod', $response->requestMethod);
     }
 
     /**
