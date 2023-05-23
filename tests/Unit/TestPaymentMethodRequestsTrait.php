@@ -13,10 +13,7 @@ class TestPaymentMethodRequestsTrait extends GatewayTestCase
     /** @test */
     public function fetch_payment_method_request_auto_configures_payment_gateway()
     {
-        $wallet = Wallet::factory()->create([
-            'provider_id' => $this->provider,
-            'merchant_id' => $this->merchant,
-        ]);
+        $wallet = $this->createWallet();
 
         $paymentMethod = PaymentMethod::factory()->create([
             'wallet_id' => $wallet->id,
@@ -25,7 +22,45 @@ class TestPaymentMethodRequestsTrait extends GatewayTestCase
         $response = $paymentMethod->fetch();
 
         $this->assertModelMatchesResponse($paymentMethod, $response);
-        $this->assertEquals('getPaymentMethod', $response->requestMethod);
+        $this->assertEquals('getPaymentMethod', $response->data['requestMethod']);
+    }
+
+    /** @test */
+    public function patch_payment_method_request_auto_configures_payment_gateway()
+    {
+        $wallet = $this->createWallet();
+
+        $paymentMethod = PaymentMethod::factory()->create([
+            'wallet_id' => $wallet->id,
+        ]);
+
+        $response = $paymentMethod->patch([]);
+
+        $this->assertModelMatchesResponse($paymentMethod, $response);
+        $this->assertEquals('updatePaymentMethod', $response->data['requestMethod']);
+    }
+
+    /** @test */
+    public function disable_payment_method_request_auto_configures_payment_gateway()
+    {
+        $wallet = $this->createWallet();
+
+        $paymentMethod = PaymentMethod::factory()->create([
+            'wallet_id' => $wallet->id,
+        ]);
+
+        $response = $paymentMethod->disable();
+
+        $this->assertModelMatchesResponse($paymentMethod, $response);
+        $this->assertEquals('deletePaymentMethod', $response->data['requestMethod']);
+    }
+
+    private function createWallet()
+    {
+        return Wallet::factory()->create([
+            'provider_id' => $this->provider,
+            'merchant_id' => $this->merchant,
+        ]);
     }
 
     /**
