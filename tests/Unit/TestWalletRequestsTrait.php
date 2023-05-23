@@ -3,7 +3,6 @@
 namespace Payavel\Checkout\Tests\Unit;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\PaymentResponse;
 use Payavel\Checkout\Tests\GatewayTestCase;
