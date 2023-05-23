@@ -21,7 +21,7 @@ class TestWalletRequestsTrait extends GatewayTestCase
         $response = $wallet->fetch();
 
         $this->assertModelMatchesResponse($wallet, $response);
-        $this->assertEquals('getWallet', $response->requestMethod);
+        $this->assertEquals('getWallet', $response->data['requestMethod']);
     }
 
     /**
