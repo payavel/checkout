@@ -13,11 +13,7 @@ class TestPaymentMethodRequestsTrait extends GatewayTestCase
     /** @test */
     public function fetch_payment_method_request_auto_configures_payment_gateway()
     {
-        $wallet = $this->createWallet();
-
-        $paymentMethod = PaymentMethod::factory()->create([
-            'wallet_id' => $wallet->id,
-        ]);
+        $paymentMethod = $this->createPaymentMethod();
 
         $response = $paymentMethod->fetch();
 
@@ -28,11 +24,7 @@ class TestPaymentMethodRequestsTrait extends GatewayTestCase
     /** @test */
     public function patch_payment_method_request_auto_configures_payment_gateway()
     {
-        $wallet = $this->createWallet();
-
-        $paymentMethod = PaymentMethod::factory()->create([
-            'wallet_id' => $wallet->id,
-        ]);
+        $paymentMethod = $this->createPaymentMethod();
 
         $response = $paymentMethod->patch([]);
 
@@ -43,11 +35,7 @@ class TestPaymentMethodRequestsTrait extends GatewayTestCase
     /** @test */
     public function disable_payment_method_request_auto_configures_payment_gateway()
     {
-        $wallet = $this->createWallet();
-
-        $paymentMethod = PaymentMethod::factory()->create([
-            'wallet_id' => $wallet->id,
-        ]);
+        $paymentMethod = $this->createPaymentMethod();
 
         $response = $paymentMethod->disable();
 
@@ -55,11 +43,15 @@ class TestPaymentMethodRequestsTrait extends GatewayTestCase
         $this->assertEquals('deletePaymentMethod', $response->data['requestMethod']);
     }
 
-    private function createWallet()
+    private function createPaymentMethod()
     {
-        return Wallet::factory()->create([
+        $wallet = Wallet::factory()->create([
             'provider_id' => $this->provider,
             'merchant_id' => $this->merchant,
+        ]);
+
+        return PaymentMethod::factory()->create([
+            'wallet_id' => $wallet->id,
         ]);
     }
 
