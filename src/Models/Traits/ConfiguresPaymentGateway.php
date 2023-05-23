@@ -22,8 +22,8 @@ trait ConfiguresPaymentGateway
     {
         if (! isset($this->paymentGateway)) {
             $this->paymentGateway = (new PaymentGateway)
-                ->provider($this->provider)
-                ->merchant($this->merchant);
+                ->provider($this->provider_id)
+                ->merchant($this->merchant_id);
         }
 
         return $this->paymentGateway;
