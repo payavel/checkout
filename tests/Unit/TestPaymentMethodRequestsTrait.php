@@ -8,21 +8,8 @@ use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\PaymentResponse;
 use Payavel\Checkout\Tests\GatewayTestCase;
 
-class TestConfiguresPaymentGatewayTrait extends GatewayTestCase
+class TestPaymentMethodRequestsTrait extends GatewayTestCase
 {
-    /** @test */
-    public function wallet_requests_auto_configure_payment_gateway()
-    {
-        $wallet = Wallet::factory()->create([
-            'provider_id' => $this->provider,
-            'merchant_id' => $this->merchant,
-        ]);
-
-        $response = $wallet->fetch();
-
-        $this->assertModelMatchesResponse($wallet, $response);
-    }
-
     /** @test */
     public function payment_method_requests_auto_configure_payment_gateway()
     {
