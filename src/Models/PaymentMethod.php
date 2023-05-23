@@ -77,7 +77,7 @@ class PaymentMethod extends Model
      */
     public function getProviderIdAttribute()
     {
-        return $this->wallet->provider;
+        return $this->wallet->provider_id;
     }
 
     /**
@@ -87,7 +87,7 @@ class PaymentMethod extends Model
      */
     public function getMerchantIdAttribute()
     {
-        return $this->wallet->merchant;
+        return $this->wallet->merchant_id;
     }
 
     /**
