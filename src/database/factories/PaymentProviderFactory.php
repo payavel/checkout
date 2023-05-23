@@ -33,7 +33,7 @@ class PaymentProviderFactory extends Factory
             'id' => $id,
             'name' => $provider,
             'request_class' => "\App\Services\Payment\{$studlyProvider}PaymentRequest",
-            'request_class' => "\App\Services\Payment\{$studlyProvider}PaymentResponse",
+            'response_class' => "\App\Services\Payment\{$studlyProvider}PaymentResponse",
         ];
     }
 }
