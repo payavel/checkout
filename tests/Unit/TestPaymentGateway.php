@@ -242,7 +242,6 @@ class TestPaymentGateway extends GatewayTestCase
     /**
      * Assert the response is configured automatically.
      *
-     * @param string $requestMethod
      * @param \Payavel\Checkout\PaymentResponse $response
      * @return void
      */
