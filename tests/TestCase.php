@@ -33,20 +33,6 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * Perform any work that should take place once the database has finished refreshing.
-     *
-     * @return void
-     */
-    protected function afterRefreshingDatabase()
-    {
-        if (! class_exists('CreateBasePaymentTables')) {
-            $this->artisan('vendor:publish', ['--provider' => 'Payavel\Checkout\PaymentServiceProvider', '--tag' => 'payavel-migrations']);
-
-            $this->artisan('migrate');
-        }
-    }
-
-    /**
      * Setup the test environment.
      *
      * @return void

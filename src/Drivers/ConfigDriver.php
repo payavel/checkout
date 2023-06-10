@@ -56,22 +56,22 @@ class ConfigDriver extends PaymentServiceDriver
      * Get the default providable identifier.
      *
      * @param \Payavel\Checkout\Contracts\Merchantable|null $merchant
-     * @return string|int
+     * @return string|int|\Payavel\Checkout\Contracts\Providable
      */
     public function getDefaultProvider(Merchantable $merchant = null)
     {
         if (
             ! $merchant instanceof Merchant ||
-            is_null($provider = $merchant->providers->search(function ($provider) { return $provider['is_default'] ?? false; }))
+            is_null($provider = $merchant->providers->first())
         ) {
             return parent::getDefaultProvider();
         }
 
-        return config('payment.providers.' . $provider . '.id');
+        return $provider['id'];
     }
 
     /**
-     * Resolve the merchantable intance.
+     * Resolve the merchantable instance.
      *
      * @param \Payavel\Checkout\Contracts\Merchantable|string $merchant
      * @return \Payavel\Checkout\Contracts\Merchantable|null

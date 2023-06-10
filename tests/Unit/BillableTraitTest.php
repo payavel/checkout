@@ -9,23 +9,6 @@ use Payavel\Checkout\Tests\User;
 
 class BillableTraitTest extends TestCase
 {
-    /**
-     * Setup the test environment.
-     *
-     * @return void
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->artisan('vendor:publish', [
-            '--provider' => 'Payavel\\Checkout\\PaymentServiceProvider',
-            '--tag' => 'payavel-migrations'
-        ]);
-
-        $this->artisan('migrate');
-    }
-
     /** @test */
     public function retrieve_billable_wallets()
     {

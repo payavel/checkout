@@ -53,10 +53,6 @@ class Install extends Command
      */
     public function handle()
     {
-        if (! class_exists('CreateBasePaymentTables')) {
-            $this->call('vendor:publish', ['--provider' => 'Payavel\Checkout\PaymentServiceProvider', '--tag' => 'payavel-migrations']);
-        }
-
         $this->installProviders();
 
         $this->installMerchants();

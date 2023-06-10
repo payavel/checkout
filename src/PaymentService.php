@@ -195,8 +195,8 @@ class PaymentService
             throw new Exception("The {$merchant->getName()} merchant is not supported by the {$provider->getName()} provider.");
         }
 
-        $gateway = config('payment.test_mode', false)
-            ? config('payment.test.gateway', '\\App\\Services\\Payment\\FakePaymentRequest')
+        $gateway = config('payment.test_mode')
+            ? config('payment.mocking.request_class')
             : $this->driver->resolveGatewayClass($provider);
 
         if (! class_exists($gateway)) {
