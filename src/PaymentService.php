@@ -26,7 +26,7 @@ class PaymentService
     /**
      * The merchant that will be passed to the provider's gateway.
      *
-     * @var \Payavel\Checkout\Contracts\Merchantable
+     * @var \Payavel\Serviceable\Contracts\Merchantable
      */
     private $merchant;
 
@@ -112,7 +112,7 @@ class PaymentService
     /**
      * Fluent merchant setter.
      *
-     * @param \Payavel\Checkout\Contracts\Merchantable|string|int $merchant
+     * @param \Payavel\Serviceable\Contracts\Merchantable|string|int $merchant
      * @return \Payavel\Checkout\PaymentService
      */
     public function merchant($merchant)
@@ -125,7 +125,7 @@ class PaymentService
     /**
      * Get the current merchant.
      *
-     * @return \Payavel\Checkout\Contracts\Merchantable
+     * @return \Payavel\Serviceable\Contracts\Merchantable
      */
     public function getMerchant()
     {
@@ -139,7 +139,7 @@ class PaymentService
     /**
      * Set the specified merchant.
      *
-     * @param \Payavel\Checkout\Contracts\Merchantable|string|int $merchant
+     * @param \Payavel\Serviceable\Contracts\Merchantable|string|int $merchant
      * @return void
      *
      * @throws Exception
@@ -158,7 +158,7 @@ class PaymentService
     /**
      * Get the default merchant.
      *
-     * @return string|int|\Payavel\Checkout\Contracts\Merchantable
+     * @return string|int|\Payavel\Serviceable\Contracts\Merchantable
      */
     public function getDefaultMerchant()
     {

@@ -3,8 +3,8 @@
 namespace Payavel\Checkout\DataTransferObjects;
 
 use Illuminate\Support\Collection;
-use Payavel\Checkout\Contracts\Merchantable;
 use Payavel\Checkout\Traits\SimulateAttributes;
+use Payavel\Serviceable\Contracts\Merchantable;
 
 class Merchant implements Merchantable
 {

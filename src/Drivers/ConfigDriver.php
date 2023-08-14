@@ -2,10 +2,10 @@
 
 namespace Payavel\Checkout\Drivers;
 
-use Payavel\Checkout\Contracts\Merchantable;
 use Payavel\Checkout\DataTransferObjects\Merchant;
 use Payavel\Checkout\DataTransferObjects\Provider;
 use Payavel\Checkout\PaymentServiceDriver;
+use Payavel\Serviceable\Contracts\Merchantable;
 
 class ConfigDriver extends PaymentServiceDriver
 {
@@ -55,7 +55,7 @@ class ConfigDriver extends PaymentServiceDriver
     /**
      * Get the default providable identifier.
      *
-     * @param \Payavel\Checkout\Contracts\Merchantable|null $merchant
+     * @param \Payavel\Serviceable\Contracts\Merchantable|null $merchant
      * @return string|int|\Payavel\Serviceable\Contracts\Providable
      */
     public function getDefaultProvider(Merchantable $merchant = null)
@@ -73,8 +73,8 @@ class ConfigDriver extends PaymentServiceDriver
     /**
      * Resolve the merchantable instance.
      *
-     * @param \Payavel\Checkout\Contracts\Merchantable|string $merchant
-     * @return \Payavel\Checkout\Contracts\Merchantable|null
+     * @param \Payavel\Serviceable\Contracts\Merchantable|string $merchant
+     * @return \Payavel\Serviceable\Contracts\Merchantable|null
      */
     public function resolveMerchant($merchant)
     {
@@ -93,7 +93,7 @@ class ConfigDriver extends PaymentServiceDriver
      * Verify that the merchant is compatible with the provider.
      *
      * @param \Payavel\Serviceable\Contracts\Providable
-     * @param \Payavel\Checkout\Contracts\Merchantable
+     * @param \Payavel\Serviceable\Contracts\Merchantable
      * @return bool
      */
     public function check($provider, $merchant)
