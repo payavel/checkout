@@ -19,7 +19,7 @@ class PaymentService
     /**
      * The payment provider requests will be forwarded to.
      *
-     * @var \Payavel\Checkout\Contracts\Providable
+     * @var \Payavel\Serviceable\Contracts\Providable
      */
     private $provider;
 
@@ -56,7 +56,7 @@ class PaymentService
     /**
      * Fluent provider setter.
      *
-     * @param \Payavel\Checkout\Contracts\Providable|string|int $provider
+     * @param \Payavel\Serviceable\Contracts\Providable|string|int $provider
      * @return \Payavel\Checkout\PaymentService
      */
     public function provider($provider)
@@ -83,7 +83,7 @@ class PaymentService
     /**
      * Set the payment provider.
      *
-     * @param \Payavel\Checkout\Contracts\Providable|string|int $provider
+     * @param \Payavel\Serviceable\Contracts\Providable|string|int $provider
      * @return void
      *
      * @throws Exception
@@ -102,7 +102,7 @@ class PaymentService
     /**
      * Get the default payment provider.
      *
-     * @return string|int|\Payavel\Checkout\Contracts\Providable
+     * @return string|int|\Payavel\Serviceable\Contracts\Providable
      */
     public function getDefaultProvider()
     {

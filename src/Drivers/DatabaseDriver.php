@@ -12,8 +12,8 @@ class DatabaseDriver extends PaymentServiceDriver
     /**
      * Resolve the providable instance.
      *
-     * @param \Payavel\Checkout\Contracts\Providable|string $provider
-     * @return \Payavel\Checkout\Contracts\Providable|null
+     * @param \Payavel\Serviceable\Contracts\Providable|string $provider
+     * @return \Payavel\Serviceable\Contracts\Providable|null
      */
     public function resolveProvider($provider)
     {
@@ -69,7 +69,7 @@ class DatabaseDriver extends PaymentServiceDriver
     /**
      * Verify that the merchant is compatible with the provider.
      *
-     * @param \Payavel\Checkout\Contracts\Providable
+     * @param \Payavel\Serviceable\Contracts\Providable
      * @param \Payavel\Checkout\Contracts\Merchantable
      * @return bool
      */
@@ -85,7 +85,7 @@ class DatabaseDriver extends PaymentServiceDriver
     /**
      * Resolve the gateway class.
      *
-     * @param \Payavel\Checkout\Contracts\Providable $provider
+     * @param \Payavel\Serviceable\Contracts\Providable $provider
      * @return string
      */
     public function resolveGatewayClass($provider)

@@ -36,8 +36,8 @@ class ConfigDriver extends PaymentServiceDriver
     /**
      * Resolve the providable instance.
      *
-     * @param \Payavel\Checkout\Contracts\Providable|string $provider
-     * @return \Payavel\Checkout\Contracts\Providable|null
+     * @param \Payavel\Serviceable\Contracts\Providable|string $provider
+     * @return \Payavel\Serviceable\Contracts\Providable|null
      */
     public function resolveProvider($provider)
     {
@@ -56,7 +56,7 @@ class ConfigDriver extends PaymentServiceDriver
      * Get the default providable identifier.
      *
      * @param \Payavel\Checkout\Contracts\Merchantable|null $merchant
-     * @return string|int|\Payavel\Checkout\Contracts\Providable
+     * @return string|int|\Payavel\Serviceable\Contracts\Providable
      */
     public function getDefaultProvider(Merchantable $merchant = null)
     {
@@ -92,7 +92,7 @@ class ConfigDriver extends PaymentServiceDriver
     /**
      * Verify that the merchant is compatible with the provider.
      *
-     * @param \Payavel\Checkout\Contracts\Providable
+     * @param \Payavel\Serviceable\Contracts\Providable
      * @param \Payavel\Checkout\Contracts\Merchantable
      * @return bool
      */
@@ -104,7 +104,7 @@ class ConfigDriver extends PaymentServiceDriver
     /**
      * Resolve the gateway class.
      *
-     * @param \Payavel\Checkout\Contracts\Providable $provider
+     * @param \Payavel\Serviceable\Contracts\Providable $provider
      * @return string
      */
     public function resolveGatewayClass($provider)

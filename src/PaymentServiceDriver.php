@@ -3,15 +3,15 @@
 namespace Payavel\Checkout;
 
 use Payavel\Checkout\Contracts\Merchantable;
-use Payavel\Checkout\Contracts\Providable;
+use Payavel\Serviceable\Contracts\Providable;
 
 abstract class PaymentServiceDriver
 {
     /**
      * Resolve the providable instance.
      *
-     * @param \Payavel\Checkout\Contracts\Providable|string|int $provider
-     * @return \Payavel\Checkout\Contracts\Providable|null
+     * @param \Payavel\Serviceable\Contracts\Providable|string|int $provider
+     * @return \Payavel\Serviceable\Contracts\Providable|null
      */
     abstract public function resolveProvider($provider);
 
@@ -37,7 +37,7 @@ abstract class PaymentServiceDriver
     /**
      * Get the default merchantable identifier.
      *
-     * @param \Payavel\Checkout\Contracts\Providable|null $provider
+     * @param \Payavel\Serviceable\Contracts\Providable|null $provider
      * @return string|int
      */
     public function getDefaultMerchant(Providable $provider = null)
@@ -48,7 +48,7 @@ abstract class PaymentServiceDriver
     /**
      * Verify that the merchant is compatible with the provider.
      *
-     * @param \Payavel\Checkout\Contracts\Providable
+     * @param \Payavel\Serviceable\Contracts\Providable
      * @param \Payavel\Checkout\Contracts\Merchantable
      * @return bool
      */
@@ -57,7 +57,7 @@ abstract class PaymentServiceDriver
     /**
      * Resolve the gateway class.
      *
-     * @param \Payavel\Checkout\Contracts\Providable $provider
+     * @param \Payavel\Serviceable\Contracts\Providable $provider
      * @return string
      */
     abstract public function resolveGatewayClass($provider);

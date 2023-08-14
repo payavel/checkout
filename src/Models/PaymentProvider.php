@@ -4,8 +4,8 @@ namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Checkout\Contracts\Providable;
 use Payavel\Checkout\Database\Factories\PaymentProviderFactory;
+use Payavel\Serviceable\Contracts\Providable;
 
 class PaymentProvider extends Model implements Providable
 {
