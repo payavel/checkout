@@ -4,9 +4,9 @@ namespace Payavel\Checkout;
 
 use Payavel\Checkout\Contracts\Merchantable;
 use Payavel\Checkout\Contracts\PaymentResponder;
-use Payavel\Checkout\Contracts\Providable;
 use Payavel\Checkout\Traits\PaymentResponses;
 use Payavel\Checkout\Traits\SimulateAttributes;
+use Payavel\Serviceable\Contracts\Providable;
 use RuntimeException;
 
 abstract class PaymentResponse implements PaymentResponder
@@ -67,7 +67,7 @@ abstract class PaymentResponse implements PaymentResponder
     /**
      * The provider that the $request was made towards.
      *
-     * @var \Payavel\Checkout\Contracts\Providable
+     * @var \Payavel\Serviceable\Contracts\Providable
      */
     public $provider;
 
@@ -111,7 +111,7 @@ abstract class PaymentResponse implements PaymentResponder
      * Configure the response based on the request.
      *
      * @param string $requestMethod
-     * @param \Payavel\Checkout\Contracts\Providable $provider
+     * @param \Payavel\Serviceable\Contracts\Providable $provider
      * @param \Payavel\Checkout\Contracts\Merchantable $merchant
      * @return void
      */

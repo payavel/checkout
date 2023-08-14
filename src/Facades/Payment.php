@@ -7,9 +7,9 @@ use Payavel\Checkout\PaymentGateway;
 
 /**
  * @method static \Payavel\Checkout\PaymentGateway provider($provider)
- * @method static \Payavel\Checkout\Contracts\Providable getProvider()
+ * @method static \Payavel\Serviceable\Contracts\Providable getProvider()
  * @method static void setProvider($provider)
- * @method static string|int|\Payavel\Checkout\Contracts\Providable getDefaultProvider()
+ * @method static string|int|\Payavel\Serviceable\Contracts\Providable getDefaultProvider()
  * @method static \Payavel\Checkout\PaymentGateway merchant($merchant)
  * @method static \Payavel\Checkout\Contracts\Merchantable getMerchant()
  * @method static void setMerchant($merchant, $strict = true)

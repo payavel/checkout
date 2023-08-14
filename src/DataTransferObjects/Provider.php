@@ -2,8 +2,8 @@
 
 namespace Payavel\Checkout\DataTransferObjects;
 
-use Payavel\Checkout\Contracts\Providable;
 use Payavel\Checkout\Traits\SimulateAttributes;
+use Payavel\Serviceable\Contracts\Providable;
 
 class Provider implements Providable
 {
