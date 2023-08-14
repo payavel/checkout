@@ -69,7 +69,7 @@ class PaymentService
     /**
      * Get the current payment provider.
      *
-     * @return \Payavel\Checkout\Contracts\Providable
+     * @return \Payavel\Serviceable\Contracts\Providable
      */
     public function getProvider()
     {
