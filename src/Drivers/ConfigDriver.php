@@ -2,10 +2,10 @@
 
 namespace Payavel\Checkout\Drivers;
 
-use Payavel\Checkout\DataTransferObjects\Merchant;
-use Payavel\Checkout\DataTransferObjects\Provider;
 use Payavel\Checkout\PaymentServiceDriver;
 use Payavel\Serviceable\Contracts\Merchantable;
+use Payavel\Serviceable\DataTransferObjects\Merchant;
+use Payavel\Serviceable\DataTransferObjects\Provider;
 
 class ConfigDriver extends PaymentServiceDriver
 {
