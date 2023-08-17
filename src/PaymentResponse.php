@@ -4,9 +4,9 @@ namespace Payavel\Checkout;
 
 use Payavel\Checkout\Contracts\PaymentResponder;
 use Payavel\Checkout\Traits\PaymentResponses;
-use Payavel\Checkout\Traits\SimulateAttributes;
 use Payavel\Serviceable\Contracts\Merchantable;
 use Payavel\Serviceable\Contracts\Providable;
+use Payavel\Serviceable\Traits\SimulateAttributes;
 use RuntimeException;
 
 abstract class PaymentResponse implements PaymentResponder
