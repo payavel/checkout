@@ -3,10 +3,10 @@
 namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Payavel\Checkout\Models\PaymentMerchant;
 use Payavel\Checkout\Models\PaymentProvider;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\PaymentStatus;
+use Payavel\Serviceable\Models\Merchant;
 
 class PaymentTransactionFactory extends Factory
 {
@@ -58,10 +58,10 @@ class PaymentTransactionFactory extends Factory
             if (is_null($transaction->merchant_id)) {
                 $merchant = ! is_null($transaction->payment_method_id)
                     ? $transaction->paymentMethod->merchant
-                    : PaymentMerchant::whereHas('providers', function ($query) use ($transaction) {
+                    : Merchant::whereHas('providers', function ($query) use ($transaction) {
                         $query->where('payment_providers.id', $transaction->provider_id);
                     })->inRandomOrder()->firstOr(function () use ($transaction) {
-                        $merchant = PaymentMerchant::factory()->create();
+                        $merchant = Merchant::factory()->create();
 
                         $merchant->providers()->attach($transaction->provider_id, ['is_default' => true]);
 
