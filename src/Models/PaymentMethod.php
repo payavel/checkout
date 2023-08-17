@@ -51,7 +51,7 @@ class PaymentMethod extends Model
     /**
      * Get the payment method's provider.
      *
-     * @return \Payavel\Checkout\Models\PaymentProvider
+     * @return \Payavel\Serviceable\Models\Provider
      */
     public function getProviderAttribute()
     {
