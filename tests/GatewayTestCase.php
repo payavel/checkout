@@ -5,13 +5,13 @@ namespace Payavel\Checkout\Tests;
 use Illuminate\Support\Str;
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\Models\PaymentMethod;
-use Payavel\Checkout\Models\PaymentProvider;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\PaymentRequest;
 use Payavel\Checkout\PaymentResponse;
 use Payavel\Checkout\PaymentStatus;
 use Payavel\Serviceable\Models\Merchant;
+use Payavel\Serviceable\Models\Provider;
 
 abstract class GatewayTestCase extends TestCase
 {
@@ -78,6 +78,7 @@ abstract class GatewayTestCase extends TestCase
     protected function databaseDriverSetUp()
     {
         $provider = PaymentProvider::create([
+        $provider = Provider::create([
             'id' => $this->provider,
             'name' => Str::headline($this->provider),
             'request_class' => TestPaymentRequest::class,
@@ -92,6 +93,7 @@ abstract class GatewayTestCase extends TestCase
         $merchant->providers()->attach($provider->id, ['is_default' => true]);
 
         $alternativeProvider = PaymentProvider::create([
+        $alternativeProvider = Provider::create([
             'id' => 'alternative',
             'name' => 'Alternative',
             'request_class' => AlternativePaymentRequest::class,

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Payavel\Checkout\Database\Factories\PaymentTransactionFactory;
 use Payavel\Checkout\Models\Traits\PaymentTransactionRequests;
 use Payavel\Serviceable\Models\Merchant;
+use Payavel\Serviceable\Models\Provider;
 
 class PaymentTransaction extends Model
 {
@@ -65,7 +66,7 @@ class PaymentTransaction extends Model
      */
     public function provider()
     {
-        return $this->belongsTo(config('payment.models.' . PaymentProvider::class, PaymentProvider::class));
+        return $this->belongsTo(config('payment.models.' . Provider::class, Provider::class));
     }
 
     /**
