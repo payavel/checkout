@@ -3,9 +3,12 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Payavel\Serviceable\Traits\ServiceableConfig;
 
 class CreateBasePaymentTables extends Migration
 {
+    use ServiceableConfig;
+
     /**
      * Run the migrations.
      *
@@ -13,35 +16,7 @@ class CreateBasePaymentTables extends Migration
      */
     public function up()
     {
-        $usingDatabaseDriver = config('payment.defaults.driver') === 'database';
-
-        if ($usingDatabaseDriver) {
-            Schema::create('payment_providers', function (Blueprint $table) {
-                $table->string('id')->primary();
-                $table->string('name');
-                $table->string('request_class');
-                $table->string('response_class');
-                $table->timestamps();
-            });
-
-            Schema::create('payment_merchants', function (Blueprint $table) {
-                $table->string('id')->primary();
-                $table->string('name');
-                $table->timestamps();
-            });
-
-            Schema::create('payment_merchant_provider', function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('merchant_id');
-                $table->string('provider_id');
-                $table->boolean('is_default')->default(false);
-                $table->json('config')->nullable();
-                $table->timestamps();
-
-                $table->foreign('merchant_id')->references('id')->on('payment_merchants')->onUpdate('cascade')->onDelete('cascade');
-                $table->foreign('provider_id')->references('id')->on('payment_providers')->onUpdate('cascade')->onDelete('cascade');
-            });
-        }
+        $usingDatabaseDriver = $this->config('checkout', 'defaults.driver') === 'database';
 
         Schema::create('payment_types', function (Blueprint $table) {
             $table->smallIncrements('id');
@@ -122,8 +97,5 @@ class CreateBasePaymentTables extends Migration
         Schema::dropIfExists('payment_methods');
         Schema::dropIfExists('payment_types');
         Schema::dropIfExists('wallets');
-        Schema::dropIfExists('payment_merchant_provider');
-        Schema::dropIfExists('payment_merchants');
-        Schema::dropIfExists('payment_providers');
     }
 }
