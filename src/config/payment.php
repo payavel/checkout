@@ -30,19 +30,4 @@ return [
         'response_class' => \App\Services\Payment\FakePaymentResponse::class,
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Payment Service Drivers
-    |--------------------------------------------------------------------------
-    |
-    | You may register custom payment drivers and/or remove the default ones.
-    | Please note that in order for the driver to be compatible it must
-    | extend the \Payavel\Checkout\PaymentServiceDriver::class.
-    |
-    */
-    'drivers' => [
-        'config' => \Payavel\Checkout\Drivers\ConfigDriver::class,
-        'database' => \Payavel\Checkout\Drivers\DatabaseDriver::class,
-    ],
-
 ];
