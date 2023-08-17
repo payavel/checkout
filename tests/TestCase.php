@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Schema;
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\PaymentServiceProvider;
 use Payavel\Checkout\Traits\Billable as BillableTrait;
+use Payavel\Serviceable\ServiceableServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -19,6 +20,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
+            ServiceableServiceProvider::class,
             PaymentServiceProvider::class,
         ];
     }

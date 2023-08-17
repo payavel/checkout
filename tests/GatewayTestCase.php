@@ -12,6 +12,7 @@ use Payavel\Checkout\PaymentResponse;
 use Payavel\Checkout\PaymentStatus;
 use Payavel\Serviceable\Models\Merchant;
 use Payavel\Serviceable\Models\Provider;
+use Payavel\Serviceable\Models\Service;
 
 abstract class GatewayTestCase extends TestCase
 {
@@ -35,10 +36,17 @@ abstract class GatewayTestCase extends TestCase
     {
         parent::getEnvironmentSetUp($app);
 
-        $app['config']->set('payment.defaults', [
-            'driver' => $this->driver,
-            'provider' => $this->provider,
-            'merchant' => $this->merchant,
+        config([
+            'serviceable.defaults.driver' => $this->driver,
+            'serviceable.services.checkout' => [
+                'name' => 'Checkout',
+                'config' => 'payment',
+            ],
+            'payment.defaults' => [
+                'driver' => $this->driver,
+                'provider' => $this->provider,
+                'merchant' => $this->merchant,
+            ],
         ]);
     }
 
@@ -77,9 +85,14 @@ abstract class GatewayTestCase extends TestCase
 
     protected function databaseDriverSetUp()
     {
-        $provider = PaymentProvider::create([
+        $service = Service::create([
+            'id' => 'checkout',
+            'name' => 'Checkout',
+        ]);
+
         $provider = Provider::create([
             'id' => $this->provider,
+            'service_id' => $service->id,
             'name' => Str::headline($this->provider),
             'request_class' => TestPaymentRequest::class,
             'response_class' => TestPaymentResponse::class,
@@ -90,11 +103,11 @@ abstract class GatewayTestCase extends TestCase
             'name' => 'Tester',
         ]);
 
-        $merchant->providers()->attach($provider->id, ['is_default' => true]);
+        $merchant->providers()->attach($provider->id, ['default' => true]);
 
-        $alternativeProvider = PaymentProvider::create([
         $alternativeProvider = Provider::create([
             'id' => 'alternative',
+            'service_id' => $service->id,
             'name' => 'Alternative',
             'request_class' => AlternativePaymentRequest::class,
             'response_class' => AlternativePaymentResponse::class,
@@ -105,7 +118,7 @@ abstract class GatewayTestCase extends TestCase
             'name' => 'Alternate',
         ]);
 
-        $alternateMerchant->providers()->attach($alternativeProvider->id, ['is_default' => true]);
+        $alternateMerchant->providers()->attach($alternativeProvider->id, ['default' => true]);
         $alternateMerchant->providers()->attach($provider->id);
 
     }
