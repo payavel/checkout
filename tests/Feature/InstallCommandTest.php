@@ -2,7 +2,7 @@
 
 namespace Payavel\Checkout\Tests;
 
-use Payavel\Checkout\Models\PaymentMerchant;
+use Payavel\Checkout\Models\Merchant;
 use Payavel\Checkout\Models\PaymentProvider;
 
 class InstallCommandTest extends TestCase
@@ -11,7 +11,7 @@ class InstallCommandTest extends TestCase
     public function install_command_publishes_migration_and_generates_config_with_single_provider_and_merchant()
     {
         $provider = PaymentProvider::factory()->make();
-        $merchant = PaymentMerchant::factory()->make();
+        $merchant = Merchant::factory()->make();
 
         $this->artisan('checkout:install')
             ->expectsOutput('Fake payment gateway generated successfully!')
@@ -42,9 +42,9 @@ class InstallCommandTest extends TestCase
     {
         $provider1 = PaymentProvider::factory()->make();
         $provider2 = PaymentProvider::factory()->make();
-        $merchant1 = PaymentMerchant::factory()->make();
-        $merchant2 = PaymentMerchant::factory()->make();
-        $merchant3 = PaymentMerchant::factory()->make();
+        $merchant1 = Merchant::factory()->make();
+        $merchant2 = Merchant::factory()->make();
+        $merchant3 = Merchant::factory()->make();
 
         $this->artisan('checkout:install')
             ->expectsOutput('Fake payment gateway generated successfully!')

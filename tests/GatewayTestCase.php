@@ -4,7 +4,6 @@ namespace Payavel\Checkout\Tests;
 
 use Illuminate\Support\Str;
 use Payavel\Checkout\Contracts\Billable;
-use Payavel\Checkout\Models\PaymentMerchant;
 use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Checkout\Models\PaymentProvider;
 use Payavel\Checkout\Models\PaymentTransaction;
@@ -12,6 +11,7 @@ use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\PaymentRequest;
 use Payavel\Checkout\PaymentResponse;
 use Payavel\Checkout\PaymentStatus;
+use Payavel\Serviceable\Models\Merchant;
 
 abstract class GatewayTestCase extends TestCase
 {
@@ -84,7 +84,7 @@ abstract class GatewayTestCase extends TestCase
             'response_class' => TestPaymentResponse::class,
         ]);
 
-        $merchant = PaymentMerchant::create([
+        $merchant = Merchant::create([
             'id' => 'tester',
             'name' => 'Tester',
         ]);
@@ -98,7 +98,7 @@ abstract class GatewayTestCase extends TestCase
             'response_class' => AlternativePaymentResponse::class,
         ]);
 
-        $alternateMerchant = PaymentMerchant::create([
+        $alternateMerchant = Merchant::create([
             'id' => 'alternate',
             'name' => 'Alternate',
         ]);

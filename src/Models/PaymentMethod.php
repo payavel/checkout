@@ -61,7 +61,7 @@ class PaymentMethod extends Model
     /**
      * Get the payment method's merchant.
      *
-     * @return \Payavel\Checkout\Models\PaymentMerchant
+     * @return \Payavel\Serviceable\Models\Merchant
      */
     public function getMerchantAttribute()
     {
