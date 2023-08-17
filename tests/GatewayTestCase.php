@@ -100,6 +100,7 @@ abstract class GatewayTestCase extends TestCase
 
         $merchant = Merchant::create([
             'id' => 'tester',
+            'service_id' => $service->id,
             'name' => 'Tester',
         ]);
 
@@ -115,6 +116,7 @@ abstract class GatewayTestCase extends TestCase
 
         $alternateMerchant = Merchant::create([
             'id' => 'alternate',
+            'service_id' => $service->id,
             'name' => 'Alternate',
         ]);
 
