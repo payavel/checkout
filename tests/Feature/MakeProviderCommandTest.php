@@ -3,19 +3,19 @@
 namespace Payavel\Checkout\Tests;
 
 use Illuminate\Support\Str;
-use Payavel\Checkout\Models\PaymentProvider;
+use Payavel\Serviceable\Models\Provider;
 
 class MakeProviderCommandTest extends TestCase
 {
     /** @test */
     public function make_payment_provider_command_will_prompt_for_missing_arguments()
     {
-        $provider = PaymentProvider::factory()->make();
+        $provider = Provider::factory()->make();
 
         $this->artisan('checkout:provider')
-            ->expectsQuestion('What payment provider would you like to add?', $provider->name)
-            ->expectsQuestion("How would you like to identify the {$provider->name} payment provider?", $provider->id)
-            ->expectsOutput("{$provider->name} payment gateway generated successfully!")
+            ->expectsQuestion('What checkout provider would you like to add?', $provider->name)
+            ->expectsQuestion("How would you like to identify the {$provider->name} checkout provider?", $provider->id)
+            ->expectsOutput("{$provider->name} checkout gateway generated successfully!")
             ->assertExitCode(0);
 
         $this->assertGatewayExists($provider->id);
@@ -24,13 +24,13 @@ class MakeProviderCommandTest extends TestCase
     /** @test */
     public function make_payment_provider_command_completes_without_asking_questions_when_providing_the_arguments()
     {
-        $provider = PaymentProvider::factory()->make();
+        $provider = Provider::factory()->make();
 
         $this->artisan('checkout:provider', [
                 'provider' => $provider->name,
                 '--id' => $provider->id,
             ])
-            ->expectsOutput("{$provider->name} payment gateway generated successfully!")
+            ->expectsOutput("{$provider->name} checkout gateway generated successfully!")
             ->assertExitCode(0);
 
         $this->assertGatewayExists($provider->id);
@@ -44,7 +44,7 @@ class MakeProviderCommandTest extends TestCase
         ];
 
         $this->artisan('checkout:provider', $arguments)
-            ->expectsOutput('Fake payment gateway generated successfully!')
+            ->expectsOutput('Fake checkout gateway generated successfully!')
             ->assertExitCode(0);
 
         $this->assertGatewayExists('fake');
