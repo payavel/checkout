@@ -7,6 +7,16 @@ use Payavel\Serviceable\Models\Provider;
 
 class MakeProviderCommandTest extends TestCase
 {
+    protected function getEnvironmentSetUp($app)
+    {
+        parent::getEnvironmentSetUp($app);
+
+        $app['config']->set('serviceable.services.checkout', [
+            'name' => 'Checkout',
+            'config' => 'payment',
+        ]);
+    }
+
     /** @test */
     public function make_payment_provider_command_will_prompt_for_missing_arguments()
     {
@@ -54,9 +64,9 @@ class MakeProviderCommandTest extends TestCase
     {
         $provider = Str::studly($id);
 
-        $servicePath = app_path('Services/Payment');
+        $servicePath = app_path('Services/Checkout');
 
-        $this->assertTrue(file_exists("{$servicePath}/{$provider}PaymentRequest.php"));
-        $this->assertTrue(file_exists("{$servicePath}/{$provider}PaymentResponse.php"));
+        $this->assertTrue(file_exists("{$servicePath}/{$provider}CheckoutRequest.php"));
+        $this->assertTrue(file_exists("{$servicePath}/{$provider}CheckoutResponse.php"));
     }
 }
