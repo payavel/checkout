@@ -14,6 +14,7 @@ class MakeProvider extends Command
      */
     protected $signature = 'checkout:provider
                             {provider? : The payment provider name}
+                            {--service=checkout}
                             {--id= : The payment provider identifier}
                             {--fake : Generates a gateway to be used for testing purposes}';
 
@@ -23,16 +24,4 @@ class MakeProvider extends Command
      * @var string
      */
     protected $description = 'Scaffold a new payment provider\'s gateway and response classes.';
-
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        $this->addOption('service', 'checkout');
-
-        parent::handle();
-    }
 }
