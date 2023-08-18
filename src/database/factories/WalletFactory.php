@@ -3,9 +3,9 @@
 namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Payavel\Checkout\Models\PaymentProvider;
 use Payavel\Checkout\Models\Wallet;
 use Payavel\Serviceable\Models\Merchant;
+use Payavel\Serviceable\Models\Provider;
 
 class WalletFactory extends Factory
 {
@@ -40,10 +40,10 @@ class WalletFactory extends Factory
     {
         return $this->afterMaking(function (Wallet $wallet) {
             if (is_null($wallet->provider_id)) {
-                $provider = PaymentProvider::whereHas('merchants', function ($query) use ($wallet) {
+                $provider = Provider::whereHas('merchants', function ($query) use ($wallet) {
                     $query->where('payment_merchants.id', $wallet->merchant_id);
                 })->inRandomOrder()->firstOr(function () {
-                    return PaymentProvider::factory()->create();
+                    return Provider::factory()->create();
                 });
 
                 $wallet->provider_id = $provider->id;
