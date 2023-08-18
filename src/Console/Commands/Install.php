@@ -2,7 +2,7 @@
 
 namespace Payavel\Checkout\Console\Commands;
 
-use Illuminate\Console\Command;
+use Payavel\Serviceable\Console\Commands\Install as Command;
 use Illuminate\Support\Facades\Artisan;
 
 class Install extends Command
@@ -12,7 +12,8 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'checkout:install';
+    protected $signature = 'checkout:install
+                            {--id= : The service identifier}';
 
     /**
      * The console command description.
@@ -28,9 +29,8 @@ class Install extends Command
      */
     public function handle()
     {
-        Artisan::call('service:install', [
-            'service' => 'Checkout',
-            '--id' => 'checkout',
-        ]);
+        $this->addArgument('service', 'checkout');
+
+        parent::handle();
     }
 }

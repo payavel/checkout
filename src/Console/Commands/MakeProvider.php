@@ -2,7 +2,7 @@
 
 namespace Payavel\Checkout\Console\Commands;
 
-use Illuminate\Console\Command;
+use Payavel\Serviceable\Console\Commands\MakeProvider as Command;
 use Illuminate\Support\Facades\Artisan;
 
 class MakeProvider extends Command
@@ -31,11 +31,8 @@ class MakeProvider extends Command
      */
     public function handle()
     {
-        Artisan::call('service:provider', [
-            'provider' => $this->argument('provider'),
-            '--service' => 'checkout',
-            '--id' => $this->option('id'),
-            '--fake' => $this->option('fake', false),
-        ]);
+        $this->addOption('service', 'checkout');
+
+        parent::handle();
     }
 }
