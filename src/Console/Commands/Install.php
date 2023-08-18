@@ -13,7 +13,8 @@ class Install extends Command
      * @var string
      */
     protected $signature = 'checkout:install
-                            {--id= : The service identifier}';
+                            {service=Checkout}
+                            {--id=checkout}';
 
     /**
      * The console command description.
@@ -21,16 +22,4 @@ class Install extends Command
      * @var string
      */
     protected $description = 'Install and configure payments within the application.';
-
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        $this->addArgument('service', 'checkout');
-
-        parent::handle();
-    }
 }
