@@ -12,10 +12,15 @@ use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\PaymentServiceProvider;
 use Payavel\Checkout\Traits\Billable as BillableTrait;
 use Payavel\Serviceable\ServiceableServiceProvider;
+use Payavel\Serviceable\Tests\Traits\CreateServiceables;
+use Payavel\Serviceable\Tests\Traits\SetUpDriver;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use CreateServiceables,
+        RefreshDatabase,
+        SetUpDriver,
+        WithFaker;
 
     protected function getPackageProviders($app)
     {
@@ -41,7 +46,15 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function setUp(): void
     {
+        $this->afterApplicationRefreshedCallbacks = [
+            function() {
+                $this->setUpDriver();
+            }
+        ];
+
         parent::setUp();
+
+        $this->createService(['id' => 'checkout', 'name' => 'Checkout']);
 
         Schema::create('users', function ($table) {
             $table->id();
