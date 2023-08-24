@@ -18,7 +18,7 @@
     "autoload-dev": {
         "psr-4": {
             "Payavel\\Checkout\\Tests\\": "tests/",
-            "Payavel\\Checkout\\Tests\\App\\": "tests/app/"
+            "Payavel\\Serviceable\\Tests\\Traits\\": "vendor/payavel/serviceable/tests/Traits"
         }
     },
     "scripts": {
