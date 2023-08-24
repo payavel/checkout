@@ -1,7 +1,8 @@
 <?php
 
-namespace Payavel\Checkout\Tests;
+namespace Payavel\Checkout\Tests\Feature\Console\Commands;
 
+use Payavel\Checkout\Tests\TestCase;
 use Payavel\Serviceable\Service;
 use Payavel\Serviceable\Tests\Traits\AssertGatewayExists;
 use Payavel\Serviceable\Tests\Traits\CreateServiceables;
@@ -10,13 +11,6 @@ class MakeProviderCommandTest extends TestCase
 {
     use AssertGatewayExists,
         CreateServiceables;
-
-    protected function getEnvironmentSetUp($app)
-    {
-        parent::getEnvironmentSetUp($app);
-
-        $this->createService(['id' => 'checkout', 'name' => 'Checkout']);
-    }
 
     /** @test */
     public function make_provider_command_defaults_to_checkout_service()
