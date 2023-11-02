@@ -21,6 +21,10 @@ class PaymentStatus
     const CHARGEBACK_LOST = 222;
     const CHARGEBACK_REVERSED = 223;
     const SECOND_CHARGEBACK = 224;
+    const REQUEST_FOR_INFORMATION = 225;
+    const NOTIFICATION_OF_FRAUD = 226;
+    const NOTIFICATION_OF_CHARGEBACK = 227;
+    const INFORMATION_SUPLIED = 228;
     const PENDING = 300;
     const PROCESSING_ASYNC = 301;
     const REFUSED = 400;
