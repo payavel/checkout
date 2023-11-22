@@ -25,6 +25,7 @@ class PaymentStatus
     const NOTIFICATION_OF_FRAUD = 226;
     const NOTIFICATION_OF_CHARGEBACK = 227;
     const INFORMATION_SUPLIED = 228;
+    const DISPUTE_DEFENSE_PERIOD_ENDED = 229;
     const PENDING = 300;
     const PROCESSING_ASYNC = 301;
     const REFUSED = 400;
@@ -88,6 +89,7 @@ class PaymentStatus
         self::NOTIFICATION_OF_FRAUD => 'Notification of fraud',
         self::NOTIFICATION_OF_CHARGEBACK => 'Notification of chargeback',
         self::INFORMATION_SUPLIED => 'Information Suplied',
+        self::DISPUTE_DEFENSE_PERIOD_ENDED => 'Dispute Defense Period Ended',
         self::PENDING => 'Pending',
         self::PROCESSING_ASYNC => 'Processing asynchronously',
         self::REFUSED => 'Refused',
@@ -152,6 +154,7 @@ class PaymentStatus
         self::NOTIFICATION_OF_FRAUD => 'The transaction notified about fraud activity.',
         self::NOTIFICATION_OF_CHARGEBACK => 'A chargeback has been initiated by the issuer.',
         self::INFORMATION_SUPLIED => 'The provider received the supporting documents and forwards them to the scheme.',
+        self::DISPUTE_DEFENSE_PERIOD_ENDED => 'The dispute was not defended within the timeframe, or the defense period ended because liability was accepted.',
         self::PENDING => 'The transaction is pending.',
         self::PROCESSING_ASYNC => 'The transaction is being completed asynchronously.',
         self::REFUSED => 'The transaction was refused.',
