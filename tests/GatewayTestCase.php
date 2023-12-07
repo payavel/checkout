@@ -4,14 +4,15 @@ namespace Payavel\Checkout\Tests;
 
 use Illuminate\Support\Str;
 use Payavel\Checkout\Contracts\Billable;
-use Payavel\Checkout\Models\PaymentMerchant;
 use Payavel\Checkout\Models\PaymentMethod;
-use Payavel\Checkout\Models\PaymentProvider;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\PaymentRequest;
 use Payavel\Checkout\PaymentResponse;
 use Payavel\Checkout\PaymentStatus;
+use Payavel\Orchestration\Models\Merchant;
+use Payavel\Orchestration\Models\Provider;
+use Payavel\Orchestration\Models\Service;
 
 abstract class GatewayTestCase extends TestCase
 {
@@ -28,21 +29,28 @@ abstract class GatewayTestCase extends TestCase
     {
         parent::setUp();
 
-        $this->{"{$this->driver}DriverSetUp"}();
+        $this->{"set{$this->driver}Driver"}();
     }
 
     protected function getEnvironmentSetUp($app)
     {
         parent::getEnvironmentSetUp($app);
 
-        $app['config']->set('payment.defaults', [
-            'driver' => $this->driver,
-            'provider' => $this->provider,
-            'merchant' => $this->merchant,
+        config([
+            'orchestration.defaults.driver' => $this->driver,
+            'orchestration.services.checkout' => [
+                'name' => 'Checkout',
+                'config' => 'payment',
+            ],
+            'payment.defaults' => [
+                'driver' => $this->driver,
+                'provider' => $this->provider,
+                'merchant' => $this->merchant,
+            ],
         ]);
     }
 
-    protected function configDriverSetUp()
+    protected function setConfigDriver()
     {
         config([
             'payment.providers' => [
@@ -75,35 +83,44 @@ abstract class GatewayTestCase extends TestCase
         ]);
     }
 
-    protected function databaseDriverSetUp()
+    protected function setDatabaseDriver()
     {
-        $provider = PaymentProvider::create([
+        $service = Service::create([
+            'id' => 'checkout',
+            'name' => 'Checkout',
+        ]);
+
+        $provider = Provider::create([
             'id' => $this->provider,
+            'service_id' => $service->id,
             'name' => Str::headline($this->provider),
             'request_class' => TestPaymentRequest::class,
             'response_class' => TestPaymentResponse::class,
         ]);
 
-        $merchant = PaymentMerchant::create([
+        $merchant = Merchant::create([
             'id' => 'tester',
+            'service_id' => $service->id,
             'name' => 'Tester',
         ]);
 
-        $merchant->providers()->attach($provider->id, ['is_default' => true]);
+        $merchant->providers()->attach($provider->id, ['default' => true]);
 
-        $alternativeProvider = PaymentProvider::create([
+        $alternativeProvider = Provider::create([
             'id' => 'alternative',
+            'service_id' => $service->id,
             'name' => 'Alternative',
             'request_class' => AlternativePaymentRequest::class,
             'response_class' => AlternativePaymentResponse::class,
         ]);
 
-        $alternateMerchant = PaymentMerchant::create([
+        $alternateMerchant = Merchant::create([
             'id' => 'alternate',
+            'service_id' => $service->id,
             'name' => 'Alternate',
         ]);
 
-        $alternateMerchant->providers()->attach($alternativeProvider->id, ['is_default' => true]);
+        $alternateMerchant->providers()->attach($alternativeProvider->id, ['default' => true]);
         $alternateMerchant->providers()->attach($provider->id);
 
     }

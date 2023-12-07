@@ -29,7 +29,7 @@ class TestPaymentGateway extends GatewayTestCase
         config(['payment.defaults.driver' => 'invalid']);
 
         $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Invalid checkout driver provided.');
+        $this->expectExceptionMessage('Invalid driver provided.');
 
         Payment::authorize([]);
     }
@@ -38,7 +38,7 @@ class TestPaymentGateway extends GatewayTestCase
     public function setting_invalid_provider_throws_exception()
     {
         $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Invalid checkout provider.');
+        $this->expectExceptionMessage('Invalid provider.');
 
         Payment::setProvider('invalid');
     }
@@ -47,7 +47,7 @@ class TestPaymentGateway extends GatewayTestCase
     public function setting_invalid_merchant_throws_exception()
     {
         $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Invalid checkout merchant.');
+        $this->expectExceptionMessage('Invalid merchant.');
 
         Payment::setMerchant('invalid');
     }
@@ -80,7 +80,7 @@ class TestPaymentGateway extends GatewayTestCase
         config(['payment.test_mode' => true]);
 
         $this->expectException(Exception::class);
-        $this->expectExceptionMessage('The App\\Services\\Payment\\FakePaymentRequest::class does not exist.');
+        $this->expectExceptionMessage('You must set a request_class for the Test Checkout provider.');
 
         Payment::authorize([]);
     }

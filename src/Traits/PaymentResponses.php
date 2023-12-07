@@ -3,6 +3,7 @@
 namespace Payavel\Checkout\Traits;
 
 use Exception;
+use Payavel\Orchestration\Traits\ThrowsRuntimeException;
 use RuntimeException;
 
 trait PaymentResponses

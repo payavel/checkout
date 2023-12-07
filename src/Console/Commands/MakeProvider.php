@@ -2,15 +2,11 @@
 
 namespace Payavel\Checkout\Console\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Str;
-use Payavel\Checkout\Traits\GeneratesFiles;
-use Payavel\Checkout\Traits\Questionable;
+use Payavel\Orchestration\Console\Commands\MakeProvider as Command;
+use Illuminate\Support\Facades\Artisan;
 
 class MakeProvider extends Command
 {
-    use Questionable, GeneratesFiles;
-
     /**
      * The name and signature of the console command.
      *
@@ -18,6 +14,7 @@ class MakeProvider extends Command
      */
     protected $signature = 'checkout:provider
                             {provider? : The payment provider name}
+                            {--service=checkout}
                             {--id= : The payment provider identifier}
                             {--fake : Generates a gateway to be used for testing purposes}';
 
@@ -27,65 +24,4 @@ class MakeProvider extends Command
      * @var string
      */
     protected $description = 'Scaffold a new payment provider\'s gateway and response classes.';
-
-    /**
-     * The payment provider attributes to be saved.
-     *
-     * @var string $name
-     * @var string $id
-     */
-    protected $name, $id;
-
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        $this->setProperties();
-
-        $this->generateProvider();
-    }
-
-    /**
-     * Format the payment provider's properties.
-     *
-     * @return void
-     */
-    protected function setProperties()
-    {
-        if ($this->option('fake', false)) {
-            $this->name = 'Fake';
-            $this->id = 'fake';
-
-            return;
-        }
-
-        $this->name = trim($this->argument('provider') ?? $this->askName('provider'));
-
-        $this->id = $this->option('id') ?? $this->askId('provider', $this->name);
-    }
-
-    /**
-     * Generated the provider gateway files.
-     *
-     * @return void
-     */
-    protected function generateProvider()
-    {
-        $provider = Str::studly($this->id);
-
-        $this->putFile(
-            app_path("Services/Payment/{$provider}PaymentRequest.php"),
-            $this->makeFile(__DIR__ . '/../../stubs/payment-request.stub', ['name' => $provider])
-        );
-
-        $this->putFile(
-            app_path("Services/Payment/{$provider}PaymentResponse.php"),
-            $this->makeFile(__DIR__ . '/../../stubs/payment-response.stub', ['name' => $provider])
-        );
-
-        $this->info("{$this->name} payment gateway generated successfully!");
-    }
 }
