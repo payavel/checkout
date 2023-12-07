@@ -7,14 +7,14 @@ use Payavel\Checkout\PaymentGateway;
 
 /**
  * @method static \Payavel\Checkout\PaymentGateway provider($provider)
- * @method static \Payavel\Serviceable\Contracts\Providable getProvider()
+ * @method static \Payavel\Orchestration\Contracts\Providable getProvider()
  * @method static void setProvider($provider)
- * @method static string|int|\Payavel\Serviceable\Contracts\Providable getDefaultProvider()
+ * @method static string|int|\Payavel\Orchestration\Contracts\Providable getDefaultProvider()
  * @method static \Payavel\Checkout\PaymentGateway merchant($merchant)
- * @method static \Payavel\Serviceable\Contracts\Merchantable getMerchant()
+ * @method static \Payavel\Orchestration\Contracts\Merchantable getMerchant()
  * @method static void setMerchant($merchant, $strict = true)
  * @method static void reset()
- * @method static string|int|\Payavel\Serviceable\Contracts\Merchantable getDefaultMerchant()
+ * @method static string|int|\Payavel\Orchestration\Contracts\Merchantable getDefaultMerchant()
  * @method static \Payavel\Checkout\PaymentResponse getWallet(\Payavel\Checkout\Models\Wallet $wallet)
  * @method static \Payavel\Checkout\PaymentResponse getPaymentMethod(\Payavel\Checkout\Models\PaymentMethod $paymentMethod)
  * @method static \Payavel\Checkout\PaymentResponse tokenizePaymentMethod(\Payavel\Checkout\Contracts\Billable $billable, $data)
@@ -35,7 +35,7 @@ class Payment extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return PaymentGateway::class;
     }

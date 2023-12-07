@@ -18,14 +18,14 @@
     "autoload-dev": {
         "psr-4": {
             "Payavel\\Checkout\\Tests\\": "tests/",
-            "Payavel\\Serviceable\\Tests\\Traits\\": "vendor/payavel/serviceable/tests/Traits"
+            "Payavel\\Orchestration\\Tests\\Traits\\": "vendor/payavel/serviceable/tests/Traits"
         }
     },
     "scripts": {
         "test": "vendor/bin/phpunit"
     },
     "require": {
-        "payavel/serviceable": "dev-master"
+        "payavel/orchestration": "dev-master"
     },
     "require-dev": {
         "orchestra/testbench": "^6.0|^7.0"

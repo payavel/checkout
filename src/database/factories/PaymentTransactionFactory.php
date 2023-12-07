@@ -5,8 +5,8 @@ namespace Payavel\Checkout\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\PaymentStatus;
-use Payavel\Serviceable\Models\Merchant;
-use Payavel\Serviceable\Models\Provider;
+use Payavel\Orchestration\Models\Merchant;
+use Payavel\Orchestration\Models\Provider;
 
 class PaymentTransactionFactory extends Factory
 {

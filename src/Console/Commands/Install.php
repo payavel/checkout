@@ -2,7 +2,7 @@
 
 namespace Payavel\Checkout\Console\Commands;
 
-use Payavel\Serviceable\Console\Commands\Install as Command;
+use Payavel\Orchestration\Console\Commands\Install as Command;
 use Illuminate\Support\Facades\Artisan;
 
 class Install extends Command

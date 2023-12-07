@@ -11,21 +11,21 @@ use Illuminate\Support\Facades\Schema;
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\PaymentServiceProvider;
 use Payavel\Checkout\Traits\Billable as BillableTrait;
-use Payavel\Serviceable\ServiceableServiceProvider;
-use Payavel\Serviceable\Tests\Traits\CreateServiceables;
-use Payavel\Serviceable\Tests\Traits\SetUpDriver;
+use Payavel\Orchestration\OrchestrationServiceProvider;
+use Payavel\Orchestration\Tests\Traits\CreatesServiceables;
+use Payavel\Orchestration\Tests\Traits\SetsDriver;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
-    use CreateServiceables,
+    use CreatesServiceables,
         RefreshDatabase,
-        SetUpDriver,
+        SetsDriver,
         WithFaker;
 
     protected function getPackageProviders($app)
     {
         return [
-            ServiceableServiceProvider::class,
+            OrchestrationServiceProvider::class,
             PaymentServiceProvider::class,
         ];
     }
@@ -48,7 +48,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     {
         $this->afterApplicationRefreshedCallbacks = [
             function() {
-                $this->setUpDriver();
+                $this->setDriver();
             }
         ];
 

@@ -4,8 +4,8 @@ namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\Wallet;
-use Payavel\Serviceable\Models\Merchant;
-use Payavel\Serviceable\Models\Provider;
+use Payavel\Orchestration\Models\Merchant;
+use Payavel\Orchestration\Models\Provider;
 
 class WalletFactory extends Factory
 {

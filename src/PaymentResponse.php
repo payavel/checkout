@@ -4,14 +4,14 @@ namespace Payavel\Checkout;
 
 use Payavel\Checkout\Contracts\PaymentResponder;
 use Payavel\Checkout\Traits\PaymentResponses;
-use Payavel\Serviceable\Contracts\Merchantable;
-use Payavel\Serviceable\Contracts\Providable;
-use Payavel\Serviceable\Traits\SimulateAttributes;
+use Payavel\Orchestration\Contracts\Merchantable;
+use Payavel\Orchestration\Contracts\Providable;
+use Payavel\Orchestration\Traits\SimulatesAttributes;
 use RuntimeException;
 
 abstract class PaymentResponse implements PaymentResponder
 {
-    use SimulateAttributes,
+    use SimulatesAttributes,
         PaymentResponses;
 
     /**
@@ -67,14 +67,14 @@ abstract class PaymentResponse implements PaymentResponder
     /**
      * The provider that the $request was made towards.
      *
-     * @var \Payavel\Serviceable\Contracts\Providable
+     * @var \Payavel\Orchestration\Contracts\Providable
      */
     public $provider;
 
     /**
      * The merchant that was used to make the $request.
      *
-     * @var \Payavel\Serviceable\Contracts\Merchantable
+     * @var \Payavel\Orchestration\Contracts\Merchantable
      */
     public $merchant;
 
@@ -111,8 +111,8 @@ abstract class PaymentResponse implements PaymentResponder
      * Configure the response based on the request.
      *
      * @param string $requestMethod
-     * @param \Payavel\Serviceable\Contracts\Providable $provider
-     * @param \Payavel\Serviceable\Contracts\Merchantable $merchant
+     * @param \Payavel\Orchestration\Contracts\Providable $provider
+     * @param \Payavel\Orchestration\Contracts\Merchantable $merchant
      * @return void
      */
     public function configure(string $requestMethod, Providable $provider, Merchantable $merchant)
