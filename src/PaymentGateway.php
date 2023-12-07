@@ -8,10 +8,15 @@ use Payavel\Checkout\Contracts\PaymentRequestor;
 use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\Models\Wallet;
-use Payavel\Serviceable\Service;
+use Payavel\Orchestration\Service;
 
 class PaymentGateway extends Service implements PaymentRequestor
 {
+    public function __construct()
+    {
+        parent::__construct(Service::find('checkout'));
+    }
+
     /**
      * Retrieve the wallet's details from the provider.
      *

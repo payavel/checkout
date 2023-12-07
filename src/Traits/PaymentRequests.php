@@ -6,7 +6,7 @@ use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\Models\Wallet;
-use Payavel\Serviceable\Traits\ThrowsRuntimeException;
+use Payavel\Orchestration\Traits\ThrowsRuntimeException;
 
 trait PaymentRequests
 {

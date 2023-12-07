@@ -10,9 +10,9 @@ use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\PaymentRequest;
 use Payavel\Checkout\PaymentResponse;
 use Payavel\Checkout\PaymentStatus;
-use Payavel\Serviceable\Models\Merchant;
-use Payavel\Serviceable\Models\Provider;
-use Payavel\Serviceable\Models\Service;
+use Payavel\Orchestration\Models\Merchant;
+use Payavel\Orchestration\Models\Provider;
+use Payavel\Orchestration\Models\Service;
 
 abstract class GatewayTestCase extends TestCase
 {
@@ -29,7 +29,7 @@ abstract class GatewayTestCase extends TestCase
     {
         parent::setUp();
 
-        $this->{"{$this->driver}DriverSetUp"}();
+        $this->{"set{$this->driver}Driver"}();
     }
 
     protected function getEnvironmentSetUp($app)
@@ -37,8 +37,8 @@ abstract class GatewayTestCase extends TestCase
         parent::getEnvironmentSetUp($app);
 
         config([
-            'serviceable.defaults.driver' => $this->driver,
-            'serviceable.services.checkout' => [
+            'orchestration.defaults.driver' => $this->driver,
+            'orchestration.services.checkout' => [
                 'name' => 'Checkout',
                 'config' => 'payment',
             ],
@@ -50,7 +50,7 @@ abstract class GatewayTestCase extends TestCase
         ]);
     }
 
-    protected function configDriverSetUp()
+    protected function setConfigDriver()
     {
         config([
             'payment.providers' => [
@@ -83,7 +83,7 @@ abstract class GatewayTestCase extends TestCase
         ]);
     }
 
-    protected function databaseDriverSetUp()
+    protected function setDatabaseDriver()
     {
         $service = Service::create([
             'id' => 'checkout',

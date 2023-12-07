@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Payavel\Checkout\Database\Factories\PaymentTransactionFactory;
 use Payavel\Checkout\Models\Traits\PaymentTransactionRequests;
-use Payavel\Serviceable\Models\Merchant;
-use Payavel\Serviceable\Models\Provider;
+use Payavel\Orchestration\Models\Merchant;
+use Payavel\Orchestration\Models\Provider;
 
 class PaymentTransaction extends Model
 {
