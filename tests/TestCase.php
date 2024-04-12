@@ -2,25 +2,18 @@
 
 namespace Payavel\Checkout\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Schema;
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\PaymentServiceProvider;
 use Payavel\Checkout\Traits\Billable as BillableTrait;
+use Payavel\Orchestration\Contracts\Serviceable;
 use Payavel\Orchestration\OrchestrationServiceProvider;
-use Payavel\Orchestration\Tests\Traits\CreatesServiceables;
-use Payavel\Orchestration\Tests\Traits\SetsDriver;
+use Payavel\Orchestration\Tests\Traits\CreatesServices;
 
-abstract class TestCase extends \Orchestra\Testbench\TestCase
+class TestCase extends \Payavel\Orchestration\Tests\TestCase
 {
-    use CreatesServiceables,
-        RefreshDatabase,
-        SetsDriver,
-        WithFaker;
+    use CreatesServices;
+
+    protected Serviceable $checkoutService;
 
     protected function getPackageProviders($app)
     {
@@ -32,8 +25,8 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'payments_test');
-        $app['config']->set('database.connections.payments_test', [
+        $app['config']->set('database.default', 'checkout_test');
+        $app['config']->set('database.connections.checkout_test', [
             'driver' => 'sqlite',
             'database' => ':memory:',
         ]);
@@ -46,45 +39,16 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function setUp(): void
     {
-        $this->afterApplicationRefreshedCallbacks = [
-            function() {
-                $this->setDriver();
-            }
-        ];
-
         parent::setUp();
 
-        $this->createService(['id' => 'checkout', 'name' => 'Checkout']);
-
-        Schema::create('users', function ($table) {
-            $table->id();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->timestamps();
-        });
+        $this->checkoutService = $this->createService([
+            'name' => 'Checkout',
+            'id' => 'checkout',
+        ]);
     }
 }
 
-class User extends Model implements Billable
+class User extends \Payavel\Orchestration\Tests\User implements Billable
 {
-    use BillableTrait,
-        HasFactory;
-
-    protected static function newFactory()
-    {
-        return UserFactory::new();
-    }
-}
-
-class UserFactory extends Factory
-{
-    protected $model = User::class;
-
-    public function definition()
-    {
-        return [
-            'email' => $this->faker->email(),
-            'password' => $this->faker->password(),
-        ];
-    }
+    use BillableTrait;
 }
