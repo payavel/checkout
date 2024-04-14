@@ -12,10 +12,11 @@ use Payavel\Checkout\Tests\AlternativePaymentResponse;
 use Payavel\Checkout\Tests\GatewayTestCase;
 use Payavel\Checkout\Tests\TestPaymentResponse;
 use Payavel\Checkout\Tests\User;
+use PHPUnit\Framework\Attributes\Test;
 
 class TestPaymentGateway extends GatewayTestCase
 {
-    /** @test */
+    #[Test]
     public function set_provider_and_merchant_fluently()
     {
         $response = Payment::provider('alternative')->merchant('alternate')->authorize([]);
@@ -23,7 +24,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->assertResponseIsConfigured($response);
     }
 
-    /** @test */
+    #[Test]
     public function setting_invalid_driver_throws_exception()
     {
         config(['payment.defaults.driver' => 'invalid']);
@@ -34,7 +35,7 @@ class TestPaymentGateway extends GatewayTestCase
         Payment::authorize([]);
     }
 
-    /** @test */
+    #[Test]
     public function setting_invalid_provider_throws_exception()
     {
         $this->expectException(Exception::class);
@@ -43,7 +44,7 @@ class TestPaymentGateway extends GatewayTestCase
         Payment::setProvider('invalid');
     }
 
-    /** @test */
+    #[Test]
     public function setting_invalid_merchant_throws_exception()
     {
         $this->expectException(Exception::class);
@@ -52,7 +53,7 @@ class TestPaymentGateway extends GatewayTestCase
         Payment::setMerchant('invalid');
     }
 
-    /** @test */
+    #[Test]
     public function setting_incompatible_merchant_provider_throws_exception()
     {
         $this->expectException(Exception::class);
@@ -62,7 +63,7 @@ class TestPaymentGateway extends GatewayTestCase
         Payment::authorize([]);
     }
 
-    /** @test */
+    #[Test]
     public function resetting_payment_service_to_default_configuration()
     {
         Payment::provider('alternative')->merchant('alternate');
@@ -74,7 +75,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->assertEquals(TestPaymentResponse::class, get_class(Payment::authorize([])));
     }
 
-    /** @test */
+    #[Test]
     public function payment_service_throws_exception_when_test_mode_gateway_does_not_exist()
     {
         config(['payment.test_mode' => true]);
@@ -84,8 +85,8 @@ class TestPaymentGateway extends GatewayTestCase
 
         Payment::authorize([]);
     }
-    
-    /** @test */
+
+    #[Test]
     public function get_wallet_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
@@ -100,7 +101,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->assertEquals('getWallet', $response->data['requestMethod']);
     }
 
-    /** @test */
+    #[Test]
     public function get_payment_method_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
@@ -119,7 +120,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->assertEquals('getPaymentMethod', $response->data['requestMethod']);
     }
 
-    /** @test */
+    #[Test]
     public function tokenize_payment_method_method_returns_configured_response()
     {
         $user = User::factory()->create();
@@ -131,7 +132,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->assertEquals('tokenizePaymentMethod', $response->data['requestMethod']);
     }
 
-    /** @test */
+    #[Test]
     public function update_payment_method_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
@@ -150,7 +151,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->assertEquals('updatePaymentMethod', $response->data['requestMethod']);
     }
 
-    /** @test */
+    #[Test]
     public function delete_payment_method_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
@@ -169,7 +170,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->assertEquals('deletePaymentMethod', $response->data['requestMethod']);
     }
 
-    /** @test */
+    #[Test]
     public function authorize_method_returns_configured_response()
     {
         $response = Payment::authorize([]);
@@ -179,7 +180,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->assertEquals('authorize', $response->data['requestMethod']);
     }
 
-    /** @test */
+    #[Test]
     public function capture_method_returns_configured_response()
     {
         $transaction = PaymentTransaction::factory()->create([
@@ -194,7 +195,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->assertEquals('capture', $response->data['requestMethod']);
     }
 
-    /** @test */
+    #[Test]
     public function get_transaction_method_returns_configured_response()
     {
         $transaction = PaymentTransaction::factory()->create([
@@ -209,7 +210,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->assertEquals('getTransaction', $response->data['requestMethod']);
     }
 
-    /** @test */
+    #[Test]
     public function void_method_returns_configured_response()
     {
         $transaction = PaymentTransaction::factory()->create([
@@ -224,7 +225,7 @@ class TestPaymentGateway extends GatewayTestCase
         $this->assertEquals('void', $response->data['requestMethod']);
     }
 
-    /** @test */
+    #[Test]
     public function refund_method_returns_configured_response()
     {
         $transaction = PaymentTransaction::factory()->create([

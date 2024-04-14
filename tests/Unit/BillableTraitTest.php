@@ -6,10 +6,11 @@ use Illuminate\Support\Facades\Config;
 use Payavel\Checkout\Models\Wallet as WalletModel;
 use Payavel\Checkout\Tests\TestCase;
 use Payavel\Checkout\Tests\User;
+use PHPUnit\Framework\Attributes\Test;
 
 class BillableTraitTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function retrieve_billable_wallets()
     {
         Config::set('payment.models.' . WalletModel::class, Wallet::class);
