@@ -51,4 +51,14 @@ class TestCase extends \Payavel\Orchestration\Tests\TestCase
 class User extends \Payavel\Orchestration\Tests\User implements Billable
 {
     use BillableTrait;
+
+    protected static function newFactory()
+    {
+        return UserFactory::new();
+    }
+}
+
+class UserFactory extends \Payavel\Orchestration\Tests\UserFactory
+{
+    protected $model = User::class;
 }

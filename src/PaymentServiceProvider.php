@@ -37,8 +37,9 @@ class PaymentServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../database/migrations/2024_01_01_000010_create_base_checkout_tables.php' => database_path('migrations/2024_01_01_000010_create_base_checkout_tables.php'),
-        ], 'payavel-migrations');
+        ], ['payavel', 'payavel-checkout', 'payavel-migrations']);
 
+        // ToDo: Remove this publishable asset, it shall only be published when running the checkout:install command.
         $this->publishes([
             __DIR__ . '/stubs/config-publish.stub' => config_path('payment.php'),
         ], 'payavel-config');
@@ -47,13 +48,13 @@ class PaymentServiceProvider extends ServiceProvider
     protected function registerCommands()
     {
         $this->commands([
-            CheckoutProvider::class,
             CheckoutInstall::class,
+            CheckoutProvider::class,
         ]);
     }
 
     protected function registerMigrations()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 }
