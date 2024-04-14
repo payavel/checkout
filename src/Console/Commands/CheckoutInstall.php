@@ -2,10 +2,9 @@
 
 namespace Payavel\Checkout\Console\Commands;
 
-use Payavel\Orchestration\Console\Commands\Install as Command;
-use Illuminate\Support\Facades\Artisan;
+use Payavel\Orchestration\Console\Commands\OrchestrateService as Command;
 
-class Install extends Command
+class CheckoutInstall extends Command
 {
     /**
      * The name and signature of the console command.

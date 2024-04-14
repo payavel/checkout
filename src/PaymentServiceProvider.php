@@ -4,7 +4,7 @@ namespace Payavel\Checkout;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
-use Payavel\Checkout\Console\Commands\Install;
+use Payavel\Checkout\Console\Commands\CheckoutInstall;
 use Payavel\Checkout\Console\Commands\MakeProvider;
 use Payavel\Orchestration\Service;
 
@@ -26,7 +26,7 @@ class PaymentServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(PaymentGateway::class, function ($app) {
-            return new PaymentGateway;
+            return new PaymentGateway();
         });
 
         $this->mergeConfigFrom(
@@ -50,7 +50,7 @@ class PaymentServiceProvider extends ServiceProvider
     {
         $this->commands([
             MakeProvider::class,
-            Install::class,
+            CheckoutInstall::class,
         ]);
     }
 
