@@ -2,20 +2,41 @@
 
 namespace Payavel\Checkout\Tests\Unit;
 
-use Exception;
+use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\Facades\Payment;
 use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\Models\Wallet;
+use Payavel\Checkout\PaymentRequest;
 use Payavel\Checkout\PaymentResponse;
-use Payavel\Checkout\Tests\AlternativePaymentResponse;
-use Payavel\Checkout\Tests\GatewayTestCase;
-use Payavel\Checkout\Tests\TestPaymentResponse;
+use Payavel\Checkout\PaymentStatus;
+use Payavel\Checkout\Tests\TestCase;
 use Payavel\Checkout\Tests\User;
+use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 
-class TestPaymentGateway extends GatewayTestCase
+abstract class TestCheckoutGateway extends TestCase implements CreatesServiceables
 {
+    /**
+     * Setup the test environment.
+     *
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $provider = $this->createProvider($this->checkoutService, [
+            'gateway' => TestPaymentRequest::class,
+        ]);
+
+        $account = $this->createAccount($this->checkoutService);
+
+        $this->linkAccountToProvider($account, $provider);
+
+        $this->setDefaultsForService($this->checkoutService, $account, $provider);
+    }
+
     #[Test]
     public function get_wallet_method_returns_configured_response()
     {
@@ -181,5 +202,136 @@ class TestPaymentGateway extends GatewayTestCase
     {
         $this->assertEquals(Payment::getProvider()->getId(), $response->provider->id);
         $this->assertEquals(Payment::getMerchant()->getId(), $response->merchant->id);
+    }
+}
+
+class TestPaymentRequest extends PaymentRequest
+{
+    public function getWallet(Wallet $wallet)
+    {
+        return new TestPaymentResponse([]);
+    }
+
+    public function getPaymentMethod(PaymentMethod $paymentMethod)
+    {
+        return new TestPaymentResponse([]);
+    }
+
+    public function tokenizePaymentMethod(Billable $billable, $data)
+    {
+        return new TestPaymentResponse([]);
+    }
+
+    public function updatePaymentMethod(PaymentMethod $paymentMethod, $data)
+    {
+        return new TestPaymentResponse([]);
+    }
+
+    public function deletePaymentMethod(PaymentMethod $paymentMethod)
+    {
+        return new TestPaymentResponse([]);
+    }
+
+    public function authorize($data, Billable $billable = null)
+    {
+        return new TestPaymentResponse([]);
+    }
+
+    public function capture(PaymentTransaction $transaction, $data = [])
+    {
+        return new TestPaymentResponse([]);
+    }
+
+    public function getTransaction(PaymentTransaction $transaction)
+    {
+        return new TestPaymentResponse([]);
+    }
+
+    public function void(PaymentTransaction $paymentTransaction, $data = [])
+    {
+        return new TestPaymentResponse([]);
+    }
+
+    public function refund(PaymentTransaction $paymentTransaction, $data = [])
+    {
+        return new TestPaymentResponse([]);
+    }
+}
+
+class TestPaymentResponse extends PaymentResponse
+{
+    public function getWalletResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+
+    public function getPaymentMethodResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+
+    public function tokenizePaymentMethodResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+
+    public function updatePaymentMethodResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+
+    public function deletePaymentMethodResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+
+    public function authorizeResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+
+    public function captureResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+
+    public function getTransactionResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+
+    public function voidResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+
+    public function refundResponse()
+    {
+        return [
+            'requestMethod' => $this->requestMethod,
+        ];
+    }
+
+    public function getStatusCode()
+    {
+        return PaymentStatus::AUTHORIZED;
     }
 }
