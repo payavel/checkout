@@ -11,8 +11,8 @@
     "autoload": {
         "psr-4": {
             "Payavel\\Checkout\\": "src/",
-            "Payavel\\Checkout\\Database\\Factories\\": "src/database/factories/",
-            "Payavel\\Checkout\\Database\\Seeders\\": "src/database/seeders/"
+            "Payavel\\Checkout\\Database\\Factories\\": "database/factories/",
+            "Payavel\\Checkout\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
