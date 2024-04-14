@@ -3,9 +3,9 @@
 namespace Payavel\Checkout\Tests\Feature\Console\Commands;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Str;
 use Payavel\Checkout\Tests\TestCase;
-use Payavel\Orchestration\Service;
+use Payavel\Orchestration\Contracts\Accountable;
+use Payavel\Orchestration\Contracts\Providable;
 use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use Payavel\Orchestration\Tests\Traits\AssertsServiceExists;
 use PHPUnit\Framework\Attributes\Test;
@@ -15,7 +15,7 @@ abstract class TestCheckoutInstallCommand extends TestCase implements CreatesSer
     use AssertsServiceExists;
 
     #[Test]
-    public function install_command_publishes_migration_and_generates_config_with_single_provider_and_account()
+    public function checkout_install_command_injects_checkout_service_into_orchestrate_service_command()
     {
         $provider = $this->createProvider($this->checkoutService);
         $account = $this->createAccount($this->checkoutService);
@@ -57,5 +57,20 @@ abstract class TestCheckoutInstallCommand extends TestCase implements CreatesSer
         $this->makeSureProviderIsLinkedToAccount($provider, $account);
 
         $this->assertTrue(unlink(config_path($checkoutServiceConfig->service)));
+    }
+
+    protected function makeSureProviderExists(Providable $provider)
+    {
+        //
+    }
+
+    protected function makeSureAccountExists(Accountable $account)
+    {
+        //
+    }
+
+    protected function makeSureProviderIsLinkedToAccount(Providable $provider, Accountable $account)
+    {
+        //
     }
 }
