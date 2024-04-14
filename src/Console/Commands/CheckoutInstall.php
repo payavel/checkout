@@ -12,8 +12,7 @@ class CheckoutInstall extends Command
      * @var string
      */
     protected $signature = 'checkout:install
-                            {service=Checkout}
-                            {--id=checkout}';
+                            {service=Checkout}';
 
     /**
      * The console command description.

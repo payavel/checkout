@@ -3,12 +3,10 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Payavel\Orchestration\Traits\ServesConfig;
+use Payavel\Orchestration\Support\ServiceConfig;
 
 class CreateBasePaymentTables extends Migration
 {
-    use ServesConfig;
-
     /**
      * Run the migrations.
      *
@@ -16,7 +14,7 @@ class CreateBasePaymentTables extends Migration
      */
     public function up()
     {
-        $usingDatabaseDriver = $this->config('checkout', 'defaults.driver') === 'database';
+        $usingDatabaseDriver = ServiceConfig::get('checkout', 'defaults.driver') === 'database';
 
         Schema::create('payment_types', function (Blueprint $table) {
             $table->smallIncrements('id');
@@ -35,8 +33,8 @@ class CreateBasePaymentTables extends Migration
             $table->timestamps();
 
             if ($usingDatabaseDriver) {
-                $table->foreign('provider_id')->references('id')->on('payment_providers')->onUpdate('cascade')->onDelete('cascade');
-                $table->foreign('merchant_id')->references('id')->on('payment_merchants')->onUpdate('cascade')->onDelete('cascade');
+                $table->foreign('provider_id')->references('id')->on('providers')->onUpdate('cascade')->onDelete('cascade');
+                $table->foreign('merchant_id')->references('id')->on('merchants')->onUpdate('cascade')->onDelete('cascade');
             }
         });
 
@@ -65,8 +63,8 @@ class CreateBasePaymentTables extends Migration
             $table->timestamps();
 
             if ($usingDatabaseDriver) {
-                $table->foreign('provider_id')->references('id')->on('payment_providers')->onUpdate('cascade')->onDelete('set null');
-                $table->foreign('merchant_id')->references('id')->on('payment_merchants')->onUpdate('cascade')->onDelete('set null');
+                $table->foreign('provider_id')->references('id')->on('providers')->onUpdate('cascade')->onDelete('set null');
+                $table->foreign('merchant_id')->references('id')->on('merchants')->onUpdate('cascade')->onDelete('set null');
             }
 
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('set null');
