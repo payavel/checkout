@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Payavel\Orchestration\Support\ServiceConfig;
 
-class CreateBasePaymentTables extends Migration
+class CreateBaseCheckoutTables extends Migration
 {
     /**
      * Run the migrations.
