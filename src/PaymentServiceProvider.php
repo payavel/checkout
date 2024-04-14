@@ -5,7 +5,7 @@ namespace Payavel\Checkout;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Payavel\Checkout\Console\Commands\CheckoutInstall;
-use Payavel\Checkout\Console\Commands\MakeProvider;
+use Payavel\Checkout\Console\Commands\CheckoutProvider;
 use Payavel\Orchestration\Service;
 
 class PaymentServiceProvider extends ServiceProvider
@@ -49,7 +49,7 @@ class PaymentServiceProvider extends ServiceProvider
     protected function registerCommands()
     {
         $this->commands([
-            MakeProvider::class,
+            CheckoutProvider::class,
             CheckoutInstall::class,
         ]);
     }

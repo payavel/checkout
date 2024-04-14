@@ -26,6 +26,7 @@ abstract class TestCheckoutInstallCommand extends TestCase implements CreatesSer
         $providerGateway = $this->gatewayPath($provider);
 
         $this->artisan('checkout:install')
+            ->expectsQuestion('How should the service be identified?', $this->checkoutService->getId())
             ->expectsQuestion("Choose a driver for the {$this->checkoutService->getName()} service.", Config::get('orchestration.defaults.driver'))
             ->expectsQuestion("How should the {$this->checkoutService->getName()} provider be named?", $provider->getName())
             ->expectsQuestion("How should the {$this->checkoutService->getName()} provider be identified?", $provider->getId())
