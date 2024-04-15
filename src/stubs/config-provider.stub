@@ -1,6 +1,0 @@
-
-        '{{ id }}' => [
-            'name' => '{{ name }}',
-            'request_class' => \App\Services\Payment\{{ provider }}PaymentRequest::class,
-            'response_class' => \App\Services\Payment\{{ provider }}PaymentResponse::class,
-        ],
