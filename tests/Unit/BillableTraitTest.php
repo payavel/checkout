@@ -18,7 +18,7 @@ class BillableTraitTest extends TestCase
         $billable = User::factory()
             ->hasWallets(
                 $totalWallets = rand(1, 3),
-                ['provider_id' => 'fake', 'merchant_id' => 'faker']
+                ['provider_id' => 'fake', 'account_id' => 'faker']
             )
             ->create();
 

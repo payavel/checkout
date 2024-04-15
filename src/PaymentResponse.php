@@ -4,15 +4,15 @@ namespace Payavel\Checkout;
 
 use Payavel\Checkout\Contracts\PaymentResponder;
 use Payavel\Checkout\Traits\PaymentResponses;
-use Payavel\Orchestration\Contracts\Merchantable;
+use Payavel\Orchestration\Contracts\Accountable;
 use Payavel\Orchestration\Contracts\Providable;
 use Payavel\Orchestration\Traits\SimulatesAttributes;
 use RuntimeException;
 
 abstract class PaymentResponse implements PaymentResponder
 {
-    use SimulatesAttributes,
-        PaymentResponses;
+    use SimulatesAttributes;
+    use PaymentResponses;
 
     /**
      * Statuses in this array are considered successful.
@@ -72,11 +72,11 @@ abstract class PaymentResponse implements PaymentResponder
     public $provider;
 
     /**
-     * The merchant that was used to make the $request.
+     * The account that was used to make the $request.
      *
-     * @var \Payavel\Orchestration\Contracts\Merchantable
+     * @var \Payavel\Orchestration\Contracts\Accountable
      */
-    public $merchant;
+    public $account;
 
     /**
      * The expected formatted data based on the $request.
@@ -112,14 +112,14 @@ abstract class PaymentResponse implements PaymentResponder
      *
      * @param string $requestMethod
      * @param \Payavel\Orchestration\Contracts\Providable $provider
-     * @param \Payavel\Orchestration\Contracts\Merchantable $merchant
+     * @param \Payavel\Orchestration\Contracts\Accountable $account
      * @return void
      */
-    public function configure(string $requestMethod, Providable $provider, Merchantable $merchant)
+    public function configure(string $requestMethod, Providable $provider, Accountable $account)
     {
         $this->requestMethod = $requestMethod;
         $this->provider = $provider;
-        $this->merchant = $merchant;
+        $this->account = $account;
     }
 
     /**
@@ -167,7 +167,7 @@ abstract class PaymentResponse implements PaymentResponder
      *
      * @return int
      */
-    public abstract function getStatusCode();
+    abstract public function getStatusCode();
 
     /**
      * Get a string representation of the response's status.

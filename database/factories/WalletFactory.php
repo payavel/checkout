@@ -4,7 +4,7 @@ namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\Wallet;
-use Payavel\Orchestration\Models\Merchant;
+use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 
 class WalletFactory extends Factory
@@ -40,8 +40,8 @@ class WalletFactory extends Factory
     {
         return $this->afterMaking(function (Wallet $wallet) {
             if (is_null($wallet->provider_id)) {
-                $provider = Provider::whereHas('merchants', function ($query) use ($wallet) {
-                    $query->where('payment_merchants.id', $wallet->merchant_id);
+                $provider = Provider::whereHas('accounts', function ($query) use ($wallet) {
+                    $query->where('payment_accounts.id', $wallet->account_id);
                 })->inRandomOrder()->firstOr(function () {
                     return Provider::factory()->create();
                 });
@@ -49,18 +49,18 @@ class WalletFactory extends Factory
                 $wallet->provider_id = $provider->id;
             }
 
-            if (is_null($wallet->merchant_id)) {
-                $merchant = Merchant::whereHas('providers', function ($query) use ($wallet) {
+            if (is_null($wallet->account_id)) {
+                $account = Account::whereHas('providers', function ($query) use ($wallet) {
                     $query->where('payment_providers.id', $wallet->provider_id);
                 })->inRandomOrder()->firstOr(function () use ($wallet) {
-                    $merchant = Merchant::factory()->create();
+                    $account = Account::factory()->create();
 
-                    $merchant->providers()->attach($wallet->provider_id, ['is_default' => true]);
+                    $account->providers()->attach($wallet->provider_id, ['is_default' => true]);
 
-                    return $merchant;
+                    return $account;
                 });
 
-                $wallet->merchant_id = $merchant->id;
+                $wallet->account_id = $account->id;
             }
         });
     }
