@@ -4,7 +4,7 @@ namespace Payavel\Checkout;
 
 use Payavel\Checkout\Contracts\PaymentRequestor;
 use Payavel\Checkout\Traits\PaymentRequests;
-use Payavel\Orchestration\Contracts\Merchantable;
+use Payavel\Orchestration\Contracts\Accountable;
 use Payavel\Orchestration\Contracts\Providable;
 
 abstract class PaymentRequest implements PaymentRequestor
@@ -19,20 +19,20 @@ abstract class PaymentRequest implements PaymentRequestor
     protected $provider;
 
     /**
-     * The payment merchant.
+     * The payment account.
      *
-     * @var \Payavel\Orchestration\Contracts\Merchantable
+     * @var \Payavel\Orchestration\Contracts\Accountable
      */
-    protected $merchant;
+    protected $account;
 
     /**
      * @param  \Payavel\Orchestration\Contracts\Providable $provider
-     * @param  \Payavel\Orchestration\Contracts\Merchantable $merchant
+     * @param  \Payavel\Orchestration\Contracts\Accountable $account
      */
-    public function __construct(Providable $provider, Merchantable $merchant)
+    public function __construct(Providable $provider, Accountable $account)
     {
         $this->provider = $provider;
-        $this->merchant = $merchant;
+        $this->account = $account;
 
         $this->setUp();
     }

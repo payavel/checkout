@@ -9,8 +9,8 @@ use Payavel\Checkout\Models\Traits\PaymentMethodRequests;
 
 class PaymentMethod extends Model
 {
-    use HasFactory,
-        PaymentMethodRequests;
+    use HasFactory;
+    use PaymentMethodRequests;
 
     /**
      * The attributes that aren't mass assignable.
@@ -59,13 +59,13 @@ class PaymentMethod extends Model
     }
 
     /**
-     * Get the payment method's merchant.
+     * Get the payment method's account.
      *
-     * @return \Payavel\Orchestration\Models\Merchant
+     * @return \Payavel\Orchestration\Models\Account
      */
-    public function getMerchantAttribute()
+    public function getAccountAttribute()
     {
-        return $this->wallet->merchant;
+        return $this->wallet->account;
     }
 
     /**

@@ -9,13 +9,13 @@ return [
     |
     | This option determines the default payment settings for your application.
     | By default we recommend using the config driver along with your favorite
-    | payment service provider & your application's default merchant account.
+    | payment service provider & your application's default account.
     |
     */
     'defaults' => [
         'driver' => 'config',
         'provider' => '...',
-        'merchant' => '...',
+        'account' => '...',
     ],
 
     /*
@@ -23,7 +23,7 @@ return [
     | Payment Test Mode
     |--------------------------------------------------------------------------
     |
-    | When set to true, it will pass the provider & merchant into the testing
+    | When set to true, it will pass the provider & account into the testing
     | gateway so you can mock your requests as you wish. This is very
     | useful when you are running tests in a CI/CD environment.
     |
@@ -46,15 +46,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Payment Merchants
+    | Payment Accounts
     |--------------------------------------------------------------------------
     |
-    | Here you may specify all the merchants that will be supported by this application
+    | Here you may specify all the accounts that will be supported by this application
     | to process payments for, along with any configuration needed in order to do so.
-    | e.g. You may provide each merchant's api keys and endpoints.
+    | e.g. You may provide each account's api keys and endpoints.
     |
     */
-    'merchants' => [
+    'accounts' => [
         // ...
     ],
 

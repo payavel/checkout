@@ -21,9 +21,9 @@ trait ConfiguresPaymentGateway
     public function getGatewayAttribute()
     {
         if (! isset($this->paymentGateway)) {
-            $this->paymentGateway = (new PaymentGateway)
+            $this->paymentGateway = (new PaymentGateway())
                 ->provider($this->provider)
-                ->merchant($this->merchant);
+                ->account($this->account);
         }
 
         return $this->paymentGateway;

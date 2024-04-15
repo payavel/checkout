@@ -5,7 +5,7 @@ namespace Payavel\Checkout\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\PaymentStatus;
-use Payavel\Orchestration\Models\Merchant;
+use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 
 class PaymentTransactionFactory extends Factory
@@ -46,29 +46,29 @@ class PaymentTransactionFactory extends Factory
             if (is_null($transaction->provider_id)) {
                 $provider = ! is_null($transaction->payment_method_id)
                     ? $transaction->paymentMethod->provider
-                    : Provider::whereHas('merchants', function ($query) use ($transaction) {
-                        $query->where('payment_merchants.id', $transaction->merchant_id);
-                    })->inRandomOrder()->firstOr(function ()  {
+                    : Provider::whereHas('accounts', function ($query) use ($transaction) {
+                        $query->where('payment_accounts.id', $transaction->account_id);
+                    })->inRandomOrder()->firstOr(function () {
                         return Provider::factory()->create();
                     });
 
                 $transaction->provider_id = $provider->id;
             }
 
-            if (is_null($transaction->merchant_id)) {
-                $merchant = ! is_null($transaction->payment_method_id)
-                    ? $transaction->paymentMethod->merchant
-                    : Merchant::whereHas('providers', function ($query) use ($transaction) {
+            if (is_null($transaction->account_id)) {
+                $account = ! is_null($transaction->payment_method_id)
+                    ? $transaction->paymentMethod->account
+                    : Account::whereHas('providers', function ($query) use ($transaction) {
                         $query->where('payment_providers.id', $transaction->provider_id);
                     })->inRandomOrder()->firstOr(function () use ($transaction) {
-                        $merchant = Merchant::factory()->create();
+                        $account = Account::factory()->create();
 
-                        $merchant->providers()->attach($transaction->provider_id, ['is_default' => true]);
+                        $account->providers()->attach($transaction->provider_id, ['is_default' => true]);
 
-                        return $merchant;
+                        return $account;
                     });
 
-                $transaction->merchant_id = $merchant->id;
+                $transaction->account_id = $account->id;
             }
         });
     }

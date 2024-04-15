@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Payavel\Checkout\Database\Factories\PaymentTransactionFactory;
 use Payavel\Checkout\Models\Traits\PaymentTransactionRequests;
-use Payavel\Orchestration\Models\Merchant;
+use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 
 class PaymentTransaction extends Model
 {
-    use HasFactory,
-        PaymentTransactionRequests;
+    use HasFactory;
+    use PaymentTransactionRequests;
 
     /**
      * The attributes that aren't mass assignable.
@@ -70,13 +70,13 @@ class PaymentTransaction extends Model
     }
 
     /**
-     * Get the merchant the transaction belongs to.
+     * Get the account the transaction belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function merchant()
+    public function account()
     {
-        return $this->belongsTo(config('payment.models.' . Merchant::class, Merchant::class));
+        return $this->belongsTo(config('payment.models.' . Account::class, Account::class));
     }
 
     /**

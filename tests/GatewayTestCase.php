@@ -10,7 +10,7 @@ use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\PaymentRequest;
 use Payavel\Checkout\PaymentResponse;
 use Payavel\Checkout\PaymentStatus;
-use Payavel\Orchestration\Models\Merchant;
+use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Models\Service;
 
@@ -18,7 +18,7 @@ abstract class GatewayTestCase extends TestCase
 {
     protected $driver;
     protected $provider = 'test';
-    protected $merchant = 'tester';
+    protected $account = 'tester';
 
     /**
      * Setup the test environment.
@@ -45,7 +45,7 @@ abstract class GatewayTestCase extends TestCase
             'payment.defaults' => [
                 'driver' => $this->driver,
                 'provider' => $this->provider,
-                'merchant' => $this->merchant,
+                'account' => $this->account,
             ],
         ]);
     }
@@ -58,16 +58,16 @@ abstract class GatewayTestCase extends TestCase
                     'name' => Str::headline($this->provider),
                     'request_class' => TestPaymentRequest::class,
                     'response_class' => TestPaymentResponse::class,
-                ], 
+                ],
                 'alternative' => [
                     'name' => 'Alternative',
                     'request_class' => AlternativePaymentRequest::class,
-                    'response_class' => AlternativePaymentResponse::class, 
+                    'response_class' => AlternativePaymentResponse::class,
                 ]
             ],
-            'payment.merchants' => [
-                $this->merchant => [
-                    'name' => Str::headline($this->merchant),
+            'payment.accounts' => [
+                $this->account => [
+                    'name' => Str::headline($this->account),
                     'providers' => [
                         $this->provider,
                     ],
@@ -98,13 +98,13 @@ abstract class GatewayTestCase extends TestCase
             'response_class' => TestPaymentResponse::class,
         ]);
 
-        $merchant = Merchant::create([
+        $account = Account::create([
             'id' => 'tester',
             'service_id' => $service->id,
             'name' => 'Tester',
         ]);
 
-        $merchant->providers()->attach($provider->id, ['default' => true]);
+        $account->providers()->attach($provider->id, ['default' => true]);
 
         $alternativeProvider = Provider::create([
             'id' => 'alternative',
@@ -114,14 +114,14 @@ abstract class GatewayTestCase extends TestCase
             'response_class' => AlternativePaymentResponse::class,
         ]);
 
-        $alternateMerchant = Merchant::create([
+        $alternateAccount = Account::create([
             'id' => 'alternate',
             'service_id' => $service->id,
             'name' => 'Alternate',
         ]);
 
-        $alternateMerchant->providers()->attach($alternativeProvider->id, ['default' => true]);
-        $alternateMerchant->providers()->attach($provider->id);
+        $alternateAccount->providers()->attach($alternativeProvider->id, ['default' => true]);
+        $alternateAccount->providers()->attach($provider->id);
 
     }
 }
@@ -168,7 +168,7 @@ class TestPaymentRequest extends PaymentRequest
         return new TestPaymentResponse([]);
     }
 
-    public function void(PaymentTransaction $paymentTransaction, $data =[])
+    public function void(PaymentTransaction $paymentTransaction, $data = [])
     {
         return new TestPaymentResponse([]);
     }
@@ -273,7 +273,7 @@ class AlternativePaymentResponse extends PaymentResponse
             'requestMethod' => $this->requestMethod,
         ];
     }
-    
+
     public function getStatusCode()
     {
         return PaymentStatus::DECLINED;

@@ -42,7 +42,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => Payment::getProvider()->getId(),
-            'merchant_id' => Payment::getMerchant()->getId(),
+            'account_id' => Payment::getAccount()->getId(),
         ]);
 
         $response = Payment::getWallet($wallet);
@@ -57,7 +57,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => Payment::getProvider()->getId(),
-            'merchant_id' => Payment::getMerchant()->getId(),
+            'account_id' => Payment::getAccount()->getId(),
         ]);
 
         $paymentMethod = PaymentMethod::factory()->create([
@@ -88,7 +88,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => Payment::getProvider()->getId(),
-            'merchant_id' => Payment::getMerchant()->getId(),
+            'account_id' => Payment::getAccount()->getId(),
         ]);
 
         $paymentMethod = PaymentMethod::factory()->create([
@@ -107,7 +107,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => Payment::getProvider()->getId(),
-            'merchant_id' => Payment::getMerchant()->getId(),
+            'account_id' => Payment::getAccount()->getId(),
         ]);
 
         $paymentMethod = PaymentMethod::factory()->create([
@@ -136,7 +136,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     {
         $transaction = PaymentTransaction::factory()->create([
             'provider_id' => Payment::getProvider()->getId(),
-            'merchant_id' => Payment::getMerchant()->getId(),
+            'account_id' => Payment::getAccount()->getId(),
         ]);
 
         $response = Payment::capture($transaction);
@@ -151,7 +151,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     {
         $transaction = PaymentTransaction::factory()->create([
             'provider_id' => Payment::getProvider()->getId(),
-            'merchant_id' => Payment::getMerchant()->getId(),
+            'account_id' => Payment::getAccount()->getId(),
         ]);
 
         $response = Payment::getTransaction($transaction);
@@ -166,7 +166,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     {
         $transaction = PaymentTransaction::factory()->create([
             'provider_id' => Payment::getProvider()->getId(),
-            'merchant_id' => Payment::getMerchant()->getId(),
+            'account_id' => Payment::getAccount()->getId(),
         ]);
 
         $response = Payment::void($transaction);
@@ -181,7 +181,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     {
         $transaction = PaymentTransaction::factory()->create([
             'provider_id' => Payment::getProvider()->getId(),
-            'merchant_id' => Payment::getMerchant()->getId(),
+            'account_id' => Payment::getAccount()->getId(),
         ]);
 
         $response = Payment::refund($transaction);
@@ -201,7 +201,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     protected function assertResponseIsConfigured(PaymentResponse $response)
     {
         $this->assertEquals(Payment::getProvider()->getId(), $response->provider->id);
-        $this->assertEquals(Payment::getMerchant()->getId(), $response->merchant->id);
+        $this->assertEquals(Payment::getAccount()->getId(), $response->account->id);
     }
 }
 

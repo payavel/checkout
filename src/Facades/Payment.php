@@ -10,11 +10,11 @@ use Payavel\Checkout\PaymentGateway;
  * @method static \Payavel\Orchestration\Contracts\Providable getProvider()
  * @method static void setProvider($provider)
  * @method static string|int|\Payavel\Orchestration\Contracts\Providable getDefaultProvider()
- * @method static \Payavel\Checkout\PaymentGateway merchant($merchant)
- * @method static \Payavel\Orchestration\Contracts\Merchantable getMerchant()
- * @method static void setMerchant($merchant, $strict = true)
+ * @method static \Payavel\Checkout\PaymentGateway account($account)
+ * @method static \Payavel\Orchestration\Contracts\Accountable getAccount()
+ * @method static void setAccount($account, $strict = true)
  * @method static void reset()
- * @method static string|int|\Payavel\Orchestration\Contracts\Merchantable getDefaultMerchant()
+ * @method static string|int|\Payavel\Orchestration\Contracts\Accountable getDefaultAccount()
  * @method static \Payavel\Checkout\PaymentResponse getWallet(\Payavel\Checkout\Models\Wallet $wallet)
  * @method static \Payavel\Checkout\PaymentResponse getPaymentMethod(\Payavel\Checkout\Models\PaymentMethod $paymentMethod)
  * @method static \Payavel\Checkout\PaymentResponse tokenizePaymentMethod(\Payavel\Checkout\Contracts\Billable $billable, $data)
@@ -25,7 +25,7 @@ use Payavel\Checkout\PaymentGateway;
  * @method static \Payavel\Checkout\PaymentResponse getTransaction(\Payavel\Checkout\Models\PaymentTransaction $transaction)
  * @method static \Payavel\Checkout\PaymentResponse void(\Payavel\Checkout\Models\PaymentTransaction $transaction, $data = [])
  * @method static \Payavel\Checkout\PaymentResponse refund(\Payavel\Checkout\Models\PaymentTransaction $transaction, $data = [])
- * 
+ *
  * @see \Payavel\Checkout\PaymentGateway
  */
 class Payment extends Facade

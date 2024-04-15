@@ -28,13 +28,13 @@ class CreateBaseCheckoutTables extends Migration
             $table->unsignedBigInteger('billable_id')->nullable();
             $table->string('billable_type')->nullable();
             $table->string('provider_id');
-            $table->string('merchant_id');
+            $table->string('account_id');
             $table->string('token');
             $table->timestamps();
 
             if ($usingDatabaseDriver) {
                 $table->foreign('provider_id')->references('id')->on('providers')->onUpdate('cascade')->onDelete('cascade');
-                $table->foreign('merchant_id')->references('id')->on('merchants')->onUpdate('cascade')->onDelete('cascade');
+                $table->foreign('account_id')->references('id')->on('accounts')->onUpdate('cascade')->onDelete('cascade');
             }
         });
 
@@ -53,7 +53,7 @@ class CreateBaseCheckoutTables extends Migration
         Schema::create('payment_transactions', function (Blueprint $table) use ($usingDatabaseDriver) {
             $table->bigIncrements('id');
             $table->string('provider_id');
-            $table->string('merchant_id');
+            $table->string('account_id');
             $table->string('reference');
             $table->unsignedInteger('amount');
             $table->char('currency', 3)->default('USD');
@@ -64,7 +64,7 @@ class CreateBaseCheckoutTables extends Migration
 
             if ($usingDatabaseDriver) {
                 $table->foreign('provider_id')->references('id')->on('providers')->onUpdate('cascade')->onDelete('set null');
-                $table->foreign('merchant_id')->references('id')->on('merchants')->onUpdate('cascade')->onDelete('set null');
+                $table->foreign('account_id')->references('id')->on('accounts')->onUpdate('cascade')->onDelete('set null');
             }
 
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('set null');

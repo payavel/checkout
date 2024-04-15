@@ -7,7 +7,7 @@ return [
     | Payment Test Mode
     |--------------------------------------------------------------------------
     |
-    | When set to true, it will pass the provider & merchant into the testing
+    | When set to true, it will pass the provider & account into the testing
     | gateway so you can mock your requests as you wish. This is very
     | useful when you are running tests in a CI/CD environment.
     |
@@ -22,7 +22,7 @@ return [
     |
     | Here you can override the location and/or class name of your fake payment
     | request & response classes. Also, feel free to add any additional config
-    | that may assist you in defining your mocked checkout responses. 
+    | that may assist you in defining your mocked checkout responses.
     |
     */
     'mocking' => [
