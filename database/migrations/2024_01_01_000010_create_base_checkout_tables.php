@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Payavel\Orchestration\Support\ServiceConfig;
 
-class CreateBaseCheckoutTables extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -96,4 +95,4 @@ class CreateBaseCheckoutTables extends Migration
         Schema::dropIfExists('payment_types');
         Schema::dropIfExists('wallets');
     }
-}
+};
