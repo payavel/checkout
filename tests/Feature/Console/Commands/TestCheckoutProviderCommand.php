@@ -19,7 +19,8 @@ abstract class TestCheckoutProviderCommand extends TestCase implements CreatesSe
         $gateway = $this->gatewayPath($provider);
 
         $this->artisan('checkout:provider', [
-            'provider' => $provider->getId(),
+            'provider' => $provider->getName(),
+            '--id' => $provider->getId(),
         ])
             ->expectsOutputToContain("Gateway [app/{$gateway->request}] created successfully.")
             ->expectsOutputToContain("Gateway [app/{$gateway->response}] created successfully.")

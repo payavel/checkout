@@ -13,6 +13,7 @@ class CheckoutProvider extends Command
      */
     protected $signature = 'checkout:provider
                             {provider? : The checkout provider name}
+                            {--id= : The checkout provider ID}
                             {--service=checkout}
                             {--fake : Generates a gateway to be used for testing purposes}';
 
