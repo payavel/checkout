@@ -4,46 +4,16 @@ namespace Payavel\Checkout;
 
 use Payavel\Checkout\Contracts\PaymentRequestor;
 use Payavel\Checkout\Traits\PaymentRequests;
-use Payavel\Orchestration\Contracts\Accountable;
-use Payavel\Orchestration\Contracts\Providable;
+use Payavel\Orchestration\ServiceRequest;
 
-abstract class PaymentRequest implements PaymentRequestor
+abstract class PaymentRequest extends ServiceRequest implements PaymentRequestor
 {
     use PaymentRequests;
 
     /**
-     * The payment provider.
+     * The service response class.
      *
-     * @var \Payavel\Orchestration\Contracts\Providable
+     * @var \Payavel\Orchestration\ServiceResponse
      */
-    protected $provider;
-
-    /**
-     * The payment account.
-     *
-     * @var \Payavel\Orchestration\Contracts\Accountable
-     */
-    protected $account;
-
-    /**
-     * @param  \Payavel\Orchestration\Contracts\Providable $provider
-     * @param  \Payavel\Orchestration\Contracts\Accountable $account
-     */
-    public function __construct(Providable $provider, Accountable $account)
-    {
-        $this->provider = $provider;
-        $this->account = $account;
-
-        $this->setUp();
-    }
-
-    /**
-     * Set up the request.
-     *
-     * @return void
-     */
-    protected function setUp()
-    {
-        //
-    }
+    protected $serviceResponse = PaymentResponse::class;
 }
