@@ -2,12 +2,11 @@
 
 namespace Payavel\Checkout\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Checkout\Database\Factories\WalletFactory;
 use Payavel\Checkout\Models\Traits\WalletRequests;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
+use Payavel\Orchestration\Traits\HasFactory;
 
 class Wallet extends Model
 {
@@ -29,13 +28,13 @@ class Wallet extends Model
     protected $hidden = ['token'];
 
     /**
-     * Create a new factory instance for the model.
+     * Custom factory namespace fallback.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return string
      */
-    protected static function newFactory()
+    protected static function getFactoryNamespace()
     {
-        return WalletFactory::new();
+        return 'Payavel\\Checkout\\Database\\Factories';
     }
 
     /**
