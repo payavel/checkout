@@ -2,9 +2,8 @@
 
 namespace Payavel\Checkout\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Checkout\Database\Factories\PaymentTransactionEventFactory;
+use Payavel\Orchestration\Traits\HasFactory;
 
 class PaymentTransactionEvent extends Model
 {
@@ -36,13 +35,13 @@ class PaymentTransactionEvent extends Model
     ];
 
     /**
-     * Create a new factory instance for the model.
+     * Custom factory namespace fallback.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return string
      */
-    public static function newFactory()
+    protected static function getFactoryNamespace()
     {
-        return PaymentTransactionEventFactory::new();
+        return 'Payavel\\Checkout\\Database\\Factories';
     }
 
     /**
