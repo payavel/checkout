@@ -5,7 +5,7 @@ namespace Payavel\Checkout\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\Models\PaymentTransactionEvent;
-use Payavel\Checkout\PaymentStatus;
+use Payavel\Checkout\CheckoutStatus;
 
 class PaymentTransactionEventFactory extends Factory
 {
@@ -26,11 +26,11 @@ class PaymentTransactionEventFactory extends Factory
         return [
             'reference' => $this->faker->uuid(),
             'status_code' => $this->faker->randomElement([
-                PaymentStatus::CAPTURED,
-                PaymentStatus::SETTLED,
-                PaymentStatus::VOIDED,
-                PaymentStatus::REFUNDED,
-                PaymentStatus::REFUND_SETTLED,
+                CheckoutStatus::CAPTURED,
+                CheckoutStatus::SETTLED,
+                CheckoutStatus::VOIDED,
+                CheckoutStatus::REFUNDED,
+                CheckoutStatus::REFUND_SETTLED,
             ]),
         ];
     }

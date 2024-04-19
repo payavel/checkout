@@ -3,13 +3,13 @@
 namespace Payavel\Checkout\Tests\Unit;
 
 use Payavel\Checkout\Contracts\Billable;
-use Payavel\Checkout\Facades\Payment;
+use Payavel\Checkout\Facades\Checkout;
 use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\Models\Wallet;
-use Payavel\Checkout\PaymentRequest;
-use Payavel\Checkout\PaymentResponse;
-use Payavel\Checkout\PaymentStatus;
+use Payavel\Checkout\CheckoutRequest;
+use Payavel\Checkout\CheckoutResponse;
+use Payavel\Checkout\CheckoutStatus;
 use Payavel\Checkout\Tests\TestCase;
 use Payavel\Checkout\Tests\User;
 use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
@@ -41,11 +41,11 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     public function get_wallet_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
-            'provider_id' => Payment::getProvider()->getId(),
-            'account_id' => Payment::getAccount()->getId(),
+            'provider_id' => Checkout::getProvider()->getId(),
+            'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $response = Payment::getWallet($wallet);
+        $response = Checkout::getWallet($wallet);
 
         $this->assertResponseIsConfigured($response);
 
@@ -56,15 +56,15 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     public function get_payment_method_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
-            'provider_id' => Payment::getProvider()->getId(),
-            'account_id' => Payment::getAccount()->getId(),
+            'provider_id' => Checkout::getProvider()->getId(),
+            'account_id' => Checkout::getAccount()->getId(),
         ]);
 
         $paymentMethod = PaymentMethod::factory()->create([
             'wallet_id' => $wallet->id,
         ]);
 
-        $response = Payment::getPaymentMethod($paymentMethod);
+        $response = Checkout::getPaymentMethod($paymentMethod);
 
         $this->assertResponseIsConfigured($response);
 
@@ -76,7 +76,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     {
         $user = User::factory()->create();
 
-        $response = Payment::tokenizePaymentMethod($user, []);
+        $response = Checkout::tokenizePaymentMethod($user, []);
 
         $this->assertResponseIsConfigured($response);
 
@@ -87,15 +87,15 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     public function update_payment_method_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
-            'provider_id' => Payment::getProvider()->getId(),
-            'account_id' => Payment::getAccount()->getId(),
+            'provider_id' => Checkout::getProvider()->getId(),
+            'account_id' => Checkout::getAccount()->getId(),
         ]);
 
         $paymentMethod = PaymentMethod::factory()->create([
             'wallet_id' => $wallet->id,
         ]);
 
-        $response = Payment::updatePaymentMethod($paymentMethod, []);
+        $response = Checkout::updatePaymentMethod($paymentMethod, []);
 
         $this->assertResponseIsConfigured($response);
 
@@ -106,15 +106,15 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     public function delete_payment_method_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
-            'provider_id' => Payment::getProvider()->getId(),
-            'account_id' => Payment::getAccount()->getId(),
+            'provider_id' => Checkout::getProvider()->getId(),
+            'account_id' => Checkout::getAccount()->getId(),
         ]);
 
         $paymentMethod = PaymentMethod::factory()->create([
             'wallet_id' => $wallet->id,
         ]);
 
-        $response = Payment::deletePaymentMethod($paymentMethod);
+        $response = Checkout::deletePaymentMethod($paymentMethod);
 
         $this->assertResponseIsConfigured($response);
 
@@ -124,7 +124,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     #[Test]
     public function authorize_method_returns_configured_response()
     {
-        $response = Payment::authorize([]);
+        $response = Checkout::authorize([]);
 
         $this->assertResponseIsConfigured($response);
 
@@ -135,11 +135,11 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     public function capture_method_returns_configured_response()
     {
         $transaction = PaymentTransaction::factory()->create([
-            'provider_id' => Payment::getProvider()->getId(),
-            'account_id' => Payment::getAccount()->getId(),
+            'provider_id' => Checkout::getProvider()->getId(),
+            'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $response = Payment::capture($transaction);
+        $response = Checkout::capture($transaction);
 
         $this->assertResponseIsConfigured($response);
 
@@ -150,11 +150,11 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     public function get_transaction_method_returns_configured_response()
     {
         $transaction = PaymentTransaction::factory()->create([
-            'provider_id' => Payment::getProvider()->getId(),
-            'account_id' => Payment::getAccount()->getId(),
+            'provider_id' => Checkout::getProvider()->getId(),
+            'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $response = Payment::getTransaction($transaction);
+        $response = Checkout::getTransaction($transaction);
 
         $this->assertResponseIsConfigured($response);
 
@@ -165,11 +165,11 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     public function void_method_returns_configured_response()
     {
         $transaction = PaymentTransaction::factory()->create([
-            'provider_id' => Payment::getProvider()->getId(),
-            'account_id' => Payment::getAccount()->getId(),
+            'provider_id' => Checkout::getProvider()->getId(),
+            'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $response = Payment::void($transaction);
+        $response = Checkout::void($transaction);
 
         $this->assertResponseIsConfigured($response);
 
@@ -180,11 +180,11 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     public function refund_method_returns_configured_response()
     {
         $transaction = PaymentTransaction::factory()->create([
-            'provider_id' => Payment::getProvider()->getId(),
-            'account_id' => Payment::getAccount()->getId(),
+            'provider_id' => Checkout::getProvider()->getId(),
+            'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $response = Payment::refund($transaction);
+        $response = Checkout::refund($transaction);
 
         $this->assertResponseIsConfigured($response);
 
@@ -195,17 +195,17 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
      * Assert the response is configured automatically.
      *
      * @param string $requestMethod
-     * @param \Payavel\Checkout\PaymentResponse $response
+     * @param \Payavel\Checkout\CheckoutResponse $response
      * @return void
      */
-    protected function assertResponseIsConfigured(PaymentResponse $response)
+    protected function assertResponseIsConfigured(CheckoutResponse $response)
     {
-        $this->assertEquals(Payment::getProvider()->getId(), $response->provider->id);
-        $this->assertEquals(Payment::getAccount()->getId(), $response->account->id);
+        $this->assertEquals(Checkout::getProvider()->getId(), $response->provider->id);
+        $this->assertEquals(Checkout::getAccount()->getId(), $response->account->id);
     }
 }
 
-class TestPaymentRequest extends PaymentRequest
+class TestPaymentRequest extends CheckoutRequest
 {
     public function getWallet(Wallet $wallet)
     {
@@ -258,7 +258,7 @@ class TestPaymentRequest extends PaymentRequest
     }
 }
 
-class TestPaymentResponse extends PaymentResponse
+class TestPaymentResponse extends CheckoutResponse
 {
     public function getWalletResponse()
     {
@@ -332,6 +332,6 @@ class TestPaymentResponse extends PaymentResponse
 
     public function getStatusCode()
     {
-        return PaymentStatus::AUTHORIZED;
+        return CheckoutStatus::AUTHORIZED;
     }
 }

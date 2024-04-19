@@ -6,7 +6,7 @@ use Exception;
 use Payavel\Orchestration\Traits\ThrowsRuntimeException;
 use RuntimeException;
 
-trait PaymentResponses
+trait CheckoutResponses
 {
     use ThrowsRuntimeException;
 
@@ -96,7 +96,7 @@ trait PaymentResponses
 
     /**
      * Maps details from the getTransaction() response to the expected format.
-     * 
+     *
      * @return array|mixed
      */
     public function getTransactionResponse()

@@ -9,7 +9,7 @@ trait PaymentTransactionRequests
     /**
      * Fetch the transaction details from the provider.
      *
-     * @return \Payavel\Checkout\PaymentResponse
+     * @return \Payavel\Checkout\CheckoutResponse
      */
     public function fetch()
     {
@@ -20,7 +20,7 @@ trait PaymentTransactionRequests
      * Request the provider to void the transaction.
      *
      * @param array|mixed $data
-     * @return \Payavel\Checkout\PaymentResponse
+     * @return \Payavel\Checkout\CheckoutResponse
      */
     public function void($data = [])
     {
@@ -31,7 +31,7 @@ trait PaymentTransactionRequests
      * Request the provider to refund the transaction.
      *
      * @param array|mixed $data
-     * @return \Payavel\Checkout\PaymentResponse
+     * @return \Payavel\Checkout\CheckoutResponse
      */
     public function refund($data = [])
     {

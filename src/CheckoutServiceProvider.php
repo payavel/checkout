@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Payavel\Checkout\Console\Commands\CheckoutInstall;
 use Payavel\Checkout\Console\Commands\CheckoutProvider;
 
-class PaymentServiceProvider extends ServiceProvider
+class CheckoutServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -23,8 +23,8 @@ class PaymentServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(PaymentGateway::class, function ($app) {
-            return new PaymentGateway();
+        $this->app->singleton(CheckoutGateway::class, function ($app) {
+            return new CheckoutGateway();
         });
 
         $this->mergeConfigFrom(

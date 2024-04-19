@@ -4,7 +4,7 @@ namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\PaymentTransaction;
-use Payavel\Checkout\PaymentStatus;
+use Payavel\Checkout\CheckoutStatus;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 
@@ -28,7 +28,7 @@ class PaymentTransactionFactory extends Factory
             'reference' => $this->faker->uuid(),
             'amount' => $this->faker->numberBetween(1, 999) * 100,
             'currency' => $this->faker->currencyCode(),
-            'status_code' => PaymentStatus::AUTHORIZED,
+            'status_code' => CheckoutStatus::AUTHORIZED,
         ];
     }
 
