@@ -28,8 +28,8 @@ class PaymentServiceProvider extends ServiceProvider
         });
 
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/payment.php',
-            'payment'
+            __DIR__ . '/../config/checkout.php',
+            'checkout'
         );
     }
 

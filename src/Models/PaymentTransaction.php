@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Payavel\Checkout\Models\Traits\PaymentTransactionRequests;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
+use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class PaymentTransaction extends Model
@@ -55,7 +56,7 @@ class PaymentTransaction extends Model
      */
     public function paymentMethod()
     {
-        return $this->belongsTo(config('payment.models.' . PaymentMethod::class, PaymentMethod::class));
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . PaymentMethod::class, PaymentMethod::class));
     }
 
     /**
@@ -65,7 +66,7 @@ class PaymentTransaction extends Model
      */
     public function provider()
     {
-        return $this->belongsTo(config('payment.models.' . Provider::class, Provider::class));
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . Provider::class, Provider::class));
     }
 
     /**
@@ -75,7 +76,7 @@ class PaymentTransaction extends Model
      */
     public function account()
     {
-        return $this->belongsTo(config('payment.models.' . Account::class, Account::class));
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . Account::class, Account::class));
     }
 
     /**
@@ -85,6 +86,6 @@ class PaymentTransaction extends Model
      */
     public function events()
     {
-        return $this->hasMany(config('payment.models.' . PaymentTransactionEvent::class, PaymentTransactionEvent::class), 'transaction_id');
+        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentTransactionEvent::class, PaymentTransactionEvent::class), 'transaction_id');
     }
 }

@@ -6,18 +6,16 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Checkout\Models\PaymentType;
+use Payavel\Orchestration\Support\ServiceConfig;
 
 class PaymentMethodFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
-     * @return string
+     * @var string
      */
-    public function modelName()
-    {
-        return config('payment.models.' . PaymentMethod::class, PaymentMethod::class);
-    }
+    protected $model = PaymentMethod::class;
 
     /**
      * Define the model's default state.
