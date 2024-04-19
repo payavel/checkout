@@ -9,7 +9,7 @@ trait WalletRequests
     /**
      * Fetch the wallet details from the provider.
      *
-     * @return \Payavel\Checkout\PaymentResponse
+     * @return \Payavel\Checkout\CheckoutResponse
      */
     public function fetch()
     {

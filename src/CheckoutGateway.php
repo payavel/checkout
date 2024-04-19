@@ -4,7 +4,7 @@ namespace Payavel\Checkout;
 
 use Payavel\Orchestration\Service;
 
-class PaymentGateway extends Service
+class CheckoutGateway extends Service
 {
     public function __construct()
     {

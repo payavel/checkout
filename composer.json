@@ -1,6 +1,6 @@
 {
     "name": "payavel/checkout",
-    "description": "The best checkout solution that integrates with any payment processor and Laravel.",
+    "description": "Laravel package providing checkout with easy setup and flexible configurations to fit any e-commerce requirements.",
     "license": "MIT",
     "authors": [
         {
@@ -33,7 +33,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Payavel\\Checkout\\PaymentServiceProvider"
+                "Payavel\\Checkout\\CheckoutServiceProvider"
             ]
         }
     }

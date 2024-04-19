@@ -9,7 +9,7 @@ trait PaymentMethodRequests
     /**
      * Fetch the payment method details from the provider.
      *
-     * @return \Payavel\Checkout\PaymentResponse
+     * @return \Payavel\Checkout\CheckoutResponse
      */
     public function fetch()
     {
@@ -20,7 +20,7 @@ trait PaymentMethodRequests
      * Request the provider to update the payment method's details.
      *
      * @param array|mixed $data
-     * @return \Payavel\Checkout\PaymentResponse
+     * @return \Payavel\Checkout\CheckoutResponse
      */
     public function patch($data)
     {
@@ -30,7 +30,7 @@ trait PaymentMethodRequests
     /**
      * Request the provider to remove the payment method from their system.
      *
-     * @return \Payavel\Checkout\PaymentResponse
+     * @return \Payavel\Checkout\CheckoutResponse
      */
     public function disable()
     {

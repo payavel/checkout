@@ -3,7 +3,7 @@
 namespace Payavel\Checkout\Tests;
 
 use Payavel\Checkout\Contracts\Billable;
-use Payavel\Checkout\PaymentServiceProvider;
+use Payavel\Checkout\CheckoutServiceProvider;
 use Payavel\Checkout\Traits\Billable as BillableTrait;
 use Payavel\Orchestration\Contracts\Serviceable;
 use Payavel\Orchestration\OrchestrationServiceProvider;
@@ -19,7 +19,7 @@ class TestCase extends \Payavel\Orchestration\Tests\TestCase
     {
         return [
             OrchestrationServiceProvider::class,
-            PaymentServiceProvider::class,
+            CheckoutServiceProvider::class,
         ];
     }
 

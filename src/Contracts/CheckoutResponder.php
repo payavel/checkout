@@ -2,7 +2,7 @@
 
 namespace Payavel\Checkout\Contracts;
 
-interface PaymentResponder
+interface CheckoutResponder
 {
     /**
      * Maps details from the getWallet() response to the expected format.
@@ -31,7 +31,7 @@ interface PaymentResponder
      * @return array|mixed
      */
     public function updatePaymentMethodResponse();
-    
+
     /**
      * Maps details from the deletePaymentMethod() response to the expected format.
      *
@@ -55,7 +55,7 @@ interface PaymentResponder
 
     /**
      * Maps details from the getTransaction() response to the expected format.
-     * 
+     *
      * @return array|mixed
      */
     public function getTransactionResponse();

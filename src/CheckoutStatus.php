@@ -2,63 +2,63 @@
 
 namespace Payavel\Checkout;
 
-class PaymentStatus
+class CheckoutStatus
 {
-    const AUTHORIZED = 200;
-    const APPROVED = 201;
-    const CAPTURED = 202;
-    const PARTIALLY_CAPTURED = 203;
-    const SETTLED = 204;
-    const CANCELED = 210;
-    const VOIDED = 211;
-    const REFUNDED = 212;
-    const PARTIALLY_REFUNDED = 213;
-    const REFUND_SETTLED = 214;
-    const REFUND_FAILED = 215;
-    const REFUND_REVERSED = 216;
-    const CHARGEBACK = 220;
-    const CHARGEBACK_WON = 221;
-    const CHARGEBACK_LOST = 222;
-    const CHARGEBACK_REVERSED = 223;
-    const SECOND_CHARGEBACK = 224;
-    const PENDING = 300;
-    const PROCESSING_ASYNC = 301;
-    const REFUSED = 400;
-    const DECLINED = 401;
-    const REFERRED = 402;
-    const NOT_ENOUGH_BALANCE = 403;
-    const INVALID_CARD = 410;
-    const INVALID_CARD_HOLDER_NAME = 411;
-    const INVALID_CARD_NUMBER = 412;
-    const INVALID_CARD_EXPIRY = 413;
-    const INVALID_CARD_SECURITY_CODE = 414;
-    const BLOCKED_CARD = 415;
-    const RESTRICTED_CARD = 416;
-    const INVALID_ADDRESS = 460;
-    const INVALID_BILLING_ADDRESS = 461;
-    const INVALID_SHIPPING_ADDRESS = 462;
-    const FRAUD = 470;
-    const FAILED_FRAUD_CHECK = 471;
-    const ACQUIRER_SUSPECTED_FRAUD = 472;
-    const ISSUER_SUSPECTED_FRAUD = 473;
-    const AVS_DECLINED = 474;
-    const INVALID_TRANSACTION = 480;
-    const INVALID_CREDENTIALS = 481;
-    const INVALID_AMOUNT = 482;
-    const TRANSACTION_NOT_SUPPORTED = 483;
-    const TRANSACTION_NOT_PERMITTED = 484;
-    const DUPLICATE_TRANSACTION = 485;
-    const PROCESSING_ISSUE = 490;
-    const AUTHORIZATION_REVOKED = 491;
-    const ACQUIRER_UNREACHABLE = 492;
-    const ISSUER_UNREACHABLE = 493;
-    const ERROR = 500;
-    const ACQUIRER_ERROR = 501;
-    const ISSUER_ERROR = 502;
-    const UNKNOWN_ERROR = 503;
+    public const AUTHORIZED = 200;
+    public const APPROVED = 201;
+    public const CAPTURED = 202;
+    public const PARTIALLY_CAPTURED = 203;
+    public const SETTLED = 204;
+    public const CANCELED = 210;
+    public const VOIDED = 211;
+    public const REFUNDED = 212;
+    public const PARTIALLY_REFUNDED = 213;
+    public const REFUND_SETTLED = 214;
+    public const REFUND_FAILED = 215;
+    public const REFUND_REVERSED = 216;
+    public const CHARGEBACK = 220;
+    public const CHARGEBACK_WON = 221;
+    public const CHARGEBACK_LOST = 222;
+    public const CHARGEBACK_REVERSED = 223;
+    public const SECOND_CHARGEBACK = 224;
+    public const PENDING = 300;
+    public const PROCESSING_ASYNC = 301;
+    public const REFUSED = 400;
+    public const DECLINED = 401;
+    public const REFERRED = 402;
+    public const NOT_ENOUGH_BALANCE = 403;
+    public const INVALID_CARD = 410;
+    public const INVALID_CARD_HOLDER_NAME = 411;
+    public const INVALID_CARD_NUMBER = 412;
+    public const INVALID_CARD_EXPIRY = 413;
+    public const INVALID_CARD_SECURITY_CODE = 414;
+    public const BLOCKED_CARD = 415;
+    public const RESTRICTED_CARD = 416;
+    public const INVALID_ADDRESS = 460;
+    public const INVALID_BILLING_ADDRESS = 461;
+    public const INVALID_SHIPPING_ADDRESS = 462;
+    public const FRAUD = 470;
+    public const FAILED_FRAUD_CHECK = 471;
+    public const ACQUIRER_SUSPECTED_FRAUD = 472;
+    public const ISSUER_SUSPECTED_FRAUD = 473;
+    public const AVS_DECLINED = 474;
+    public const INVALID_TRANSACTION = 480;
+    public const INVALID_CREDENTIALS = 481;
+    public const INVALID_AMOUNT = 482;
+    public const TRANSACTION_NOT_SUPPORTED = 483;
+    public const TRANSACTION_NOT_PERMITTED = 484;
+    public const DUPLICATE_TRANSACTION = 485;
+    public const PROCESSING_ISSUE = 490;
+    public const AUTHORIZATION_REVOKED = 491;
+    public const ACQUIRER_UNREACHABLE = 492;
+    public const ISSUER_UNREACHABLE = 493;
+    public const ERROR = 500;
+    public const ACQUIRER_ERROR = 501;
+    public const ISSUER_ERROR = 502;
+    public const UNKNOWN_ERROR = 503;
 
     /**
-     * List of all supported payment response codes.
+     * List of all supported checkout response codes.
      *
      * @var array
      */
@@ -118,7 +118,7 @@ class PaymentStatus
     ];
 
     /**
-     * List of all supported payment response code messages.
+     * List of all supported checkout response code messages.
      *
      * @var array
      */

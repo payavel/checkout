@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Checkout\Models\PaymentType;
-use Payavel\Orchestration\Support\ServiceConfig;
 
 class PaymentMethodFactory extends Factory
 {
