@@ -3,6 +3,7 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class PaymentTransactionEvent extends Model
@@ -51,6 +52,6 @@ class PaymentTransactionEvent extends Model
      */
     public function transaction()
     {
-        return $this->belongsTo(config('payment.models.' . PaymentTransaction::class, PaymentTransaction::class));
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . PaymentTransaction::class, PaymentTransaction::class));
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Payavel\Checkout\Models\Traits\WalletRequests;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
+use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class Wallet extends Model
@@ -54,7 +55,7 @@ class Wallet extends Model
      */
     public function provider()
     {
-        return $this->belongsTo(config('payment.models.' . Provider::class, Provider::class));
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . Provider::class, Provider::class));
     }
 
     /**
@@ -64,7 +65,7 @@ class Wallet extends Model
      */
     public function account()
     {
-        return $this->belongsTo(config('payment.models.' . Account::class, Account::class));
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . Account::class, Account::class));
     }
 
     /**
@@ -74,6 +75,6 @@ class Wallet extends Model
      */
     public function paymentMethods()
     {
-        return $this->hasMany(config('payment.models.' . PaymentMethod::class, PaymentMethod::class));
+        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentMethod::class, PaymentMethod::class));
     }
 }

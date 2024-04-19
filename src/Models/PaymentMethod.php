@@ -4,6 +4,7 @@ namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Payavel\Checkout\Models\Traits\PaymentMethodRequests;
+use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class PaymentMethod extends Model
@@ -74,7 +75,7 @@ class PaymentMethod extends Model
      */
     public function wallet()
     {
-        return $this->belongsTo(config('payment.models.' . Wallet::class, Wallet::class));
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . Wallet::class, Wallet::class));
     }
 
     /**
@@ -84,7 +85,7 @@ class PaymentMethod extends Model
      */
     public function type()
     {
-        return $this->belongsTo(config('payment.models.' . PaymentType::class, PaymentType::class));
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . PaymentType::class, PaymentType::class));
     }
 
     /**
@@ -94,6 +95,6 @@ class PaymentMethod extends Model
      */
     public function transactions()
     {
-        return $this->hasMany(config('payment.models.' . PaymentTransaction::class, PaymentTransaction::class));
+        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentTransaction::class, PaymentTransaction::class));
     }
 }

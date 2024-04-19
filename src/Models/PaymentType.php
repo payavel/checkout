@@ -3,6 +3,7 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class PaymentType extends Model
@@ -33,7 +34,7 @@ class PaymentType extends Model
      */
     public function paymentMethods()
     {
-        return $this->hasMany(config('payment.models.' . PaymentMethod::class, PaymentMethod::class), 'type_id');
+        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentMethod::class, PaymentMethod::class), 'type_id');
     }
 
     /**

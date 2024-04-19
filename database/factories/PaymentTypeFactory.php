@@ -10,12 +10,9 @@ class PaymentTypeFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @return string
+     * @var string
      */
-    public function modelName()
-    {
-        return config('payment.models.' . PaymentType::class, PaymentType::class);
-    }
+    protected $model = PaymentType::class;
 
     public const DEFAULTS = [
         [
@@ -80,8 +77,7 @@ class PaymentTypeFactory extends Factory
         return $this->state(function () {
             $type = collect(static::DEFAULTS)->whereNotIn('slug', PaymentType::all()->pluck('slug'))->first();
 
-            if (is_null($type))
-            {
+            if (is_null($type)) {
                 return [];
             }
 

@@ -12,13 +12,9 @@ class PaymentTransactionEventFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @return string
+     * @var string
      */
-    public function modelName()
-    {
-        return config('payment.models.' . PaymentTransactionEvent::class, PaymentTransactionEvent::class);
-    }
-
+    protected $model = PaymentTransactionEvent::class;
 
     /**
      * Define the model's default state.
