@@ -25,9 +25,9 @@ class BillableTraitTest extends TestCase
 
         $this->assertCount($totalWallets, $billable->wallets);
 
-        $billable->wallets->each(function ($wallet) {
-            $this->assertTrue($wallet->isLocalModel);
-        });
+        $billable->wallets->each(
+            fn ($wallet) => $this->assertTrue($wallet->isLocalModel)
+        );
     }
 }
 

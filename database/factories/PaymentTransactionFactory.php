@@ -43,11 +43,12 @@ class PaymentTransactionFactory extends Factory
             if (is_null($transaction->provider_id)) {
                 $provider = ! is_null($transaction->payment_method_id)
                     ? $transaction->paymentMethod->provider
-                    : Provider::whereHas('accounts', function ($query) use ($transaction) {
-                        $query->where('payment_accounts.id', $transaction->account_id);
-                    })->inRandomOrder()->firstOr(function () {
-                        return Provider::factory()->create();
-                    });
+                    : Provider::whereHas(
+                        'accounts',
+                        fn ($query) => $query->where('payment_accounts.id', $transaction->account_id)
+                    )->inRandomOrder()->firstOr(
+                        fn () => Provider::factory()->create()
+                    );
 
                 $transaction->provider_id = $provider->id;
             }
@@ -55,9 +56,11 @@ class PaymentTransactionFactory extends Factory
             if (is_null($transaction->account_id)) {
                 $account = ! is_null($transaction->payment_method_id)
                     ? $transaction->paymentMethod->account
-                    : Account::whereHas('providers', function ($query) use ($transaction) {
-                        $query->where('payment_providers.id', $transaction->provider_id);
-                    })->inRandomOrder()->firstOr(function () use ($transaction) {
+                    : Account::whereHas(
+                        'providers',
+                        fn ($query) => $query->where('payment_providers.id', $transaction->provider_id)
+                    )->inRandomOrder()
+                    ->firstOr(function () use ($transaction) {
                         $account = Account::factory()->create();
 
                         $account->providers()->attach($transaction->provider_id, ['is_default' => true]);
