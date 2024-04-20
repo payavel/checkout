@@ -3,7 +3,7 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Checkout\Models\Traits\WalletRequests;
+use Payavel\Checkout\Traits\ConfiguresCheckoutGateway;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
@@ -11,8 +11,8 @@ use Payavel\Orchestration\Traits\HasFactory;
 
 class Wallet extends Model
 {
+    use ConfiguresCheckoutGateway;
     use HasFactory;
-    use WalletRequests;
 
     /**
      * The attributes that aren't mass assignable.
@@ -76,5 +76,15 @@ class Wallet extends Model
     public function paymentMethods()
     {
         return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentMethod::class, PaymentMethod::class));
+    }
+
+    /**
+     * Fetch the wallet details from the provider.
+     *
+     * @return \Payavel\Checkout\CheckoutResponse
+     */
+    public function fetch()
+    {
+        return $this->gateway->getWallet($this);
     }
 }
