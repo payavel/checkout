@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Services\Checkout\Contracts;
+
+use Payavel\Checkout\Contracts\CheckoutRequester as PayavelCheckoutRequester
+
+interface CheckoutRequester extends PayavelCheckoutRequester
+{
+    //
+}

@@ -21,4 +21,16 @@ class CheckoutInstall extends Command
      * @var string
      */
     protected $description = 'Install the checkout service into the application.';
+
+    /**
+     * Execute the console command.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        $this->call('vendor:publish', ['--tag' => 'payavel-checkout-stubs']);
+
+        return parent::handle();
+    }
 }
