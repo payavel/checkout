@@ -23,9 +23,10 @@ class CheckoutServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(CheckoutGateway::class, function ($app) {
-            return new CheckoutGateway();
-        });
+        $this->app->singleton(
+            CheckoutGateway::class,
+            fn ($app) => new CheckoutGateway()
+        );
 
         $this->mergeConfigFrom(
             __DIR__ . '/../config/checkout.php',

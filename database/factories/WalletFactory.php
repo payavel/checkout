@@ -37,19 +37,23 @@ class WalletFactory extends Factory
     {
         return $this->afterMaking(function (Wallet $wallet) {
             if (is_null($wallet->provider_id)) {
-                $provider = Provider::whereHas('accounts', function ($query) use ($wallet) {
-                    $query->where('payment_accounts.id', $wallet->account_id);
-                })->inRandomOrder()->firstOr(function () {
-                    return Provider::factory()->create();
-                });
+                $provider = Provider::whereHas(
+                    'accounts',
+                    fn ($query) => $query->where('payment_accounts.id', $wallet->account_id)
+                )->inRandomOrder()
+                ->firstOr(
+                    fn () => Provider::factory()->create()
+                );
 
                 $wallet->provider_id = $provider->id;
             }
 
             if (is_null($wallet->account_id)) {
-                $account = Account::whereHas('providers', function ($query) use ($wallet) {
-                    $query->where('payment_providers.id', $wallet->provider_id);
-                })->inRandomOrder()->firstOr(function () use ($wallet) {
+                $account = Account::whereHas(
+                    'providers',
+                    fn ($query) => $query->where('payment_providers.id', $wallet->provider_id)
+                )->inRandomOrder()
+                ->firstOr(function () use ($wallet) {
                     $account = Account::factory()->create();
 
                     $account->providers()->attach($wallet->provider_id, ['is_default' => true]);

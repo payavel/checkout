@@ -37,17 +37,17 @@ class PaymentMethodFactory extends Factory
     {
         return $this->afterMaking(function (PaymentMethod $paymentMethod) {
             if(is_null($paymentMethod->wallet_id)) {
-                $wallet = Wallet::inRandomOrder()->firstOr(function () {
-                    return Wallet::factory()->create();
-                });
+                $wallet = Wallet::inRandomOrder()->firstOr(
+                    fn () => Wallet::factory()->create()
+                );
 
                 $paymentMethod->wallet_id = $wallet->id;
             }
 
             if (is_null($paymentMethod->type_id)) {
-                $type = PaymentType::inRandomOrder()->firstOr(function () {
-                    return PaymentType::factory()->create();
-                });
+                $type = PaymentType::inRandomOrder()->firstOr(
+                    fn () => PaymentType::factory()->create()
+                );
 
                 $paymentMethod->type_id = $type->id;
             }
