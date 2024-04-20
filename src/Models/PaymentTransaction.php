@@ -3,7 +3,7 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Checkout\Models\Traits\PaymentTransactionRequests;
+use Payavel\Checkout\Traits\ConfiguresCheckoutGateway;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
@@ -11,8 +11,8 @@ use Payavel\Orchestration\Traits\HasFactory;
 
 class PaymentTransaction extends Model
 {
+    use ConfiguresCheckoutGateway;
     use HasFactory;
-    use PaymentTransactionRequests;
 
     /**
      * The attributes that aren't mass assignable.
@@ -87,5 +87,37 @@ class PaymentTransaction extends Model
     public function events()
     {
         return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentTransactionEvent::class, PaymentTransactionEvent::class), 'transaction_id');
+    }
+
+    /**
+     * Fetch the transaction details from the provider.
+     *
+     * @return \Payavel\Checkout\CheckoutResponse
+     */
+    public function fetch()
+    {
+        return $this->gateway->getTransaction($this);
+    }
+
+    /**
+     * Request the provider to void the transaction.
+     *
+     * @param array|mixed $data
+     * @return \Payavel\Checkout\CheckoutResponse
+     */
+    public function void($data = [])
+    {
+        return $this->gateway->void($this, $data);
+    }
+
+    /**
+     * Request the provider to refund the transaction.
+     *
+     * @param array|mixed $data
+     * @return \Payavel\Checkout\CheckoutResponse
+     */
+    public function refund($data = [])
+    {
+        return $this->gateway->refund($this, $data);
     }
 }

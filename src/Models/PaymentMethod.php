@@ -3,14 +3,14 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Checkout\Models\Traits\PaymentMethodRequests;
+use Payavel\Checkout\Traits\ConfiguresCheckoutGateway;
 use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class PaymentMethod extends Model
 {
+    use ConfiguresCheckoutGateway;
     use HasFactory;
-    use PaymentMethodRequests;
 
     /**
      * The attributes that aren't mass assignable.
@@ -96,5 +96,36 @@ class PaymentMethod extends Model
     public function transactions()
     {
         return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentTransaction::class, PaymentTransaction::class));
+    }
+
+    /**
+     * Fetch the payment method details from the provider.
+     *
+     * @return \Payavel\Checkout\CheckoutResponse
+     */
+    public function fetch()
+    {
+        return $this->gateway->getPaymentMethod($this);
+    }
+
+    /**
+     * Request the provider to update the payment method's details.
+     *
+     * @param array|mixed $data
+     * @return \Payavel\Checkout\CheckoutResponse
+     */
+    public function patch($data)
+    {
+        return $this->gateway->updatePaymentMethod($this, $data);
+    }
+
+    /**
+     * Request the provider to remove the payment method from their system.
+     *
+     * @return \Payavel\Checkout\CheckoutResponse
+     */
+    public function disable()
+    {
+        return $this->gateway->deletePaymentMethod($this);
     }
 }
