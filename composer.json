@@ -25,7 +25,7 @@
         "test": "vendor/bin/phpunit"
     },
     "require": {
-        "payavel/orchestration": "dev-master"
+        "payavel/orchestration": "dev-fix-extend_stubs"
     },
     "require-dev": {
         "orchestra/testbench": "^8.0|^9.0"
