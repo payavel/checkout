@@ -4,7 +4,7 @@ namespace Payavel\Checkout\Models\Traits;
 
 use Payavel\Checkout\CheckoutGateway;
 
-trait ConfiguresPaymentGateway
+trait ConfiguresCheckoutGateway
 {
     /**
      * The payment method's pre-configured gateway.

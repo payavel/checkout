@@ -27,7 +27,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
         parent::setUp();
 
         $provider = $this->createProvider($this->checkoutService, [
-            'gateway' => TestPaymentRequest::class,
+            'gateway' => TestCheckoutRequest::class,
         ]);
 
         $account = $this->createAccount($this->checkoutService);
@@ -205,60 +205,60 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 }
 
-class TestPaymentRequest extends CheckoutRequest
+class TestCheckoutRequest extends CheckoutRequest
 {
     public function getWallet(Wallet $wallet)
     {
-        return new TestPaymentResponse([]);
+        return new TestCheckoutResponse([]);
     }
 
     public function getPaymentMethod(PaymentMethod $paymentMethod)
     {
-        return new TestPaymentResponse([]);
+        return new TestCheckoutResponse([]);
     }
 
     public function tokenizePaymentMethod(Billable $billable, $data)
     {
-        return new TestPaymentResponse([]);
+        return new TestCheckoutResponse([]);
     }
 
     public function updatePaymentMethod(PaymentMethod $paymentMethod, $data)
     {
-        return new TestPaymentResponse([]);
+        return new TestCheckoutResponse([]);
     }
 
     public function deletePaymentMethod(PaymentMethod $paymentMethod)
     {
-        return new TestPaymentResponse([]);
+        return new TestCheckoutResponse([]);
     }
 
     public function authorize($data, Billable $billable = null)
     {
-        return new TestPaymentResponse([]);
+        return new TestCheckoutResponse([]);
     }
 
     public function capture(PaymentTransaction $transaction, $data = [])
     {
-        return new TestPaymentResponse([]);
+        return new TestCheckoutResponse([]);
     }
 
     public function getTransaction(PaymentTransaction $transaction)
     {
-        return new TestPaymentResponse([]);
+        return new TestCheckoutResponse([]);
     }
 
     public function void(PaymentTransaction $paymentTransaction, $data = [])
     {
-        return new TestPaymentResponse([]);
+        return new TestCheckoutResponse([]);
     }
 
     public function refund(PaymentTransaction $paymentTransaction, $data = [])
     {
-        return new TestPaymentResponse([]);
+        return new TestCheckoutResponse([]);
     }
 }
 
-class TestPaymentResponse extends CheckoutResponse
+class TestCheckoutResponse extends CheckoutResponse
 {
     public function getWalletResponse()
     {

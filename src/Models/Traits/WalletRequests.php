@@ -4,7 +4,7 @@ namespace Payavel\Checkout\Models\Traits;
 
 trait WalletRequests
 {
-    use ConfiguresPaymentGateway;
+    use ConfiguresCheckoutGateway;
 
     /**
      * Fetch the wallet details from the provider.
