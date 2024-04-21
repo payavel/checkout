@@ -3,9 +3,9 @@
 namespace App\Services\Checkout;
 
 use App\Services\Checkout\Contracts\CheckoutRequester;
-use Payavel\Orchestration\ServiceRequest;
+use Payavel\Checkout\CheckoutRequest;
 
-class {{ Provider }}CheckoutRequest extends ServiceRequest implements CheckoutRequester
+class {{ Provider }}CheckoutRequest extends CheckoutRequest implements CheckoutRequester
 {
     /**
      * Set up the request.

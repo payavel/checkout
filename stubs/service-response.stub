@@ -3,7 +3,7 @@
 namespace App\Services\Checkout;
 
 use App\Services\Checkout\Contracts\CheckoutResponder;
-use Payavel\Orchestration\ServiceResponse;
+use Payavel\Checkout\CheckoutResponse;
 
 class {{ Provider }}CheckoutResponse extends ServiceResponse implements CheckoutResponder
 {
@@ -13,6 +13,16 @@ class {{ Provider }}CheckoutResponse extends ServiceResponse implements Checkout
      * @return void
      */
     protected function setUp()
+    {
+        //
+    }
+
+    /**
+     * Determines the status code based on the request's raw response.
+     *
+     * @return int
+     */
+    public function getStatusCode()
     {
         //
     }
@@ -113,36 +123,6 @@ class {{ Provider }}CheckoutResponse extends ServiceResponse implements Checkout
      * @return array|mixed
      */
     public function refundResponse()
-    {
-        //
-    }
-
-    /**
-     * Determines the status code based on the request's raw response.
-     *
-     * @return int
-     */
-    public function getStatusCode()
-    {
-        //
-    }
-
-    /**
-     * Get a string representation of the response's status.
-     *
-     * @return string|null
-     */
-    public function getStatusMessage()
-    {
-        //
-    }
-
-    /**
-     * Get a description of the response's status.
-     *
-     * @return string|null
-     */
-    public function getStatusDescription()
     {
         //
     }
