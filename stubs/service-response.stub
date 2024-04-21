@@ -5,7 +5,7 @@ namespace App\Services\Checkout;
 use App\Services\Checkout\Contracts\CheckoutResponder;
 use Payavel\Checkout\CheckoutResponse;
 
-class {{ Provider }}CheckoutResponse extends ServiceResponse implements CheckoutResponder
+class {{ Provider }}CheckoutResponse extends CheckoutResponse implements CheckoutResponder
 {
     /**
      * Set up the response.

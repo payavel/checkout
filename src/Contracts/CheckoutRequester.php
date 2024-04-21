@@ -13,7 +13,7 @@ interface CheckoutRequester
      * Retrieve the wallet's details from the provider.
      *
      * @param \Payavel\Checkout\Models\Wallet $wallet
-     * @return \Payavel\Checkout\CheckoutResponse
+     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
     public function getWallet(Wallet $wallet);
 
@@ -21,7 +21,7 @@ interface CheckoutRequester
      * Retrieve the payment method's details from the provider.
      *
      * @param \Payavel\Checkout\Models\PaymentMethod $paymentMethod
-     * @return \Payavel\Checkout\CheckoutResponse
+     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
     public function getPaymentMethod(PaymentMethod $paymentMethod);
 
@@ -30,7 +30,7 @@ interface CheckoutRequester
      *
      * @param \Payavel\Checkout\Contracts\Billable $billable
      * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse
+     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
     public function tokenizePaymentMethod(Billable $billable, $data);
 
@@ -39,7 +39,7 @@ interface CheckoutRequester
      *
      * @param \Payavel\Checkout\Models\PaymentMethod $paymentMethod
      * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse
+     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
     public function updatePaymentMethod(PaymentMethod $paymentMethod, $data);
 
@@ -47,7 +47,7 @@ interface CheckoutRequester
      * Delete the payment method at the provider.
      *
      * @param \Payavel\Checkout\Models\PaymentMethod $paymentMethod
-     * @return \Payavel\Checkout\CheckoutResponse
+     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
     public function deletePaymentMethod(PaymentMethod $paymentMethod);
 
@@ -56,7 +56,7 @@ interface CheckoutRequester
      *
      * @param array|mixed $data
      * @param \Payavel\Checkout\Contracts\Billable|null $billable
-     * @return \Payavel\Checkout\CheckoutResponse
+     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
     public function authorize($data, Billable $billable = null);
 
@@ -65,7 +65,7 @@ interface CheckoutRequester
      *
      * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
      * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse
+     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
     public function capture(PaymentTransaction $transaction, $data = []);
 
@@ -73,7 +73,7 @@ interface CheckoutRequester
      * Retrieve the transaction details from the provider.
      *
      * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
-     * @return \Payavel\Checkout\CheckoutResponse
+     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
     public function getTransaction(PaymentTransaction $transaction);
 
@@ -82,7 +82,7 @@ interface CheckoutRequester
      *
      * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
      * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse
+     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
     public function void(PaymentTransaction $transaction, $data = []);
 
@@ -91,7 +91,7 @@ interface CheckoutRequester
      *
      * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
      * @param array|mixed
-     * @return \Payavel\Checkout\CheckoutResponse
+     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
     public function refund(PaymentTransaction $transaction, $data = []);
 }
