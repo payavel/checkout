@@ -1,0 +1,93 @@
+<?php
+
+return [
+
+    'name' => 'Checkout',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Checkout Defaults
+    |--------------------------------------------------------------------------
+    |
+    | This option defines the default checkout service config
+    | for your application. You should define your checkout
+    | provider of choice along with your primary account.
+    |
+    */
+    'defaults' => [
+        'driver' => '{{ driver }}',
+        'provider' => '{{ provider }}',
+        'account' => '{{ account }}',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Checkout Test Mode
+    |--------------------------------------------------------------------------
+    |
+    | When set to true, the provider & account will be shared with the fake checkout
+    | request so you can mock your responses as you wish. This is very useful for
+    | local & testing environments where a sandbox is limited or non-existent.
+    |
+    */
+    'test_mode' => env('CHECKOUT_TEST_MODE', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Checkout Testing
+    |--------------------------------------------------------------------------
+    |
+    | This option allows you to define the location of the fake checkout
+    | request & response classes you would like to leverage when test_mode
+    | is set to true. Also, feel free to add any other settings here.
+    |
+    */
+    'test_gateway' => \App\Services\Checkout\FakeCheckoutRequest::class,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Checkout Providers
+    |--------------------------------------------------------------------------
+    |
+    | Here you may provide the location for each checkout provider's
+    | implementation by mapping the request & response classes to it.
+    | You may also add relevant provider specific configurations.
+    |
+    */
+    'providers' => [
+{{ providers }}
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Checkout Accounts
+    |--------------------------------------------------------------------------
+    |
+    | This is where you should define all the accounts that will be leveraging the
+    | checkout service, along with required provider specific configurations
+    | This is the perfect place to set each account's api keys & secrets.
+    |
+    */
+    'accounts' => [
+{{ accounts }}
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Checkout Models
+    |--------------------------------------------------------------------------
+    |
+    | You may override the checkout package models by specifying a model from your
+    | application. The checkout package will automatically inject the overridden
+    | model in it's place, so be sure to have covered all of its functionality.
+    |
+    */
+    //  'models' => [
+    //      \Payavel\Checkout\Models\PaymentMethod::class => \App\Models\PaymentMethod::class,
+    //      \Payavel\Checkout\Models\PaymentTransaction::class => \App\Models\PaymentTransaction::class,
+    //      \Payavel\Checkout\Models\PaymentTransactionEvent::class => \App\Models\PaymentTransactionEvent::class,
+    //      \Payavel\Checkout\Models\PaymentType::class => \App\Models\PaymentType::class,
+    //      \Payavel\Checkout\Models\Wallet::class => \App\Models\Wallet::class,
+    //  ],
+
+];
