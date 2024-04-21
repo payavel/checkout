@@ -41,8 +41,8 @@ class CheckoutServiceProvider extends ServiceProvider
         ], ['payavel', 'payavel-checkout', 'payavel-migrations', 'payavel-checkout-migrations']);
 
         $this->publishes([
-            __DIR__ . '/../stubs/orchestration/checkout/service-requester.stub' => base_path('stubs/orchestration/checkout/service-requester.stub'),
-            __DIR__ . '/../stubs/orchestration/checkout/service-responder.stub' => base_path('stubs/orchestration/checkout/service-responder.stub'),
+            __DIR__ . '/../stubs/service-requester.stub' => base_path('stubs/orchestration/checkout/service-requester.stub'),
+            __DIR__ . '/../stubs/service-responder.stub' => base_path('stubs/orchestration/checkout/service-responder.stub'),
         ], ['payavel', 'payavel-checkout', 'payavel-stubs', 'payavel-checkout-stubs']);
     }
 
