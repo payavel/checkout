@@ -1,4 +1,6 @@
-<p align="center"><a href="https://payavel.com" target="_blank"><img src="https://user-images.githubusercontent.com/13485445/223704901-8c2754c6-0890-486f-ab4a-6bf551119374.svg" width="400"></a></p>
+<p align="center">
+    <a href="https://payavel.com" target="_blank"><img src="https://github.com/payavel/checkout/assets/13485445/532df670-2a83-4fa1-adff-a8e26c6dc68f" width="400"></a>
+</p>
 
 <p align="center">
 <a href="https://packagist.org/packages/payavel/checkout" target="_blank"><img src="https://img.shields.io/packagist/v/payavel/checkout" alt="Latest Stable Version"></a>
@@ -9,17 +11,17 @@
 </p>
 
 ## About
-Payavel Checkout is a package that integrates seamlessly within the Laravel ecosystem that simplifies the way you integrate & process payments via your preferred payment service provider.
+Payavel Checkout is a package designed to streamline the integration and processing of payments within your Laravel applications. It provides a smooth and flexible interface to connect with your chosen payment service provider.
 
 ---
 [payavel/checkout](https://github.com/payavel/checkout) is the re-branded version of the legacy [r-kujawa/laravel-payment-gateway](https://github.com/r-kujawa/laravel-payment-gateway) package.
 
-Please reference the [payavel documentation](https://payavel.com) to get started.
+Please reference the [documentation](https://payavel.com) to get started.
 ## Contributing
 All contributions are welcome! If you are not sure how to contribute, please feel free to [start a discussion](https://github.com/payavel/checkout/discussions) to suggest an idea or ask any relevant questions regarding this package.
 
 ## License
 
-Copyright © Robert Kujawa
+Copyright © 2024 Robert Kujawa
 
 Payavel is open-sourced software licensed under the [MIT license](LICENSE.md).
