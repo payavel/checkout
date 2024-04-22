@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://payavel.com" target="_blank"><img src="https://github.com/payavel/checkout/assets/13485445/532df670-2a83-4fa1-adff-a8e26c6dc68f" width="400"></a>
+    <a href="https://payavel.com" target="_blank"><img src="https://github.com/payavel/checkout/assets/13485445/3003e343-286a-44d6-8fa2-c3fea7093cc4" width="400"></a>
 </p>
 
 <p align="center">
