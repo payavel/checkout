@@ -62,8 +62,8 @@ return new class () extends Migration {
             $table->timestamps();
 
             if ($usingDatabaseDriver) {
-                $table->foreign('provider_id')->references('id')->on('providers')->onUpdate('cascade')->onDelete('set null');
-                $table->foreign('account_id')->references('id')->on('accounts')->onUpdate('cascade')->onDelete('set null');
+                $table->foreign('provider_id')->references('id')->on('providers')->onUpdate('cascade');
+                $table->foreign('account_id')->references('id')->on('accounts')->onUpdate('cascade');
             }
 
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('set null');
