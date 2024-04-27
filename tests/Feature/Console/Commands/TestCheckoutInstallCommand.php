@@ -25,6 +25,7 @@ abstract class TestCheckoutInstallCommand extends TestCase implements CreatesSer
         $fakeGateway = $this->gatewayPath($this->checkoutService);
         $providerGateway = $this->gatewayPath($provider);
 
+        $ds = DIRECTORY_SEPARATOR;
         $this->artisan('checkout:install')
             ->expectsQuestion("Choose a driver for the {$this->checkoutService->getName()} service.", Config::get('orchestration.defaults.driver'))
             ->expectsQuestion("How should the {$this->checkoutService->getName()} provider be named?", $provider->getName())
@@ -33,14 +34,14 @@ abstract class TestCheckoutInstallCommand extends TestCase implements CreatesSer
             ->expectsQuestion("How should the {$this->checkoutService->getName()} account be named?", $account->getName())
             ->expectsQuestion("How should the {$this->checkoutService->getName()} account be identified?", $account->getId())
             ->expectsConfirmation("Would you like to add another {$this->checkoutService->getName()} account?", 'no')
-            ->expectsOutputToContain("Config [config/{$checkoutServiceConfig->orchestration}] created successfully.")
-            ->expectsOutputToContain("Config [config/{$checkoutServiceConfig->service}] created successfully.")
-            ->expectsOutputToContain("Contract [app/{$checkoutServiceContract->requester}] created successfully.")
-            ->expectsOutputToContain("Contract [app/{$checkoutServiceContract->responder}] created successfully.")
-            ->expectsOutputToContain("Gateway [app/{$fakeGateway->request}] created successfully.")
-            ->expectsOutputToContain("Gateway [app/{$fakeGateway->response}] created successfully.")
-            ->expectsOutputToContain("Gateway [app/{$providerGateway->request}] created successfully.")
-            ->expectsOutputToContain("Gateway [app/{$providerGateway->response}] created successfully.")
+            ->expectsOutputToContain("Config [config{$ds}{$checkoutServiceConfig->orchestration}] created successfully.")
+            ->expectsOutputToContain("Config [config{$ds}{$checkoutServiceConfig->service}] created successfully.")
+            ->expectsOutputToContain("Contract [app{$ds}{$checkoutServiceContract->requester}] created successfully.")
+            ->expectsOutputToContain("Contract [app{$ds}{$checkoutServiceContract->responder}] created successfully.")
+            ->expectsOutputToContain("Gateway [app{$ds}{$fakeGateway->request}] created successfully.")
+            ->expectsOutputToContain("Gateway [app{$ds}{$fakeGateway->response}] created successfully.")
+            ->expectsOutputToContain("Gateway [app{$ds}{$providerGateway->request}] created successfully.")
+            ->expectsOutputToContain("Gateway [app{$ds}{$providerGateway->response}] created successfully.")
             ->assertSuccessful();
 
         $config = require(config_path($checkoutServiceConfig->service));
