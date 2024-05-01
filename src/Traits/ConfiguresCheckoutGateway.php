@@ -14,7 +14,7 @@ trait ConfiguresCheckoutGateway
     private $checkoutGateway;
 
     /**
-     * Retrieve the payment method's configured gateway.
+     * Retrieve the payment instrument's configured gateway.
      *
      * @return \Payavel\Checkout\CheckoutGateway
      */

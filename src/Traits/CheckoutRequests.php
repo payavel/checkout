@@ -3,7 +3,7 @@
 namespace Payavel\Checkout\Traits;
 
 use Payavel\Checkout\Contracts\Billable;
-use Payavel\Checkout\Models\PaymentMethod;
+use Payavel\Checkout\Models\PaymentInstrument;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\Models\Wallet;
 use Payavel\Orchestration\Traits\ThrowsRuntimeException;
@@ -24,47 +24,47 @@ trait CheckoutRequests
     }
 
     /**
-     * Retrieve the payment method's details from the provider.
+     * Retrieve the payment instrument's details from the provider.
      *
-     * @param \Payavel\Checkout\Models\PaymentMethod $paymentMethod
+     * @param \Payavel\Checkout\Models\PaymentInstrument $paymentInstrument
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function getPaymentMethod(PaymentMethod $paymentMethod)
+    public function getPaymentInstrument(PaymentInstrument $paymentInstrument)
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
-     * Store the payment method details at the provider.
+     * Store the payment instrument details at the provider.
      *
      * @param \Payavel\Checkout\Contracts\Billable $billable
      * @param array|mixed $data
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function tokenizePaymentMethod(Billable $billable, $data)
+    public function tokenizePaymentInstrument(Billable $billable, $data)
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
-     * Update the payment method's details at the provider.
+     * Update the payment instrument's details at the provider.
      *
-     * @param \Payavel\Checkout\Models\PaymentMethod $paymentMethod
+     * @param \Payavel\Checkout\Models\PaymentInstrument $paymentInstrument
      * @param array|mixed $data
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function updatePaymentMethod(PaymentMethod $paymentMethod, $data)
+    public function updatePaymentInstrument(PaymentInstrument $paymentInstrument, $data)
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
-     * Delete the payment method at the provider.
+     * Delete the payment instrument at the provider.
      *
-     * @param \Payavel\Checkout\Models\PaymentMethod $paymentMethod
+     * @param \Payavel\Checkout\Models\PaymentInstrument $paymentInstrument
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function deletePaymentMethod(PaymentMethod $paymentMethod)
+    public function deletePaymentInstrument(PaymentInstrument $paymentInstrument)
     {
         $this->throwRuntimeException(__FUNCTION__);
     }

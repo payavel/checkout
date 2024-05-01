@@ -50,13 +50,13 @@ class PaymentTransaction extends Model
     }
 
     /**
-     * Get the payment method used for this transaction.
+     * Get the payment instrument used for this transaction.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function paymentMethod()
+    public function paymentInstrument()
     {
-        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . PaymentMethod::class, PaymentMethod::class));
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . PaymentInstrument::class, PaymentInstrument::class));
     }
 
     /**

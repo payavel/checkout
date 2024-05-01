@@ -69,13 +69,13 @@ class Wallet extends Model
     }
 
     /**
-     * Get the wallet's payment methods.
+     * Get the wallet's payment instruments.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function paymentMethods()
+    public function paymentInstruments()
     {
-        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentMethod::class, PaymentMethod::class));
+        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentInstrument::class, PaymentInstrument::class));
     }
 
     /**

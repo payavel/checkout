@@ -23,49 +23,49 @@ trait CheckoutResponses
     }
 
     /**
-     * Maps details from the getPaymentMethod() response to the expected format.
+     * Maps details from the getPaymentInstrument() response to the expected format.
      *
      * @return array|mixed
      *
      * @throws \RuntimeException|Exception
      */
-    public function getPaymentMethodResponse()
+    public function getPaymentInstrumentResponse()
     {
         return $this->genericResponse(__FUNCTION__);
     }
 
     /**
-     * Maps details from the tokenizePaymentMethod() response to the expected format.
+     * Maps details from the tokenizePaymentInstrument() response to the expected format.
      *
      * @return array|mixed
      *
      * @throws \RuntimeException|Exception
      */
-    public function tokenizePaymentMethodResponse()
+    public function tokenizePaymentInstrumentResponse()
     {
         return $this->genericResponse(__FUNCTION__);
     }
 
     /**
-     * Maps details from the updatePaymentMethod() response to the expected format.
+     * Maps details from the updatePaymentInstrument() response to the expected format.
      *
      * @return array|mixed
      *
      * @throws \RuntimeException|Exception
      */
-    public function updatePaymentMethodResponse()
+    public function updatePaymentInstrumentResponse()
     {
         return $this->genericResponse(__FUNCTION__);
     }
 
     /**
-     * Maps details from the deletePaymentMethod() response to the expected format.
+     * Maps details from the deletePaymentInstrument() response to the expected format.
      *
      * @return array|mixed
      *
      * @throws \RuntimeException|Exception
      */
-    public function deletePaymentMethodResponse()
+    public function deletePaymentInstrumentResponse()
     {
         return $this->genericResponse(__FUNCTION__);
     }
@@ -129,7 +129,7 @@ trait CheckoutResponses
     }
 
     /**
-     * Attempts to call the generic response method, else throws RuntimeException.
+     * Attempts to call the generic response Instrument, else throws RuntimeException.
      *
      * @param string $function
      * @return array|mixed

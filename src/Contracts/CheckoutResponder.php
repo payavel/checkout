@@ -12,32 +12,32 @@ interface CheckoutResponder
     public function getWalletResponse();
 
     /**
-     * Maps details from the getPaymentMethod() response to the expected format.
+     * Maps details from the getPaymentInstrument() response to the expected format.
      *
      * @return array|mixed
      */
-    public function getPaymentMethodResponse();
+    public function getPaymentInstrumentResponse();
 
     /**
-     * Maps details from the tokenizePaymentMethod() response to the expected format.
+     * Maps details from the tokenizePaymentInstrument() response to the expected format.
      *
      * @return array|mixed
      */
-    public function tokenizePaymentMethodResponse();
+    public function tokenizePaymentInstrumentResponse();
 
     /**
-     * Maps details from the updatePaymentMethod() response to the expected format.
+     * Maps details from the updatePaymentInstrument() response to the expected format.
      *
      * @return array|mixed
      */
-    public function updatePaymentMethodResponse();
+    public function updatePaymentInstrumentResponse();
 
     /**
-     * Maps details from the deletePaymentMethod() response to the expected format.
+     * Maps details from the deletePaymentInstrument() response to the expected format.
      *
      * @return array|mixed
      */
-    public function deletePaymentMethodResponse();
+    public function deletePaymentInstrumentResponse();
 
     /**
      * Maps details from the authorize() response to the expected format.

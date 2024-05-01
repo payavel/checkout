@@ -28,13 +28,13 @@ class PaymentType extends Model
     }
 
     /**
-     * Get the payment methods that inherit this type.
+     * Get the payment instruments that inherit this type.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function paymentMethods()
+    public function paymentInstruments()
     {
-        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentMethod::class, PaymentMethod::class), 'type_id');
+        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentInstrument::class, PaymentInstrument::class), 'type_id');
     }
 
     /**

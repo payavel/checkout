@@ -41,8 +41,8 @@ class PaymentTransactionFactory extends Factory
     {
         return $this->afterMaking(function (PaymentTransaction $transaction) {
             if (is_null($transaction->provider_id)) {
-                $provider = ! is_null($transaction->payment_method_id)
-                    ? $transaction->paymentMethod->provider
+                $provider = ! is_null($transaction->payment_instrument_id)
+                    ? $transaction->paymentInstrument->provider
                     : Provider::whereHas(
                         'accounts',
                         fn ($query) => $query->where('payment_accounts.id', $transaction->account_id)
@@ -54,8 +54,8 @@ class PaymentTransactionFactory extends Factory
             }
 
             if (is_null($transaction->account_id)) {
-                $account = ! is_null($transaction->payment_method_id)
-                    ? $transaction->paymentMethod->account
+                $account = ! is_null($transaction->payment_instrument_id)
+                    ? $transaction->paymentInstrument->account
                     : Account::whereHas(
                         'providers',
                         fn ($query) => $query->where('payment_providers.id', $transaction->provider_id)

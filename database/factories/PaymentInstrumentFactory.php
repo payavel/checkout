@@ -4,17 +4,17 @@ namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\Wallet;
-use Payavel\Checkout\Models\PaymentMethod;
+use Payavel\Checkout\Models\PaymentInstrument;
 use Payavel\Checkout\Models\PaymentType;
 
-class PaymentMethodFactory extends Factory
+class PaymentInstrumentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = PaymentMethod::class;
+    protected $model = PaymentInstrument::class;
 
     /**
      * Define the model's default state.
@@ -35,7 +35,7 @@ class PaymentMethodFactory extends Factory
      */
     public function configure()
     {
-        return $this->afterMaking(function (PaymentMethod $paymentMethod) {
+        return $this->afterMaking(function (PaymentInstrument $paymentMethod) {
             if(is_null($paymentMethod->wallet_id)) {
                 $wallet = Wallet::inRandomOrder()->firstOr(
                     fn () => Wallet::factory()->create()
