@@ -7,7 +7,7 @@ use Payavel\Checkout\Traits\ConfiguresCheckoutGateway;
 use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
-class PaymentMethod extends Model
+class PaymentInstrument extends Model
 {
     use ConfiguresCheckoutGateway;
     use HasFactory;
@@ -49,7 +49,7 @@ class PaymentMethod extends Model
     }
 
     /**
-     * Get the payment method's provider.
+     * Get the payment instrument's provider.
      *
      * @return \Payavel\Orchestration\Models\Provider
      */
@@ -59,7 +59,7 @@ class PaymentMethod extends Model
     }
 
     /**
-     * Get the payment method's account.
+     * Get the payment instrument's account.
      *
      * @return \Payavel\Orchestration\Models\Account
      */
@@ -69,7 +69,7 @@ class PaymentMethod extends Model
     }
 
     /**
-     * Get the wallet the payment method belongs to.
+     * Get the wallet the payment instrument belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -79,7 +79,7 @@ class PaymentMethod extends Model
     }
 
     /**
-     * Get the payment method's type
+     * Get the payment instrument's type
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -89,7 +89,7 @@ class PaymentMethod extends Model
     }
 
     /**
-     * Get the transactions that this payment method has triggered.
+     * Get the transactions that this payment instrument has triggered.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -99,33 +99,33 @@ class PaymentMethod extends Model
     }
 
     /**
-     * Fetch the payment method details from the provider.
+     * Fetch the payment instrument details from the provider.
      *
      * @return \Payavel\Checkout\CheckoutResponse
      */
     public function fetch()
     {
-        return $this->gateway->getPaymentMethod($this);
+        return $this->gateway->getPaymentInstrument($this);
     }
 
     /**
-     * Request the provider to update the payment method's details.
+     * Request the provider to update the payment instrument's details.
      *
      * @param array|mixed $data
      * @return \Payavel\Checkout\CheckoutResponse
      */
     public function patch($data)
     {
-        return $this->gateway->updatePaymentMethod($this, $data);
+        return $this->gateway->updatePaymentInstrument($this, $data);
     }
 
     /**
-     * Request the provider to remove the payment method from their system.
+     * Request the provider to remove the payment instrument from their system.
      *
      * @return \Payavel\Checkout\CheckoutResponse
      */
     public function disable()
     {
-        return $this->gateway->deletePaymentMethod($this);
+        return $this->gateway->deletePaymentInstrument($this);
     }
 }

@@ -37,7 +37,7 @@ return new class () extends Migration {
             }
         });
 
-        Schema::create('payment_methods', function (Blueprint $table) {
+        Schema::create('payment_instruments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('wallet_id');
             $table->string('token');
@@ -56,7 +56,7 @@ return new class () extends Migration {
             $table->string('reference');
             $table->unsignedInteger('amount');
             $table->char('currency', 3)->default('USD');
-            $table->unsignedBigInteger('payment_method_id')->nullable();
+            $table->unsignedBigInteger('payment_instrument_id')->nullable();
             $table->unsignedSmallInteger('status_code');
             $table->json('details')->nullable();
             $table->timestamps();
@@ -66,7 +66,7 @@ return new class () extends Migration {
                 $table->foreign('account_id')->references('id')->on('accounts')->onUpdate('cascade');
             }
 
-            $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('set null');
+            $table->foreign('payment_instrument_id')->references('id')->on('payment_instruments')->onDelete('set null');
         });
 
         Schema::create('payment_transaction_events', function (Blueprint $table) {
@@ -91,7 +91,7 @@ return new class () extends Migration {
     {
         Schema::dropIfExists('payment_transaction_events');
         Schema::dropIfExists('payment_transactions');
-        Schema::dropIfExists('payment_methods');
+        Schema::dropIfExists('payment_instruments');
         Schema::dropIfExists('payment_types');
         Schema::dropIfExists('wallets');
     }

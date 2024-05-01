@@ -4,7 +4,7 @@ namespace Payavel\Checkout\Tests\Unit;
 
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\Facades\Checkout;
-use Payavel\Checkout\Models\PaymentMethod;
+use Payavel\Checkout\Models\PaymentInstrument;
 use Payavel\Checkout\Models\PaymentTransaction;
 use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\CheckoutRequest;
@@ -53,72 +53,72 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 
     #[Test]
-    public function get_payment_method_method_returns_configured_response()
+    public function get_payment_instrument_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
             'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $paymentMethod = PaymentMethod::factory()->create([
+        $paymentInstrument = PaymentInstrument::factory()->create([
             'wallet_id' => $wallet->id,
         ]);
 
-        $response = Checkout::getPaymentMethod($paymentMethod);
+        $response = Checkout::getPaymentInstrument($paymentInstrument);
 
         $this->assertResponseIsConfigured($response);
 
-        $this->assertEquals('getPaymentMethod', $response->data['requestMethod']);
+        $this->assertEquals('getPaymentInstrument', $response->data['requestMethod']);
     }
 
     #[Test]
-    public function tokenize_payment_method_method_returns_configured_response()
+    public function tokenize_payment_instrument_method_returns_configured_response()
     {
         $user = User::factory()->create();
 
-        $response = Checkout::tokenizePaymentMethod($user, []);
+        $response = Checkout::tokenizePaymentInstrument($user, []);
 
         $this->assertResponseIsConfigured($response);
 
-        $this->assertEquals('tokenizePaymentMethod', $response->data['requestMethod']);
+        $this->assertEquals('tokenizePaymentInstrument', $response->data['requestMethod']);
     }
 
     #[Test]
-    public function update_payment_method_method_returns_configured_response()
+    public function update_payment_instrument_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
             'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $paymentMethod = PaymentMethod::factory()->create([
+        $paymentInstrument = PaymentInstrument::factory()->create([
             'wallet_id' => $wallet->id,
         ]);
 
-        $response = Checkout::updatePaymentMethod($paymentMethod, []);
+        $response = Checkout::updatePaymentInstrument($paymentInstrument, []);
 
         $this->assertResponseIsConfigured($response);
 
-        $this->assertEquals('updatePaymentMethod', $response->data['requestMethod']);
+        $this->assertEquals('updatePaymentInstrument', $response->data['requestMethod']);
     }
 
     #[Test]
-    public function delete_payment_method_method_returns_configured_response()
+    public function delete_payment_instrument_method_returns_configured_response()
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
             'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $paymentMethod = PaymentMethod::factory()->create([
+        $paymentInstrument = PaymentInstrument::factory()->create([
             'wallet_id' => $wallet->id,
         ]);
 
-        $response = Checkout::deletePaymentMethod($paymentMethod);
+        $response = Checkout::deletePaymentInstrument($paymentInstrument);
 
         $this->assertResponseIsConfigured($response);
 
-        $this->assertEquals('deletePaymentMethod', $response->data['requestMethod']);
+        $this->assertEquals('deletePaymentInstrument', $response->data['requestMethod']);
     }
 
     #[Test]
@@ -212,22 +212,22 @@ class TestCheckoutRequest extends CheckoutRequest
         return new TestCheckoutResponse([]);
     }
 
-    public function getPaymentMethod(PaymentMethod $paymentMethod)
+    public function getPaymentInstrument(PaymentInstrument $paymentInstrument)
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function tokenizePaymentMethod(Billable $billable, $data)
+    public function tokenizePaymentInstrument(Billable $billable, $data)
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function updatePaymentMethod(PaymentMethod $paymentMethod, $data)
+    public function updatePaymentInstrument(PaymentInstrument $paymentInstrument, $data)
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function deletePaymentMethod(PaymentMethod $paymentMethod)
+    public function deletePaymentInstrument(PaymentInstrument $paymentInstrument)
     {
         return new TestCheckoutResponse([]);
     }
@@ -267,28 +267,28 @@ class TestCheckoutResponse extends CheckoutResponse
         ];
     }
 
-    public function getPaymentMethodResponse()
+    public function getPaymentInstrumentResponse()
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function tokenizePaymentMethodResponse()
+    public function tokenizePaymentInstrumentResponse()
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function updatePaymentMethodResponse()
+    public function updatePaymentInstrumentResponse()
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function deletePaymentMethodResponse()
+    public function deletePaymentInstrumentResponse()
     {
         return [
             'requestMethod' => $this->requestMethod,
