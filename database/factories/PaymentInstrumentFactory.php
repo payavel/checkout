@@ -35,21 +35,21 @@ class PaymentInstrumentFactory extends Factory
      */
     public function configure()
     {
-        return $this->afterMaking(function (PaymentInstrument $paymentMethod) {
-            if(is_null($paymentMethod->wallet_id)) {
+        return $this->afterMaking(function (PaymentInstrument $paymentInstrument) {
+            if(is_null($paymentInstrument->wallet_id)) {
                 $wallet = Wallet::inRandomOrder()->firstOr(
                     fn () => Wallet::factory()->create()
                 );
 
-                $paymentMethod->wallet_id = $wallet->id;
+                $paymentInstrument->wallet_id = $wallet->id;
             }
 
-            if (is_null($paymentMethod->type_id)) {
+            if (is_null($paymentInstrument->type_id)) {
                 $type = PaymentType::inRandomOrder()->firstOr(
                     fn () => PaymentType::factory()->create()
                 );
 
-                $paymentMethod->type_id = $type->id;
+                $paymentInstrument->type_id = $type->id;
             }
         });
     }
