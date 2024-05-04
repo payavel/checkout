@@ -46,12 +46,14 @@ class PaymentTransactionEvent extends Model
     }
 
     /**
-     * Get the event's original transaction.
+     * Get the event's originating payment.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function transaction()
+    public function payment()
     {
-        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . PaymentTransaction::class, PaymentTransaction::class));
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class));
     }
+
+    // ToDo: Figure out the new TransactionEvent idea.
 }

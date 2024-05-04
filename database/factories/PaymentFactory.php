@@ -3,19 +3,19 @@
 namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Payavel\Checkout\Models\PaymentTransaction;
+use Payavel\Checkout\Models\Payment;
 use Payavel\Checkout\CheckoutStatus;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 
-class PaymentTransactionFactory extends Factory
+class PaymentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = PaymentTransaction::class;
+    protected $model = Payment::class;
 
     /**
      * Define the model's default state.
@@ -39,7 +39,7 @@ class PaymentTransactionFactory extends Factory
      */
     public function configure()
     {
-        return $this->afterMaking(function (PaymentTransaction $transaction) {
+        return $this->afterMaking(function (Payment $transaction) {
             if (is_null($transaction->provider_id)) {
                 $provider = ! is_null($transaction->payment_instrument_id)
                     ? $transaction->paymentInstrument->provider

@@ -4,7 +4,7 @@ namespace Payavel\Checkout\Traits;
 
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\Models\PaymentInstrument;
-use Payavel\Checkout\Models\PaymentTransaction;
+use Payavel\Checkout\Models\Payment;
 use Payavel\Checkout\Models\Wallet;
 use Payavel\Orchestration\Traits\ThrowsRuntimeException;
 
@@ -70,7 +70,7 @@ trait CheckoutRequests
     }
 
     /**
-     * Authorize a transaction.
+     * Authorize a payment.
      *
      * @param array|mixed $data
      * @param \Payavel\Checkout\Contracts\Billable|null $billable
@@ -82,48 +82,49 @@ trait CheckoutRequests
     }
 
     /**
-     * Capture a previously authorized transaction.
+     * Capture an authorized payment.
      *
-     * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
+     * @param \Payavel\Checkout\Models\Payment $payment
      * @param array|mixed $data
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function capture(PaymentTransaction $transaction, $data = [])
+    public function capture(Payment $payment, $data = [])
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
+    // ToDo: The param should be an instance of Transactionable (Payment, Refund or Dispute)
     /**
      * Retrieve the transaction details from the provider.
      *
-     * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
+     * @param \Payavel\Checkout\Models\Payment $transaction
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function getTransaction(PaymentTransaction $transaction)
+    public function getTransaction(Payment $transaction)
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
-     * Void a previously authorized transaction.
+     * Void an authorized payment.
      *
-     * @param \Payavel\Checkout\Models\PaymentTransaction $paymentTransaction
+     * @param \Payavel\Checkout\Models\Payment $payment
      * @param array|mixed $data
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function void(PaymentTransaction $paymentTransaction, $data = [])
+    public function void(Payment $payment, $data = [])
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
-     * Refund a previously captured transaction.
+     * Refund a payment.
      *
-     * @param \Payavel\Checkout\Models\PaymentTransaction $paymentTransaction
+     * @param \Payavel\Checkout\Models\Payment $payment
      * @param array|mixed $data
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function refund(PaymentTransaction $paymentTransaction, $data = [])
+    public function refund(Payment $payment, $data = [])
     {
         $this->throwRuntimeException(__FUNCTION__);
     }

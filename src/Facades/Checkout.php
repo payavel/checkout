@@ -21,10 +21,10 @@ use Payavel\Checkout\CheckoutGateway;
  * @method static \Payavel\Checkout\CheckoutResponse updatePaymentInstrument(\Payavel\Checkout\Models\PaymentInstrument $paymentInstrument, $data)
  * @method static \Payavel\Checkout\CheckoutResponse deletePaymentInstrument(\Payavel\Checkout\Models\PaymentInstrument $paymentInstrument)
  * @method static \Payavel\Checkout\CheckoutResponse authorize($data, \Payavel\Checkout\Contracts\Billable $billable = null)
- * @method static \Payavel\Checkout\CheckoutResponse capture(\Payavel\Checkout\Models\PaymentTransaction $transaction, $data = [])
- * @method static \Payavel\Checkout\CheckoutResponse getTransaction(\Payavel\Checkout\Models\PaymentTransaction $transaction)
- * @method static \Payavel\Checkout\CheckoutResponse void(\Payavel\Checkout\Models\PaymentTransaction $transaction, $data = [])
- * @method static \Payavel\Checkout\CheckoutResponse refund(\Payavel\Checkout\Models\PaymentTransaction $transaction, $data = [])
+ * @method static \Payavel\Checkout\CheckoutResponse capture(\Payavel\Checkout\Models\Payment $payment, $data = [])
+ * @method static \Payavel\Checkout\CheckoutResponse getTransaction(\Payavel\Checkout\Models\Payment $transaction)
+ * @method static \Payavel\Checkout\CheckoutResponse void(\Payavel\Checkout\Models\Payment $payment, $data = [])
+ * @method static \Payavel\Checkout\CheckoutResponse refund(\Payavel\Checkout\Models\Payment $payment, $data = [])
  *
  * @see \Payavel\Checkout\CheckoutGateway
  */

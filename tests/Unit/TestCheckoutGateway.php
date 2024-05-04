@@ -5,7 +5,7 @@ namespace Payavel\Checkout\Tests\Unit;
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\Facades\Checkout;
 use Payavel\Checkout\Models\PaymentInstrument;
-use Payavel\Checkout\Models\PaymentTransaction;
+use Payavel\Checkout\Models\Payment;
 use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\CheckoutRequest;
 use Payavel\Checkout\CheckoutResponse;
@@ -134,12 +134,12 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     #[Test]
     public function capture_method_returns_configured_response()
     {
-        $transaction = PaymentTransaction::factory()->create([
+        $payment = Payment::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
             'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $response = Checkout::capture($transaction);
+        $response = Checkout::capture($payment);
 
         $this->assertResponseIsConfigured($response);
 
@@ -149,7 +149,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     #[Test]
     public function get_transaction_method_returns_configured_response()
     {
-        $transaction = PaymentTransaction::factory()->create([
+        $transaction = Payment::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
             'account_id' => Checkout::getAccount()->getId(),
         ]);
@@ -164,7 +164,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     #[Test]
     public function void_method_returns_configured_response()
     {
-        $transaction = PaymentTransaction::factory()->create([
+        $transaction = Payment::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
             'account_id' => Checkout::getAccount()->getId(),
         ]);
@@ -179,7 +179,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     #[Test]
     public function refund_method_returns_configured_response()
     {
-        $transaction = PaymentTransaction::factory()->create([
+        $transaction = Payment::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
             'account_id' => Checkout::getAccount()->getId(),
         ]);
@@ -237,22 +237,22 @@ class TestCheckoutRequest extends CheckoutRequest
         return new TestCheckoutResponse([]);
     }
 
-    public function capture(PaymentTransaction $transaction, $data = [])
+    public function capture(Payment $transaction, $data = [])
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function getTransaction(PaymentTransaction $transaction)
+    public function getTransaction(Payment $transaction)
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function void(PaymentTransaction $paymentTransaction, $data = [])
+    public function void(Payment $paymentTransaction, $data = [])
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function refund(PaymentTransaction $paymentTransaction, $data = [])
+    public function refund(Payment $paymentTransaction, $data = [])
     {
         return new TestCheckoutResponse([]);
     }
