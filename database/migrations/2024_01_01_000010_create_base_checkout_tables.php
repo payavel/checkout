@@ -56,7 +56,7 @@ return new class () extends Migration {
             $table->string('reference');
             $table->unsignedInteger('amount');
             $table->char('currency', 3)->default('USD');
-            $table->unsignedBigInteger('payment_instrument_id')->nullable();
+            $table->unsignedBigInteger('instrument_id')->nullable();
             $table->unsignedSmallInteger('status_code');
             $table->json('details')->nullable();
             $table->timestamps();
@@ -66,10 +66,10 @@ return new class () extends Migration {
                 $table->foreign('account_id')->references('id')->on('accounts')->onUpdate('cascade');
             }
 
-            $table->foreign('payment_instrument_id')->references('id')->on('payment_instruments')->onDelete('set null');
+            $table->foreign('instrument_id')->references('id')->on('payment_instruments')->onDelete('set null');
         });
 
-        Schema::create('payment_transaction_events', function (Blueprint $table) {
+        Schema::create('transaction_events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('payment_id');
             $table->string('reference')->nullable();
@@ -89,7 +89,7 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('payment_transaction_events');
+        Schema::dropIfExists('transaction_events');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('payment_instruments');
         Schema::dropIfExists('payment_types');

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
-class PaymentTransactionEvent extends Model
+class TransactionEvent extends Model
 {
     use HasFactory;
 

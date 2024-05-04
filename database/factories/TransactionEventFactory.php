@@ -4,17 +4,17 @@ namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\Payment;
-use Payavel\Checkout\Models\PaymentTransactionEvent;
+use Payavel\Checkout\Models\TransactionEvent;
 use Payavel\Checkout\CheckoutStatus;
 
-class PaymentTransactionEventFactory extends Factory
+class TransactionEventFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = PaymentTransactionEvent::class;
+    protected $model = TransactionEvent::class;
 
     /**
      * Define the model's default state.
@@ -42,7 +42,7 @@ class PaymentTransactionEventFactory extends Factory
      */
     public function configure()
     {
-        return $this->afterMaking(function (PaymentTransactionEvent $transactionEvent) {
+        return $this->afterMaking(function (TransactionEvent $transactionEvent) {
             if (is_null($transactionEvent->payment_id)) {
                 $payment = Payment::factory()->create();
 
