@@ -4,7 +4,7 @@ namespace Payavel\Checkout\Contracts;
 
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\Models\PaymentInstrument;
-use Payavel\Checkout\Models\PaymentTransaction;
+use Payavel\Checkout\Models\Payment;
 use Payavel\Checkout\Models\Wallet;
 
 interface CheckoutRequester
@@ -52,7 +52,7 @@ interface CheckoutRequester
     public function deletePaymentInstrument(PaymentInstrument $paymentInstrument);
 
     /**
-     * Authorize a transaction.
+     * Authorize a payment.
      *
      * @param array|mixed $data
      * @param \Payavel\Checkout\Contracts\Billable|null $billable
@@ -61,37 +61,38 @@ interface CheckoutRequester
     public function authorize($data, Billable $billable = null);
 
     /**
-     * Capture a previously authorized transaction.
+     * Capture an authorized payment.
      *
-     * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
+     * @param \Payavel\Checkout\Models\Payment $payment
      * @param array|mixed $data
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function capture(PaymentTransaction $transaction, $data = []);
+    public function capture(Payment $payment, $data = []);
 
+    // ToDo: The param should be an instance of Transactionable (Payment, Refund or Dispute)
     /**
      * Retrieve the transaction details from the provider.
      *
-     * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
+     * @param \Payavel\Checkout\Models\Payment $transaction
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function getTransaction(PaymentTransaction $transaction);
+    public function getTransaction(Payment $transaction);
 
     /**
-     * Void a previously authorized transaction.
+     * Void an authorized payment.
      *
-     * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
+     * @param \Payavel\Checkout\Models\Payment $payment
      * @param array|mixed $data
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function void(PaymentTransaction $transaction, $data = []);
+    public function void(Payment $payment, $data = []);
 
     /**
-     * Refund a previously captured transaction.
+     * Refund a payment.
      *
-     * @param \Payavel\Checkout\Models\PaymentTransaction $transaction
+     * @param \Payavel\Checkout\Models\Payment $payment
      * @param array|mixed
      * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function refund(PaymentTransaction $transaction, $data = []);
+    public function refund(Payment $payment, $data = []);
 }

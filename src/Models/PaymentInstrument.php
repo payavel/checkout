@@ -89,13 +89,13 @@ class PaymentInstrument extends Model
     }
 
     /**
-     * Get the transactions that this payment instrument has triggered.
+     * Get the payments that this instrument has been used for.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function transactions()
+    public function payments()
     {
-        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentTransaction::class, PaymentTransaction::class));
+        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class));
     }
 
     /**

@@ -84,7 +84,7 @@ return [
     */
     //  'models' => [
     //      \Payavel\Checkout\Models\PaymentInstrument::class => \App\Models\PaymentInstrument::class,
-    //      \Payavel\Checkout\Models\PaymentTransaction::class => \App\Models\PaymentTransaction::class,
+    //      \Payavel\Checkout\Models\Payment::class => \App\Models\Payment::class,
     //      \Payavel\Checkout\Models\PaymentTransactionEvent::class => \App\Models\PaymentTransactionEvent::class,
     //      \Payavel\Checkout\Models\PaymentType::class => \App\Models\PaymentType::class,
     //      \Payavel\Checkout\Models\Wallet::class => \App\Models\Wallet::class,

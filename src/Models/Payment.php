@@ -9,7 +9,7 @@ use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
-class PaymentTransaction extends Model
+class Payment extends Model
 {
     use ConfiguresCheckoutGateway;
     use HasFactory;
@@ -50,7 +50,7 @@ class PaymentTransaction extends Model
     }
 
     /**
-     * Get the payment instrument used for this transaction.
+     * Get the payment instrument used to process this payment.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -60,7 +60,7 @@ class PaymentTransaction extends Model
     }
 
     /**
-     * Get the provider the transaction belongs to.
+     * Get the provider that processed the payment.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -70,7 +70,7 @@ class PaymentTransaction extends Model
     }
 
     /**
-     * Get the account the transaction belongs to.
+     * Get the account the payment belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -80,7 +80,7 @@ class PaymentTransaction extends Model
     }
 
     /**
-     * Get the transaction's event history.
+     * Get the payment transaction's event history.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -89,8 +89,10 @@ class PaymentTransaction extends Model
         return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentTransactionEvent::class, PaymentTransactionEvent::class), 'transaction_id');
     }
 
+    // ToDo: Figure out the new TransactionEvent idea.
+
     /**
-     * Fetch the transaction details from the provider.
+     * Fetch the payment details from the provider.
      *
      * @return \Payavel\Checkout\CheckoutResponse
      */
@@ -100,7 +102,7 @@ class PaymentTransaction extends Model
     }
 
     /**
-     * Request the provider to void the transaction.
+     * Request the provider to void the payment.
      *
      * @param array|mixed $data
      * @return \Payavel\Checkout\CheckoutResponse
@@ -111,7 +113,7 @@ class PaymentTransaction extends Model
     }
 
     /**
-     * Request the provider to refund the transaction.
+     * Request the provider to refund the payment.
      *
      * @param array|mixed $data
      * @return \Payavel\Checkout\CheckoutResponse
