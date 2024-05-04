@@ -39,36 +39,36 @@ class PaymentFactory extends Factory
      */
     public function configure()
     {
-        return $this->afterMaking(function (Payment $transaction) {
-            if (is_null($transaction->provider_id)) {
-                $provider = ! is_null($transaction->payment_instrument_id)
-                    ? $transaction->paymentInstrument->provider
+        return $this->afterMaking(function (Payment $payment) {
+            if (is_null($payment->provider_id)) {
+                $provider = ! is_null($payment->instrument_id)
+                    ? $payment->instrument->provider
                     : Provider::whereHas(
                         'accounts',
-                        fn ($query) => $query->where('payment_accounts.id', $transaction->account_id)
+                        fn ($query) => $query->where('payment_accounts.id', $payment->account_id)
                     )->inRandomOrder()->firstOr(
                         fn () => Provider::factory()->create()
                     );
 
-                $transaction->provider_id = $provider->id;
+                $payment->provider_id = $provider->id;
             }
 
-            if (is_null($transaction->account_id)) {
-                $account = ! is_null($transaction->payment_instrument_id)
-                    ? $transaction->paymentInstrument->account
+            if (is_null($payment->account_id)) {
+                $account = ! is_null($payment->instrument_id)
+                    ? $payment->instrument->account
                     : Account::whereHas(
                         'providers',
-                        fn ($query) => $query->where('payment_providers.id', $transaction->provider_id)
+                        fn ($query) => $query->where('payment_providers.id', $payment->provider_id)
                     )->inRandomOrder()
-                    ->firstOr(function () use ($transaction) {
+                    ->firstOr(function () use ($payment) {
                         $account = Account::factory()->create();
 
-                        $account->providers()->attach($transaction->provider_id, ['is_default' => true]);
+                        $account->providers()->attach($payment->provider_id, ['is_default' => true]);
 
                         return $account;
                     });
 
-                $transaction->account_id = $account->id;
+                $payment->account_id = $account->id;
             }
         });
     }

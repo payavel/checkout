@@ -50,11 +50,11 @@ class Payment extends Model
     }
 
     /**
-     * Get the payment instrument used to process this payment.
+     * Get the instrument used to process this payment.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function paymentInstrument()
+    public function instrument()
     {
         return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . PaymentInstrument::class, PaymentInstrument::class));
     }
@@ -86,7 +86,7 @@ class Payment extends Model
      */
     public function events()
     {
-        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentTransactionEvent::class, PaymentTransactionEvent::class), 'transaction_id');
+        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . TransactionEvent::class, TransactionEvent::class), 'transaction_id');
     }
 
     // ToDo: Figure out the new TransactionEvent idea.

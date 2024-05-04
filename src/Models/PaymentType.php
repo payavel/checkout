@@ -32,7 +32,7 @@ class PaymentType extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function paymentInstruments()
+    public function instruments()
     {
         return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentInstrument::class, PaymentInstrument::class), 'type_id');
     }
