@@ -149,12 +149,12 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     #[Test]
     public function get_transaction_method_returns_configured_response()
     {
-        $transaction = Payment::factory()->create([
+        $payment = Payment::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
             'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $response = Checkout::getTransaction($transaction);
+        $response = Checkout::getTransaction($payment);
 
         $this->assertResponseIsConfigured($response);
 
@@ -164,12 +164,12 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     #[Test]
     public function void_method_returns_configured_response()
     {
-        $transaction = Payment::factory()->create([
+        $payment = Payment::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
             'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $response = Checkout::void($transaction);
+        $response = Checkout::void($payment);
 
         $this->assertResponseIsConfigured($response);
 
@@ -179,12 +179,12 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     #[Test]
     public function refund_method_returns_configured_response()
     {
-        $transaction = Payment::factory()->create([
+        $payment = Payment::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
             'account_id' => Checkout::getAccount()->getId(),
         ]);
 
-        $response = Checkout::refund($transaction);
+        $response = Checkout::refund($payment);
 
         $this->assertResponseIsConfigured($response);
 
@@ -237,7 +237,7 @@ class TestCheckoutRequest extends CheckoutRequest
         return new TestCheckoutResponse([]);
     }
 
-    public function capture(Payment $transaction, $data = [])
+    public function capture(Payment $payment, $data = [])
     {
         return new TestCheckoutResponse([]);
     }
@@ -247,12 +247,12 @@ class TestCheckoutRequest extends CheckoutRequest
         return new TestCheckoutResponse([]);
     }
 
-    public function void(Payment $paymentTransaction, $data = [])
+    public function void(Payment $payment, $data = [])
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function refund(Payment $paymentTransaction, $data = [])
+    public function refund(Payment $payment, $data = [])
     {
         return new TestCheckoutResponse([]);
     }
