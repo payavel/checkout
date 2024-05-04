@@ -16,37 +16,49 @@ return new class () extends Migration {
         $usingDatabaseDriver = ServiceConfig::get('checkout', 'defaults.driver') === 'database';
 
         Schema::create('payment_types', function (Blueprint $table) {
-            $table->smallIncrements('id');
+            $table->string('id')->primary();
             $table->string('name');
-            $table->string('slug')->unique();
+            $table->string('logo');
             $table->timestamps();
+        });
+
+        Schema::create('payment_rails', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->string('parent_type_id');
+            $table->string('type_id');
+            $table->timestamps();
+
+            $table->foreign('parent_type_id')->references('id')->on('payment_types')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('payment_types')->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::create('wallets', function (Blueprint $table) use ($usingDatabaseDriver) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('billable_id')->nullable();
-            $table->string('billable_type')->nullable();
+            $table->morphs('billable');
             $table->string('provider_id');
             $table->string('account_id');
-            $table->string('token');
+            $table->string('reference');
             $table->timestamps();
 
             if ($usingDatabaseDriver) {
                 $table->foreign('provider_id')->references('id')->on('providers')->onUpdate('cascade')->onDelete('cascade');
                 $table->foreign('account_id')->references('id')->on('accounts')->onUpdate('cascade')->onDelete('cascade');
             }
+
+            $table->index('reference');
         });
 
         Schema::create('payment_instruments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('wallet_id');
-            $table->string('token');
-            $table->unsignedSmallInteger('type_id');
+            $table->string('type_id');
+            $table->string('reference');
             $table->json('details')->nullable();
             $table->timestamps();
 
             $table->foreign('wallet_id')->references('id')->on('wallets')->onDelete('cascade');
-            $table->foreign('type_id')->references('id')->on('payment_types');
+            $table->foreign('type_id')->references('id')->on('payment_types')->onUpdate('cascade');
+            $table->index('reference');
         });
 
         Schema::create('payments', function (Blueprint $table) use ($usingDatabaseDriver) {
@@ -54,10 +66,11 @@ return new class () extends Migration {
             $table->string('provider_id');
             $table->string('account_id');
             $table->string('reference');
+            $table->boolean('authorized')->default(true);
             $table->unsignedInteger('amount');
             $table->char('currency', 3)->default('USD');
+            $table->string('rail_id');
             $table->unsignedBigInteger('instrument_id')->nullable();
-            $table->unsignedSmallInteger('status_code');
             $table->json('details')->nullable();
             $table->timestamps();
 
@@ -66,19 +79,49 @@ return new class () extends Migration {
                 $table->foreign('account_id')->references('id')->on('accounts')->onUpdate('cascade');
             }
 
+            $table->index('reference');
+            $table->index('authorized');
+            $table->foreign('rail_id')->references('id')->on('payment_rails')->onUpdate('cascade');
             $table->foreign('instrument_id')->references('id')->on('payment_instruments')->onDelete('set null');
+        });
+
+        Schema::create('refunds', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('payment_id');
+            $table->string('reference');
+            $table->unsignedInteger('amount');
+            $table->json('details')->nullable();
+            $table->timestamps();
+
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
+            $table->index('reference');
+        });
+
+        Schema::create('disputes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('payment_id');
+            $table->string('reference');
+            $table->unsignedInteger('amount');
+            $table->json('details')->nullable();
+            $table->timestamps();
+
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
+            $table->index('reference');
         });
 
         Schema::create('transaction_events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('payment_id');
-            $table->string('reference')->nullable();
-            $table->unsignedBigInteger('amount');
-            $table->smallInteger('status_code');
+            $table->morphs('transactionable');
+            $table->string('reference');
+            $table->unsignedInteger('status_code');
+            $table->unsignedInteger('amount');
             $table->json('details')->nullable();
             $table->timestamps();
 
             $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
+            $table->index('reference');
+            $table->index('status_code');
         });
     }
 
@@ -90,9 +133,12 @@ return new class () extends Migration {
     public function down()
     {
         Schema::dropIfExists('transaction_events');
+        Schema::dropIfExists('disputes');
+        Schema::dropIfExists('refunds');
         Schema::dropIfExists('payments');
         Schema::dropIfExists('payment_instruments');
-        Schema::dropIfExists('payment_types');
         Schema::dropIfExists('wallets');
+        Schema::dropDatabaseIfExists('payment_rails');
+        Schema::dropIfExists('payment_types');
     }
 };
