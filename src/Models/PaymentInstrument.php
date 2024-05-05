@@ -25,7 +25,7 @@ class PaymentInstrument extends Model
      * @var array
      */
     protected $hidden = [
-        'token',
+        'reference',
         'details',
     ];
 
