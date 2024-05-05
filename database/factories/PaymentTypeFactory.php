@@ -3,6 +3,7 @@
 namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use Payavel\Checkout\Models\PaymentType;
 
 class PaymentTypeFactory extends Factory
@@ -14,46 +15,42 @@ class PaymentTypeFactory extends Factory
      */
     protected $model = PaymentType::class;
 
-    public const DEFAULTS = [
+    public const REAL = [
         [
+            'id' => 'visa',
             'name' => 'VISA',
-            'slug' => 'visa',
         ],
         [
+            'id' => 'mastercard',
             'name' => 'MasterCard',
-            'slug' => 'mastercard',
         ],
         [
+            'id' => 'amex',
             'name' => 'AMEX',
-            'slug' => 'amex',
         ],
         [
-            'name' => 'Alipay',
-            'slug' => 'alipay',
-        ],
-        [
-            'name' => 'Apple Pay',
-            'slug' => 'apple_pay',
-        ],
-        [
-            'name' => 'Google Pay',
-            'slug' => 'google_pay',
-        ],
-        [
-            'name' => 'JCB',
-            'slug' => 'jcb',
-        ],
-        [
-            'name' => 'Diners Club',
-            'slug' => 'diners_club',
-        ],
-        [
+            'id' => 'discover',
             'name' => 'Discover',
-            'slug' => 'discover',
         ],
         [
+            'id' => 'diners_club',
+            'name' => 'Diners Club',
+        ],
+        [
+            'id' => 'jcb',
+            'name' => 'JCB',
+        ],
+        [
+            'id' => 'apple_pay',
+            'name' => 'Apple Pay',
+        ],
+        [
+            'id' => 'google_pay',
+            'name' => 'Google Pay',
+        ],
+        [
+            'id' => 'paypal',
             'name' => 'PayPal',
-            'slug' => 'paypal',
         ],
     ];
 
@@ -64,18 +61,18 @@ class PaymentTypeFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->unique()->lexify('????');
+        $name = Str::ucfirst($this->faker->unique()->lexify('????'));
 
         return [
-            'name' => ucfirst($name),
-            'slug' => PaymentType::slugify($name),
+            'id' => preg_replace('/[^a-z0-9]+/i', '_', Str::lower($name)),
+            'name' => $name,
         ];
     }
 
     public function real()
     {
         return $this->state(function () {
-            $type = collect(static::DEFAULTS)->whereNotIn('slug', PaymentType::all()->pluck('slug'))->first();
+            $type = collect(static::REAL)->whereNotIn('id', PaymentType::all()->pluck('id'))->first();
 
             if (is_null($type)) {
                 return [];
