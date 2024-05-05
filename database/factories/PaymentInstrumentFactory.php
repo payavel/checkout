@@ -24,7 +24,7 @@ class PaymentInstrumentFactory extends Factory
     public function definition()
     {
         return [
-            'token' => $this->faker->uuid(),
+            'reference' => $this->faker->uuid(),
         ];
     }
 
@@ -36,7 +36,7 @@ class PaymentInstrumentFactory extends Factory
     public function configure()
     {
         return $this->afterMaking(function (PaymentInstrument $paymentInstrument) {
-            if(is_null($paymentInstrument->wallet_id)) {
+            if (is_null($paymentInstrument->wallet_id)) {
                 $wallet = Wallet::inRandomOrder()->firstOr(
                     fn () => Wallet::factory()->create()
                 );
