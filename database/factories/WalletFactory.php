@@ -24,7 +24,7 @@ class WalletFactory extends Factory
     public function definition()
     {
         return [
-            'token' => $this->faker->uuid(),
+            'reference' => $this->faker->uuid(),
         ];
     }
 

@@ -26,7 +26,7 @@ class Wallet extends Model
      *
      * @var array
      */
-    protected $hidden = ['token'];
+    protected $hidden = ['reference'];
 
     /**
      * Custom factory namespace fallback.
