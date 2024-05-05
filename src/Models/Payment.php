@@ -50,16 +50,6 @@ class Payment extends Model
     }
 
     /**
-     * Get the instrument used to process this payment.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function instrument()
-    {
-        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . PaymentInstrument::class, PaymentInstrument::class));
-    }
-
-    /**
      * Get the provider that processed the payment.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -80,16 +70,44 @@ class Payment extends Model
     }
 
     /**
-     * Get the payment transaction's event history.
+     * Get the rail the payment was processed on.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function rail()
+    {
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . PaymentRail::class, PaymentRail::class));
+    }
+
+    /**
+     * Get the instrument used to process this payment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function instrument()
+    {
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . PaymentInstrument::class, PaymentInstrument::class));
+    }
+
+    /**
+     * Get the payment event full history.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function events()
     {
-        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . TransactionEvent::class, TransactionEvent::class), 'transaction_id');
+        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . TransactionEvent::class, TransactionEvent::class));
     }
 
-    // ToDo: Figure out the new TransactionEvent idea.
+    /**
+     * Get the transaction specific events.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function transactionEvents()
+    {
+        return $this->morphMany(ServiceConfig::get('checkout', 'models.' . TransactionEvent::class, TransactionEvent::class), 'transactionable');
+    }
 
     /**
      * Fetch the payment details from the provider.
