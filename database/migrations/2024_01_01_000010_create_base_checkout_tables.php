@@ -18,7 +18,7 @@ return new class () extends Migration {
         Schema::create('payment_types', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name');
-            $table->string('logo');
+            $table->string('logo')->default('checkoutshopper-live.adyen.com/checkoutshopper/images/logos/card.svg');
             $table->timestamps();
         });
 
@@ -34,7 +34,7 @@ return new class () extends Migration {
 
         Schema::create('wallets', function (Blueprint $table) use ($usingDatabaseDriver) {
             $table->bigIncrements('id');
-            $table->morphs('billable');
+            $table->nullableMorphs('billable');
             $table->string('provider_id');
             $table->string('account_id');
             $table->string('reference');
