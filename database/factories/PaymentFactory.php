@@ -4,7 +4,7 @@ namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\Payment;
-use Payavel\Checkout\CheckoutStatus;
+use Payavel\Checkout\Models\PaymentRail;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 
@@ -28,7 +28,6 @@ class PaymentFactory extends Factory
             'reference' => $this->faker->uuid(),
             'amount' => $this->faker->numberBetween(1, 999) * 100,
             'currency' => $this->faker->currencyCode(),
-            'status_code' => CheckoutStatus::AUTHORIZED,
         ];
     }
 
@@ -69,6 +68,19 @@ class PaymentFactory extends Factory
                     });
 
                 $payment->account_id = $account->id;
+            }
+
+            if (is_null($payment->rail_id)) {
+                $rail = ! is_null($payment->instrument_id)
+                    ? $payment->instrument->type->rails()->inRandomOrder()->firstOrCreate(
+                        ['parent_type_id' => $payment->instrument->type_id],
+                        ['type_id' => $payment->instrument->type_id]
+                    ) : PaymentRail::inRandomOrder()
+                        ->firstOr(
+                            fn () => PaymentRail::factory()->create()
+                        );
+
+                $payment->rail_id = $rail->id;
             }
         });
     }
