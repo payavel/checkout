@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Checkout\Models\Payment;
 use Payavel\Checkout\Models\TransactionEvent;
 use Payavel\Checkout\CheckoutStatus;
+use Payavel\Checkout\Models\Dispute;
+use Payavel\Checkout\Models\Refund;
 
 class TransactionEventFactory extends Factory
 {
@@ -25,13 +27,6 @@ class TransactionEventFactory extends Factory
     {
         return [
             'reference' => $this->faker->uuid(),
-            'status_code' => $this->faker->randomElement([
-                CheckoutStatus::CAPTURED,
-                CheckoutStatus::SETTLED,
-                CheckoutStatus::VOIDED,
-                CheckoutStatus::REFUNDED,
-                CheckoutStatus::REFUND_SETTLED,
-            ]),
         ];
     }
 
@@ -44,13 +39,24 @@ class TransactionEventFactory extends Factory
     {
         return $this->afterMaking(function (TransactionEvent $transactionEvent) {
             if (is_null($transactionEvent->payment_id)) {
-                $payment = Payment::factory()->create();
+                $transactionEvent->payment_id = Payment::factory()->create()->id;
+            }
 
-                $transactionEvent->payment_id = $payment->id;
+            if (is_null($transactionEvent->transactionable_id)) {
+                $transactionEvent->transactionable_id = $transactionEvent->payment_id;
+                $transactionEvent->transactionable_type = Payment::class;
             }
 
             if (is_null($transactionEvent->amount)) {
-                $transactionEvent->amount = $transactionEvent->transaction->amount;
+                $transactionEvent->amount = $transactionEvent->transactionable->amount;
+            }
+
+            if (is_null($transactionEvent->status_code)) {
+                $transactionEvent->status_code = [
+                    Payment::class => CheckoutStatus::AUTHORIZED,
+                    Refund::class => CheckoutStatus::REFUNDED,
+                    Dispute::class => CheckoutStatus::CHARGEBACK,
+                ][$transactionEvent->transactionable_type];
             }
         });
     }
