@@ -55,5 +55,13 @@ class TransactionEvent extends Model
         return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class));
     }
 
-    // ToDo: Figure out the new TransactionEvent idea.
+    /**
+     * Get the event's originating transaction.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function transactionable()
+    {
+        return $this->morphTo();
+    }
 }

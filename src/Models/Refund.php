@@ -74,4 +74,14 @@ class Refund extends Model
     {
         return $this->payment->account;
     }
+
+    /**
+     * Get the transaction specific events.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function transactionEvents()
+    {
+        return $this->morphMany(ServiceConfig::get('checkout', 'models.' . TransactionEvent::class, TransactionEvent::class), 'transactionable');
+    }
 }
