@@ -44,7 +44,7 @@ class PaymentFactory extends Factory
                     ? $payment->instrument->provider
                     : Provider::whereHas(
                         'accounts',
-                        fn ($query) => $query->where('payment_accounts.id', $payment->account_id)
+                        fn ($query) => $query->where('accounts.id', $payment->account_id)
                     )->inRandomOrder()->firstOr(
                         fn () => Provider::factory()->create()
                     );
@@ -57,7 +57,7 @@ class PaymentFactory extends Factory
                     ? $payment->instrument->account
                     : Account::whereHas(
                         'providers',
-                        fn ($query) => $query->where('payment_providers.id', $payment->provider_id)
+                        fn ($query) => $query->where('providers.id', $payment->provider_id)
                     )->inRandomOrder()
                     ->firstOr(function () use ($payment) {
                         $account = Account::factory()->create();
