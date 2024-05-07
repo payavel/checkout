@@ -46,7 +46,7 @@ class Dispute extends Model
     }
 
     /**
-     * Get the payment that is being refunded.
+     * Get the payment that is being disputed.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -56,7 +56,7 @@ class Dispute extends Model
     }
 
     /**
-     * Get the refund's provider.
+     * Get the dispute's provider.
      *
      * @return \Payavel\Orchestration\Models\Provider
      */
@@ -66,7 +66,7 @@ class Dispute extends Model
     }
 
     /**
-     * Get the refund's account.
+     * Get the dispute's account.
      *
      * @return \Payavel\Orchestration\Models\Account
      */
