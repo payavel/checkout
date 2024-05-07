@@ -138,7 +138,7 @@ return new class () extends Migration {
         Schema::dropIfExists('payments');
         Schema::dropIfExists('payment_instruments');
         Schema::dropIfExists('wallets');
-        Schema::dropDatabaseIfExists('payment_rails');
+        Schema::dropIfExists('payment_rails');
         Schema::dropIfExists('payment_types');
     }
 };
