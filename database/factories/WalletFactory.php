@@ -39,7 +39,7 @@ class WalletFactory extends Factory
             if (is_null($wallet->provider_id)) {
                 $provider = Provider::whereHas(
                     'accounts',
-                    fn ($query) => $query->where('payment_accounts.id', $wallet->account_id)
+                    fn ($query) => $query->where('accounts.id', $wallet->account_id)
                 )->inRandomOrder()
                 ->firstOr(
                     fn () => Provider::factory()->create()
@@ -51,7 +51,7 @@ class WalletFactory extends Factory
             if (is_null($wallet->account_id)) {
                 $account = Account::whereHas(
                     'providers',
-                    fn ($query) => $query->where('payment_providers.id', $wallet->provider_id)
+                    fn ($query) => $query->where('providers.id', $wallet->provider_id)
                 )->inRandomOrder()
                 ->firstOr(function () use ($wallet) {
                     $account = Account::factory()->create();
