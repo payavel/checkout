@@ -28,6 +28,19 @@ class PaymentRailTest extends TestCase
     }
 
     #[Test]
+    public function payment_rail_generates_the_same_id_before_committing_when_parent_type_is_equal_to_type()
+    {
+        $paymentType = PaymentType::factory()->create();
+
+        $paymentRail = PaymentRail::create([
+            'parent_type_id' => $paymentType->id,
+            'type_id' => $paymentType->id,
+        ]);
+
+        $this->assertEquals($paymentType->id, $paymentRail->id);
+    }
+
+    #[Test]
     public function retrieve_payment_rail_parent_type()
     {
         $paymentRail = PaymentRail::factory()->create();
