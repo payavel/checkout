@@ -60,9 +60,9 @@ class PaymentFactory extends Factory
                         fn ($query) => $query->where('providers.id', $payment->provider_id)
                     )->inRandomOrder()
                     ->firstOr(function () use ($payment) {
-                        $account = Account::factory()->create();
+                        $account = Account::factory()->create(['default_provider_id' => $payment->provider_id]);
 
-                        $account->providers()->attach($payment->provider_id, ['is_default' => true]);
+                        $account->providers()->attach($payment->provider_id);
 
                         return $account;
                     });

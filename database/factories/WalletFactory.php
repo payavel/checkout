@@ -54,9 +54,9 @@ class WalletFactory extends Factory
                     fn ($query) => $query->where('providers.id', $wallet->provider_id)
                 )->inRandomOrder()
                 ->firstOr(function () use ($wallet) {
-                    $account = Account::factory()->create();
+                    $account = Account::factory()->create(['default_provider_id' => $wallet->provider_id]);
 
-                    $account->providers()->attach($wallet->provider_id, ['is_default' => true]);
+                    $account->providers()->attach($wallet->provider_id);
 
                     return $account;
                 });
