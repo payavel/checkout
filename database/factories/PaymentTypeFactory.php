@@ -61,10 +61,10 @@ class PaymentTypeFactory extends Factory
      */
     public function definition()
     {
-        $name = Str::ucfirst($this->faker->unique()->lexify('????'));
+        $name = Str::ucfirst($this->faker->unique()->lexify(Str::repeat('?', rand(4, 8))));
 
         return [
-            'id' => preg_replace('/[^a-z0-9]+/i', '_', Str::lower($name)),
+            'id' => preg_replace('/[^a-z]+/i', '_', Str::lower($name)),
             'name' => $name,
         ];
     }
