@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Checkout\Tests\Unit\Models;
+namespace Payavel\Checkout\Tests\Unit;
 
 use Payavel\Checkout\Models\Payment;
 use Payavel\Checkout\Models\PaymentInstrument;
@@ -15,7 +15,7 @@ use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
 use PHPUnit\Framework\Attributes\Test;
 
-class PaymentInstrumentTest extends TestCase
+class PaymentInstrumentModelTest extends TestCase
 {
     #[Test]
     public function retrieve_payment_instrument_provider()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Checkout\Tests\Unit\Models;
+namespace Payavel\Checkout\Tests\Unit;
 
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\Models\PaymentInstrument;
@@ -15,7 +15,7 @@ use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
 use PHPUnit\Framework\Attributes\Test;
 
-class WalletTest extends TestCase
+class WalletModelTest extends TestCase
 {
     #[Test]
     public function retrieve_wallet_billable()

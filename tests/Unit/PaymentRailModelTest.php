@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Checkout\Tests\Unit\Models;
+namespace Payavel\Checkout\Tests\Unit;
 
 use Payavel\Checkout\Models\Payment;
 use Payavel\Checkout\Models\PaymentRail;
@@ -11,7 +11,7 @@ use Payavel\Checkout\Tests\TestCase;
 use Payavel\Orchestration\Support\ServiceConfig;
 use PHPUnit\Framework\Attributes\Test;
 
-class PaymentRailTest extends TestCase
+class PaymentRailModelTest extends TestCase
 {
     #[Test]
     public function payment_rail_generates_id_before_committing()
