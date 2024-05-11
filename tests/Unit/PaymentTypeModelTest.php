@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Checkout\Tests\Unit\Models;
+namespace Payavel\Checkout\Tests\Unit;
 
 use Payavel\Checkout\Models\PaymentInstrument;
 use Payavel\Checkout\Models\PaymentRail;
@@ -11,7 +11,7 @@ use Payavel\Checkout\Tests\TestCase;
 use Payavel\Orchestration\Support\ServiceConfig;
 use PHPUnit\Framework\Attributes\Test;
 
-class PaymentTypeTest extends TestCase
+class PaymentTypeModelTest extends TestCase
 {
     #[Test]
     public function retrieve_payment_type_rails()
