@@ -95,7 +95,7 @@ class PaymentInstrument extends Model
      */
     public function payments()
     {
-        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class));
+        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class), 'instrument_id');
     }
 
     /**
