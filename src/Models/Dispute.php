@@ -46,16 +46,6 @@ class Dispute extends Model
     }
 
     /**
-     * Get the payment that is being disputed.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function payment()
-    {
-        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class));
-    }
-
-    /**
      * Get the dispute's provider.
      *
      * @return \Payavel\Orchestration\Models\Provider
@@ -73,6 +63,16 @@ class Dispute extends Model
     public function getAccountAttribute()
     {
         return $this->payment->account;
+    }
+
+    /**
+     * Get the payment that is being disputed.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function payment()
+    {
+        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class));
     }
 
     /**
