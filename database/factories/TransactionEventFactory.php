@@ -8,6 +8,7 @@ use Payavel\Checkout\Models\TransactionEvent;
 use Payavel\Checkout\CheckoutStatus;
 use Payavel\Checkout\Models\Dispute;
 use Payavel\Checkout\Models\Refund;
+use Payavel\Orchestration\Support\ServiceConfig;
 
 class TransactionEventFactory extends Factory
 {
@@ -37,26 +38,26 @@ class TransactionEventFactory extends Factory
      */
     public function configure()
     {
+        $this->model = ServiceConfig::get('checkout', 'models.' . $this->model, $this->model);
+
         return $this->afterMaking(function (TransactionEvent $transactionEvent) {
             if (is_null($transactionEvent->payment_id)) {
                 $transactionEvent->payment_id = Payment::factory()->create()->id;
             }
 
-            if (is_null($transactionEvent->transactionable_id)) {
-                $transactionEvent->transactionable_id = $transactionEvent->payment_id;
-                $transactionEvent->transactionable_type = Payment::class;
-            }
-
             if (is_null($transactionEvent->amount)) {
-                $transactionEvent->amount = $transactionEvent->transactionable->amount;
+                $transactionEvent->amount = $transactionEvent->transactionable->amount ?? $transactionEvent->payment->amount;
             }
 
             if (is_null($transactionEvent->status_code)) {
                 $transactionEvent->status_code = [
-                    Payment::class => CheckoutStatus::AUTHORIZED,
-                    Refund::class => CheckoutStatus::REFUNDED,
-                    Dispute::class => CheckoutStatus::CHARGEBACK,
-                ][$transactionEvent->transactionable_type];
+                    ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class) => CheckoutStatus::AUTHORIZED,
+                    ServiceConfig::get('checkout', 'models.' . Refund::class, Refund::class) => CheckoutStatus::REFUNDED,
+                    ServiceConfig::get('checkout', 'models.' . Dispute::class, Dispute::class) => CheckoutStatus::CHARGEBACK,
+                ][
+                    ServiceConfig::get('checkout', 'models.' . $transactionEvent->transactionable_type, $transactionEvent->transactionable_type) ??
+                    ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class)
+                ];
             }
         });
     }
