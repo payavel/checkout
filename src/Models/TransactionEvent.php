@@ -3,6 +3,8 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Arr;
 use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
@@ -63,5 +65,22 @@ class TransactionEvent extends Model
     public function transactionable()
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Retrieve the actual class name for a given morph class.
+     *
+     * @param  string  $class
+     * @return string
+     */
+    public static function getActualClassNameForMorph($class)
+    {
+        $value = Arr::get(Relation::morphMap() ?: [], $class, $class);
+
+        if (is_callable($value)) {
+            return $value();
+        }
+
+        return $value;
     }
 }
