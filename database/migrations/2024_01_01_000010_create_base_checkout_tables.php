@@ -112,7 +112,7 @@ return new class () extends Migration {
         Schema::create('transaction_events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('payment_id');
-            $table->morphs('transactionable');
+            $table->nullableMorphs('transactionable');
             $table->string('reference');
             $table->unsignedInteger('status_code');
             $table->unsignedInteger('amount');
