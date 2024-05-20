@@ -3,11 +3,11 @@
 namespace Payavel\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Payavel\Checkout\Models\Payment;
-use Payavel\Checkout\Models\TransactionEvent;
 use Payavel\Checkout\CheckoutStatus;
 use Payavel\Checkout\Models\Dispute;
+use Payavel\Checkout\Models\Payment;
 use Payavel\Checkout\Models\Refund;
+use Payavel\Checkout\Models\TransactionEvent;
 use Payavel\Orchestration\Support\ServiceConfig;
 
 class TransactionEventFactory extends Factory
@@ -49,15 +49,16 @@ class TransactionEventFactory extends Factory
                 $transactionEvent->amount = $transactionEvent->transactionable->amount ?? $transactionEvent->payment->amount;
             }
 
-            if (is_null($transactionEvent->status_code)) {
-                $transactionEvent->status_code = [
-                    ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class) => CheckoutStatus::AUTHORIZED,
-                    ServiceConfig::get('checkout', 'models.' . Refund::class, Refund::class) => CheckoutStatus::REFUNDED,
-                    ServiceConfig::get('checkout', 'models.' . Dispute::class, Dispute::class) => CheckoutStatus::CHARGEBACK,
-                ][
-                    ServiceConfig::get('checkout', 'models.' . $transactionEvent->transactionable_type, $transactionEvent->transactionable_type) ??
-                    ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class)
-                ];
+            if (is_null($transactionEvent->status_code) && !is_null($transactionEvent->transactionable_type)) {
+                $transactionable = new $transactionEvent->transactionable_type();
+
+                if ($transactionable instanceof Payment) {
+                    $transactionEvent->status_code = CheckoutStatus::AUTHORIZED;
+                } elseif ($transactionable instanceof Refund) {
+                    $transactionEvent->status_code = CheckoutStatus::REFUNDED;
+                } elseif ($transactionable instanceof Dispute) {
+                    $transactionEvent->status_code = CheckoutStatus::CHARGEBACK;
+                }
             }
         });
     }
