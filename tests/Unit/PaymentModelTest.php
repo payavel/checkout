@@ -2,6 +2,7 @@
 
 namespace Payavel\Checkout\Tests\Unit;
 
+use Payavel\Checkout\CheckoutStatus;
 use Payavel\Checkout\Models\Payment;
 use Payavel\Checkout\Models\PaymentInstrument;
 use Payavel\Checkout\Models\PaymentRail;
@@ -72,12 +73,12 @@ class PaymentModelTest extends TestCase
         $payment = Payment::factory()->create();
         $this->assertEmpty($payment->events);
 
-        $paymentWith2Events = Payment::factory()->hasEvents(2)->create();
+        $paymentWith2Events = Payment::factory()->hasEvents(2, ['status_code' => CheckoutStatus::AUTHORIZED])->create();
         $this->assertCount(2, $paymentWith2Events->events);
         $this->assertContainsOnlyInstancesOf(TransactionEvent::class, $paymentWith2Events->events);
 
         ServiceConfig::set('checkout', 'models.' . TransactionEvent::class, TestTransactionEvent::class);
-        $paymentWith3OverriddenEvents = Payment::factory()->hasEvents(3)->create();
+        $paymentWith3OverriddenEvents = Payment::factory()->hasEvents(3, ['status_code' => CheckoutStatus::AUTHORIZED])->create();
         $this->assertCount(3, $paymentWith3OverriddenEvents->events);
         $this->assertContainsOnlyInstancesOf(TestTransactionEvent::class, $paymentWith3OverriddenEvents->events);
     }

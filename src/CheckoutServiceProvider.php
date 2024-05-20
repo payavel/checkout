@@ -2,14 +2,9 @@
 
 namespace Payavel\Checkout;
 
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use Payavel\Checkout\Console\Commands\CheckoutInstall;
 use Payavel\Checkout\Console\Commands\CheckoutProvider;
-use Payavel\Checkout\Models\Dispute;
-use Payavel\Checkout\Models\Payment;
-use Payavel\Checkout\Models\Refund;
-use Payavel\Orchestration\Support\ServiceConfig;
 
 class CheckoutServiceProvider extends ServiceProvider
 {
@@ -24,12 +19,6 @@ class CheckoutServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         $this->registerMigrations();
-
-        Relation::morphMap([
-            Payment::class => fn () => ServiceConfig::get('checkout', 'models.' . Payment::class, Payment::class),
-            Refund::class => fn () => ServiceConfig::get('checkout', 'models.' . Refund::class, Refund::class),
-            Dispute::class => fn () => ServiceConfig::get('checkout', 'models.' . Dispute::class, Dispute::class),
-        ]);
     }
 
     public function register()
