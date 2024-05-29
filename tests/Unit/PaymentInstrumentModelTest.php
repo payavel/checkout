@@ -10,35 +10,11 @@ use Payavel\Checkout\Tests\Models\TestPayment;
 use Payavel\Checkout\Tests\Models\TestPaymentType;
 use Payavel\Checkout\Tests\Models\TestWallet;
 use Payavel\Checkout\Tests\TestCase;
-use Payavel\Orchestration\Models\Account;
-use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
 use PHPUnit\Framework\Attributes\Test;
 
 class PaymentInstrumentModelTest extends TestCase
 {
-    #[Test]
-    public function retrieve_payment_instrument_provider()
-    {
-        $paymentInstrumentWithProviderViaWallet = PaymentInstrument::factory()->create();
-        $this->assertInstanceOf(Provider::class, $paymentInstrumentWithProviderViaWallet->provider);
-
-        ServiceConfig::set('checkout', 'models.' . Wallet::class, TestWallet::class);
-        $paymentInstrumentWithProviderViaOverriddenWallet = PaymentInstrument::factory()->create();
-        $this->assertInstanceOf(Provider::class, $paymentInstrumentWithProviderViaOverriddenWallet->provider);
-    }
-
-    #[Test]
-    public function retrieve_payment_instrument_account()
-    {
-        $paymentInstrumentWithAccountViaWallet = PaymentInstrument::factory()->create();
-        $this->assertInstanceOf(Account::class, $paymentInstrumentWithAccountViaWallet->account);
-
-        ServiceConfig::set('checkout', 'models.' . Wallet::class, TestWallet::class);
-        $paymentInstrumentWithAccountViaOverriddenWallet = PaymentInstrument::factory()->create();
-        $this->assertInstanceOf(Account::class, $paymentInstrumentWithAccountViaOverriddenWallet->account);
-    }
-
     #[Test]
     public function retrieve_payment_instrument_wallet()
     {

@@ -46,26 +46,6 @@ class Refund extends Model
     }
 
     /**
-     * Get the refund's provider.
-     *
-     * @return \Payavel\Orchestration\Models\Provider
-     */
-    public function getProviderAttribute()
-    {
-        return $this->payment->provider;
-    }
-
-    /**
-     * Get the refund's account.
-     *
-     * @return \Payavel\Orchestration\Models\Account
-     */
-    public function getAccountAttribute()
-    {
-        return $this->payment->account;
-    }
-
-    /**
      * Get the payment that is being refunded.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

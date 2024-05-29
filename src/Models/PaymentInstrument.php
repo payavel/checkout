@@ -49,26 +49,6 @@ class PaymentInstrument extends Model
     }
 
     /**
-     * Get the payment instrument's provider.
-     *
-     * @return \Payavel\Orchestration\Models\Provider
-     */
-    public function getProviderAttribute()
-    {
-        return $this->wallet->provider;
-    }
-
-    /**
-     * Get the payment instrument's account.
-     *
-     * @return \Payavel\Orchestration\Models\Account
-     */
-    public function getAccountAttribute()
-    {
-        return $this->wallet->account;
-    }
-
-    /**
      * Get the wallet the payment instrument belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
