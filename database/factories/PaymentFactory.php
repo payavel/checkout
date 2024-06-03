@@ -10,9 +10,12 @@ use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Service;
 use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Tests\Traits\CreatesConfigServiceables;
 
 class PaymentFactory extends Factory
 {
+    use CreatesConfigServiceables;
+
     /**
      * The name of the factory's corresponding model.
      *

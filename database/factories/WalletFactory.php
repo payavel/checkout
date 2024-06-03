@@ -51,7 +51,7 @@ class WalletFactory extends Factory
     protected function makeSureServiceablesExistInDatabase(Wallet $wallet)
     {
         if (is_null($wallet->provider_id)) {
-            Provider::whereHas(
+            $provider = Provider::whereHas(
                 'accounts',
                 fn ($query) => $query->where('accounts.id', $wallet->account_id)
             )->inRandomOrder()
