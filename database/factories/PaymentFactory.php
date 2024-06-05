@@ -68,7 +68,7 @@ class PaymentFactory extends Factory
     {
         if (is_null($payment->provider_id)) {
             $provider = ! is_null($payment->instrument_id)
-                ? $payment->instrument->provider
+                ? $payment->instrument->wallet->provider
                 : Provider::whereHas(
                     'accounts',
                     fn ($query) => $query->where('accounts.id', $payment->account_id)
@@ -81,7 +81,7 @@ class PaymentFactory extends Factory
 
         if (is_null($payment->account_id)) {
             $account = ! is_null($payment->instrument_id)
-                ? $payment->instrument->account
+                ? $payment->instrument->wallet->account
                 : Account::whereHas(
                     'providers',
                     fn ($query) => $query->where('providers.id', $payment->provider_id)
