@@ -13,35 +13,16 @@ use Payavel\Checkout\Tests\Models\TestPaymentRail;
 use Payavel\Checkout\Tests\Models\TestProvider;
 use Payavel\Checkout\Tests\Models\TestTransactionEvent;
 use Payavel\Checkout\Tests\TestCase;
+use Payavel\Orchestration\Contracts\Accountable;
+use Payavel\Orchestration\Contracts\Providable;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 
-class PaymentModelTest extends TestCase
+abstract class TestPaymentModel extends TestCase implements CreatesServiceables
 {
-    #[Test]
-    public function retrieve_payment_provider()
-    {
-        $paymentWithProvider = Payment::factory()->create();
-        $this->assertInstanceOf(Provider::class, $paymentWithProvider->provider);
-
-        ServiceConfig::set('checkout', 'models.' . Provider::class, TestProvider::class);
-        $paymentWithOverriddenProvider = Payment::factory()->create();
-        $this->assertInstanceOf(TestProvider::class, $paymentWithOverriddenProvider->provider);
-    }
-
-    #[Test]
-    public function retrieve_payment_account()
-    {
-        $paymentWithAccount = Payment::factory()->create();
-        $this->assertInstanceOf(Account::class, $paymentWithAccount->account);
-
-        ServiceConfig::set('checkout', 'models.' . Account::class, TestAccount::class);
-        $paymentWithOverriddenAccount = Payment::factory()->create();
-        $this->assertInstanceOf(TestAccount::class, $paymentWithOverriddenAccount->account);
-    }
-
     #[Test]
     public function retrieve_payment_rail()
     {
@@ -97,5 +78,25 @@ class PaymentModelTest extends TestCase
         $paymentWith3OverriddenTransactionEvents = Payment::factory()->hasTransactionEvents(3)->create();
         $this->assertCount(3, $paymentWith3OverriddenTransactionEvents->transactionEvents);
         $this->assertContainsOnlyInstancesOf(TestTransactionEvent::class, $paymentWith3OverriddenTransactionEvents->transactionEvents);
+    }
+
+    #[Test]
+    public function retrieve_payment_providable()
+    {
+        $payment = Payment::factory()->create([
+            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
+            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+        ]);
+        $this->assertInstanceOf(Providable::class, $payment->getProvider());
+    }
+
+    #[Test]
+    public function retrieve_payment_accountable()
+    {
+        $payment = Payment::factory()->create([
+            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
+            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+        ]);
+        $this->assertInstanceOf(Accountable::class, $payment->getAccount());
     }
 }
