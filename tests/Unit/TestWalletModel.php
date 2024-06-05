@@ -10,45 +10,31 @@ use Payavel\Checkout\Tests\Models\TestPaymentInstrument;
 use Payavel\Checkout\Tests\Models\TestProvider;
 use Payavel\Checkout\Tests\TestCase;
 use Payavel\Checkout\Tests\User;
+use Payavel\Orchestration\Contracts\Accountable;
+use Payavel\Orchestration\Contracts\Providable;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 
-class WalletModelTest extends TestCase
+abstract class TestWalletModel extends TestCase implements CreatesServiceables
 {
     #[Test]
     public function retrieve_wallet_billable()
     {
-        $wallet = Wallet::factory()->create();
+        $wallet = Wallet::factory()->create([
+            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
+            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+        ]);
         $this->assertNull($wallet->billable);
 
-        $billable = User::factory()->create();
-        $walletWithBillable = Wallet::factory()->create();
-        $walletWithBillable->billable()->associate($billable);
+        $walletWithBillable = Wallet::factory()->for(User::factory()->create(), 'billable')->create([
+            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
+            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+        ]);
+        $this->assertInstanceOf(User::class, $walletWithBillable->billable);
         $this->assertInstanceOf(Billable::class, $walletWithBillable->billable);
-    }
-
-    #[Test]
-    public function retrieve_wallet_provider()
-    {
-        $walletWithProvider = Wallet::factory()->create();
-        $this->assertInstanceOf(Provider::class, $walletWithProvider->provider);
-
-        ServiceConfig::set('checkout', 'models.' . Provider::class, TestProvider::class);
-        $walletWithOverriddenProvider = Wallet::factory()->create();
-        $this->assertInstanceOF(TestProvider::class, $walletWithOverriddenProvider->provider);
-    }
-
-    #[Test]
-    public function retrieve_wallet_account()
-    {
-        $walletWithAccount = Wallet::factory()->create();
-        $this->assertInstanceOf(Account::class, $walletWithAccount->account);
-
-        ServiceConfig::set('checkout', 'models.' . Account::class, TestAccount::class);
-        $walletWithOverriddenAccount = Wallet::factory()->create();
-        $this->assertInstanceOF(TestAccount::class, $walletWithOverriddenAccount->account);
     }
 
     #[Test]
@@ -65,5 +51,25 @@ class WalletModelTest extends TestCase
         $walletWith3OverriddenPaymentInstruments = Wallet::factory()->hasPaymentInstruments(3)->create();
         $this->assertCount(3, $walletWith3OverriddenPaymentInstruments->paymentInstruments);
         $this->assertContainsOnlyInstancesOf(TestPaymentInstrument::class, $walletWith3OverriddenPaymentInstruments->paymentInstruments);
+    }
+
+    #[Test]
+    public function retrieve_wallet_providable()
+    {
+        $wallet = Wallet::factory()->create([
+            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
+            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+        ]);
+        $this->assertInstanceOf(Providable::class, $wallet->getProvider());
+    }
+
+    #[Test]
+    public function retrieve_wallet_accountable()
+    {
+        $wallet = Wallet::factory()->create([
+            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
+            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+        ]);
+        $this->assertInstanceOf(Accountable::class, $wallet->getAccount());
     }
 }
