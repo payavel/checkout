@@ -3,15 +3,15 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Checkout\Traits\ConfiguresCheckoutGateway;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Traits\ConfiguresOrchestra;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class Payment extends Model
 {
-    use ConfiguresCheckoutGateway;
+    use ConfiguresOrchestra;
     use HasFactory;
 
     /**
@@ -38,6 +38,13 @@ class Payment extends Model
     protected $casts = [
         'details' => 'array',
     ];
+
+    /**
+     * The orchestra's service id.
+     *
+     * @var string
+     */
+    protected $serviceId = 'checkout';
 
     /**
      * Custom factory namespace fallback.
