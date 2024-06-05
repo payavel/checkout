@@ -3,13 +3,11 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Checkout\Traits\ConfiguresCheckoutGateway;
 use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class PaymentInstrument extends Model
 {
-    use ConfiguresCheckoutGateway;
     use HasFactory;
 
     /**
@@ -85,7 +83,7 @@ class PaymentInstrument extends Model
      */
     public function fetch()
     {
-        return $this->gateway->getPaymentInstrument($this);
+        return $this->wallet->gateway->getPaymentInstrument($this);
     }
 
     /**
@@ -96,7 +94,7 @@ class PaymentInstrument extends Model
      */
     public function patch($data)
     {
-        return $this->gateway->updatePaymentInstrument($this, $data);
+        return $this->wallet->gateway->updatePaymentInstrument($this, $data);
     }
 
     /**
@@ -106,6 +104,6 @@ class PaymentInstrument extends Model
      */
     public function disable()
     {
-        return $this->gateway->deletePaymentInstrument($this);
+        return $this->wallet->gateway->deletePaymentInstrument($this);
     }
 }
