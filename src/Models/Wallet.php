@@ -3,7 +3,7 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Orchestration\Traits\ConfiguresOrchestra;
+use Payavel\Orchestration\Traits\OrchestratesService;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
@@ -11,8 +11,8 @@ use Payavel\Orchestration\Traits\HasFactory;
 
 class Wallet extends Model
 {
-    use ConfiguresOrchestra;
     use HasFactory;
+    use OrchestratesService;
 
     /**
      * The attributes that aren't mass assignable.
@@ -92,6 +92,6 @@ class Wallet extends Model
      */
     public function fetch()
     {
-        return $this->gateway->getWallet($this);
+        return $this->service->getWallet($this);
     }
 }
