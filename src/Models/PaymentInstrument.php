@@ -83,7 +83,7 @@ class PaymentInstrument extends Model
      */
     public function fetch()
     {
-        return $this->wallet->gateway->getPaymentInstrument($this);
+        return $this->wallet->service->getPaymentInstrument($this);
     }
 
     /**
@@ -94,7 +94,7 @@ class PaymentInstrument extends Model
      */
     public function patch($data)
     {
-        return $this->wallet->gateway->updatePaymentInstrument($this, $data);
+        return $this->wallet->service->updatePaymentInstrument($this, $data);
     }
 
     /**
@@ -104,6 +104,6 @@ class PaymentInstrument extends Model
      */
     public function disable()
     {
-        return $this->wallet->gateway->deletePaymentInstrument($this);
+        return $this->wallet->service->deletePaymentInstrument($this);
     }
 }

@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
-use Payavel\Orchestration\Traits\ConfiguresOrchestra;
+use Payavel\Orchestration\Traits\OrchestratesService;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class Payment extends Model
 {
-    use ConfiguresOrchestra;
     use HasFactory;
+    use OrchestratesService;
 
     /**
      * The attributes that aren't mass assignable.
@@ -123,7 +123,7 @@ class Payment extends Model
      */
     public function fetch()
     {
-        return $this->gateway->getTransaction($this);
+        return $this->service->getTransaction($this);
     }
 
     /**
@@ -134,7 +134,7 @@ class Payment extends Model
      */
     public function void($data = [])
     {
-        return $this->gateway->void($this, $data);
+        return $this->service->void($this, $data);
     }
 
     /**
@@ -145,6 +145,6 @@ class Payment extends Model
      */
     public function refund($data = [])
     {
-        return $this->gateway->refund($this, $data);
+        return $this->service->refund($this, $data);
     }
 }
