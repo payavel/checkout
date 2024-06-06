@@ -3,13 +3,14 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Payavel\Orchestration\Contracts\Orchestrable;
 use Payavel\Orchestration\Traits\OrchestratesService;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Support\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
-class Wallet extends Model
+class Wallet extends Model implements Orchestrable
 {
     use HasFactory;
     use OrchestratesService;
