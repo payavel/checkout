@@ -21,22 +21,32 @@ class PaymentModelTest extends TestPaymentModel
     #[Test]
     public function retrieve_payment_provider()
     {
-        $paymentWithProvider = Payment::factory()->create();
+        $usingServiceables = [
+            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
+            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+        ];
+
+        $paymentWithProvider = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(Provider::class, $paymentWithProvider->provider);
 
         ServiceConfig::set('checkout', 'models.' . Provider::class, TestProvider::class);
-        $paymentWithOverriddenProvider = Payment::factory()->create();
+        $paymentWithOverriddenProvider = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(TestProvider::class, $paymentWithOverriddenProvider->provider);
     }
 
     #[Test]
     public function retrieve_payment_account()
     {
-        $paymentWithAccount = Payment::factory()->create();
+        $usingServiceables = [
+            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
+            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+        ];
+
+        $paymentWithAccount = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(Account::class, $paymentWithAccount->account);
 
         ServiceConfig::set('checkout', 'models.' . Account::class, TestAccount::class);
-        $paymentWithOverriddenAccount = Payment::factory()->create();
+        $paymentWithOverriddenAccount = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(TestAccount::class, $paymentWithOverriddenAccount->account);
     }
 }

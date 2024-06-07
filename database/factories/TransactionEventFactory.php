@@ -42,7 +42,7 @@ class TransactionEventFactory extends Factory
 
         return $this->afterMaking(function (TransactionEvent $transactionEvent) {
             if (is_null($transactionEvent->payment_id)) {
-                $transactionEvent->payment_id = Payment::factory()->create()->id;
+                $transactionEvent->payment_id = $transactionEvent->transactionable_type === Payment::class ? $transactionEvent->transactionable_id : Payment::factory()->create()->id;
             }
 
             if (is_null($transactionEvent->amount)) {
