@@ -46,16 +46,6 @@ class TestCase extends \Payavel\Orchestration\Tests\TestCase
             'id' => 'checkout',
         ]);
     }
-
-    // ToDo: Move this into the orchestration package.
-    protected function tearDown(): void
-    {
-        if (file_exists($migration = database_path('migrations/2024_01_01_000001_create_base_orchestration_tables.php'))) {
-            unlink($migration);
-        }
-
-        parent::tearDown();
-    }
 }
 
 class User extends \Payavel\Orchestration\Tests\User implements Billable
