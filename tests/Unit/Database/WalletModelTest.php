@@ -21,22 +21,32 @@ class WalletModelTest extends TestWalletModel
     #[Test]
     public function retrieve_wallet_provider()
     {
-        $walletWithProvider = Wallet::factory()->create();
+        $usingServiceables = [
+            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
+            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+        ];
+
+        $walletWithProvider = Wallet::factory()->create($usingServiceables);
         $this->assertInstanceOf(Provider::class, $walletWithProvider->provider);
 
         ServiceConfig::set('checkout', 'models.' . Provider::class, TestProvider::class);
-        $walletWithOverriddenProvider = Wallet::factory()->create();
+        $walletWithOverriddenProvider = Wallet::factory()->create($usingServiceables);
         $this->assertInstanceOF(TestProvider::class, $walletWithOverriddenProvider->provider);
     }
 
     #[Test]
     public function retrieve_wallet_account()
     {
-        $walletWithAccount = Wallet::factory()->create();
+        $usingServiceables = [
+            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
+            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+        ];
+
+        $walletWithAccount = Wallet::factory()->create($usingServiceables);
         $this->assertInstanceOf(Account::class, $walletWithAccount->account);
 
         ServiceConfig::set('checkout', 'models.' . Account::class, TestAccount::class);
-        $walletWithOverriddenAccount = Wallet::factory()->create();
+        $walletWithOverriddenAccount = Wallet::factory()->create($usingServiceables);
         $this->assertInstanceOF(TestAccount::class, $walletWithOverriddenAccount->account);
     }
 }
