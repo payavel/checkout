@@ -9,9 +9,10 @@ use Payavel\Checkout\Tests\Models\TestPayment;
 use Payavel\Checkout\Tests\Models\TestPaymentType;
 use Payavel\Checkout\Tests\TestCase;
 use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 
-class PaymentRailModelTest extends TestCase
+abstract class TestPaymentRailModel extends TestCase implements CreatesServiceables
 {
     #[Test]
     public function payment_rail_generates_id_before_committing()
@@ -65,15 +66,20 @@ class PaymentRailModelTest extends TestCase
     #[Test]
     public function retrieve_payment_rail_payments()
     {
+        $usingServiceables = [
+            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
+            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+        ];
+
         $paymentRail = PaymentRail::factory()->create();
         $this->assertEmpty($paymentRail->payments);
 
-        $paymentRailWith2Payments = PaymentRail::factory()->hasPayments(2)->create();
+        $paymentRailWith2Payments = PaymentRail::factory()->hasPayments(2, $usingServiceables)->create();
         $this->assertCount(2, $paymentRailWith2Payments->payments);
         $this->assertContainsOnlyInstancesOf(Payment::class, $paymentRailWith2Payments->payments);
 
         ServiceConfig::set('checkout', 'models.' . Payment::class, TestPayment::class);
-        $paymentRailWith3OverriddenPayments = PaymentRail::factory()->hasPayments(3)->create();
+        $paymentRailWith3OverriddenPayments = PaymentRail::factory()->hasPayments(3, $usingServiceables)->create();
         $this->assertCount(3, $paymentRailWith3OverriddenPayments->payments);
         $this->assertContainsOnlyInstancesOf(TestPayment::class, $paymentRailWith3OverriddenPayments->payments);
     }
