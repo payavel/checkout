@@ -41,7 +41,7 @@ class PaymentFactory extends Factory
         return $this->afterMaking(function (Payment $payment) {
             if (is_null($payment->provider_id)) {
                 $provider = ! is_null($payment->instrument_id)
-                    ? $payment->instrument->provider
+                    ? $payment->instrument->wallet->getProvider()
                     : Provider::whereHas(
                         'accounts',
                         fn ($query) => $query->where('accounts.id', $payment->account_id)
@@ -49,12 +49,12 @@ class PaymentFactory extends Factory
                         fn () => Provider::factory()->create()
                     );
 
-                $payment->provider_id = $provider->id;
+                $payment->provider_id = $provider->getId();
             }
 
             if (is_null($payment->account_id)) {
                 $account = ! is_null($payment->instrument_id)
-                    ? $payment->instrument->account
+                    ? $payment->instrument->wallet->getAccount()
                     : Account::whereHas(
                         'providers',
                         fn ($query) => $query->where('providers.id', $payment->provider_id)
@@ -67,7 +67,7 @@ class PaymentFactory extends Factory
                         return $account;
                     });
 
-                $payment->account_id = $account->id;
+                $payment->account_id = $account->getId();
             }
 
             if (is_null($payment->rail_id)) {
