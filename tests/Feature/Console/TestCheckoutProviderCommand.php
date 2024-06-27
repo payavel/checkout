@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Checkout\Tests\Feature\Console\Commands;
+namespace Payavel\Checkout\Tests\Feature\Console;
 
 use Payavel\Checkout\Tests\TestCase;
 use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
