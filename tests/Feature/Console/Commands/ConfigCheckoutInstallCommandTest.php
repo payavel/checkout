@@ -15,19 +15,19 @@ class ConfigCheckoutInstallCommandTest extends TestCheckoutInstallCommand
 
     protected function makeSureProviderExists(Providable $provider)
     {
-        $config = require(config_path(Str::slug($this->checkoutService->getId()) . '.php'));
+        $config = require(config_path(Str::slug($this->checkoutService->id) . '.php'));
 
         $this->assertIsArray($config['providers']);
         $this->assertIsArray($config['providers'][$provider->getId()]);
         $this->assertEquals(
-            'App\\Services\\' . Str::studly($this->checkoutService->getId()) . '\\' . Str::studly($provider->getId()) . Str::studly($this->checkoutService->getId()) . 'Request',
+            'App\\Services\\' . Str::studly($this->checkoutService->id) . '\\' . Str::studly($provider->getId()) . Str::studly($this->checkoutService->id) . 'Request',
             $config['providers'][$provider->getId()]['gateway']
         );
     }
 
     protected function makeSureAccountExists(Accountable $account)
     {
-        $config = require(config_path(Str::slug($this->checkoutService->getId()) . '.php'));
+        $config = require(config_path(Str::slug($this->checkoutService->id) . '.php'));
 
         $this->assertIsArray($config['accounts']);
         $this->assertIsArray($config['accounts'][$account->getId()]);
@@ -37,7 +37,7 @@ class ConfigCheckoutInstallCommandTest extends TestCheckoutInstallCommand
 
     protected function makeSureProviderIsLinkedToAccount(Providable $provider, Accountable $account)
     {
-        $config = require(config_path(Str::slug($this->checkoutService->getId()) . '.php'));
+        $config = require(config_path(Str::slug($this->checkoutService->id) . '.php'));
 
         $this->assertIsArray($config['accounts'][$account->getId()]['providers'][$provider->getId()]);
     }

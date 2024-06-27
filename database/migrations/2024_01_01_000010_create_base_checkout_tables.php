@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Fluent\ServiceConfig;
 
 return new class () extends Migration {
     /**
@@ -13,7 +13,7 @@ return new class () extends Migration {
      */
     public function up()
     {
-        $usingDatabaseDriver = ServiceConfig::get('checkout', 'defaults.driver') === 'database';
+        $usingDatabaseDriver = ServiceConfig::find('checkout')->get('defaults.driver') === 'database';
 
         Schema::create('payment_types', function (Blueprint $table) {
             $table->string('id')->primary();
