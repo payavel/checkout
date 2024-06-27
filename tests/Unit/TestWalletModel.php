@@ -24,8 +24,8 @@ abstract class TestWalletModel extends TestCase implements CreatesServiceables
     public function retrieve_wallet_billable()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $wallet = Wallet::factory()->create($usingServiceables);
@@ -40,8 +40,8 @@ abstract class TestWalletModel extends TestCase implements CreatesServiceables
     public function retrieve_wallet_payment_instruments()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $wallet = Wallet::factory()->create($usingServiceables);
@@ -61,8 +61,8 @@ abstract class TestWalletModel extends TestCase implements CreatesServiceables
     public function retrieve_wallet_providable()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $wallet = Wallet::factory()->create($usingServiceables);
@@ -73,8 +73,8 @@ abstract class TestWalletModel extends TestCase implements CreatesServiceables
     public function retrieve_wallet_accountable()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $wallet = Wallet::factory()->create($usingServiceables);

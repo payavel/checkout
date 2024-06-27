@@ -13,7 +13,7 @@ class TestCase extends \Payavel\Orchestration\Tests\TestCase
 {
     use CreatesServices;
 
-    protected ServiceConfig $checkoutService;
+    protected ServiceConfig $checkoutConfig;
 
     protected function getPackageProviders($app)
     {
@@ -42,7 +42,7 @@ class TestCase extends \Payavel\Orchestration\Tests\TestCase
     {
         parent::setUp();
 
-        $this->checkoutService = $this->createServiceConfig([
+        $this->checkoutConfig = $this->createServiceConfig([
             'name' => 'Checkout',
             'id' => 'checkout',
         ]);

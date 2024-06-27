@@ -30,7 +30,7 @@ class DatabaseCheckoutInstallCommandTest extends TestCheckoutInstallCommand
 
         $this->assertNotNull($provider);
         $this->assertEquals(
-            'App\\Services\\' . Str::studly($this->checkoutService->id) . '\\' . Str::studly($provider->getId()) . Str::studly($this->checkoutService->id) . 'Request',
+            'App\\Services\\' . Str::studly($this->checkoutConfig->id) . '\\' . Str::studly($provider->getId()) . Str::studly($this->checkoutConfig->id) . 'Request',
             $provider->gateway
         );
     }
@@ -62,8 +62,8 @@ class DatabaseCheckoutInstallCommandTest extends TestCheckoutInstallCommand
             return;
         }
 
-        Account::where('service_id', $this->checkoutService->id)->delete();
-        Provider::where('service_id', $this->checkoutService->id)->delete();
+        Account::where('service_id', $this->checkoutConfig->id)->delete();
+        Provider::where('service_id', $this->checkoutConfig->id)->delete();
 
         $this->artisan('migrate');
 

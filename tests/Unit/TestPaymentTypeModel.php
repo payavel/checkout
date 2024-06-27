@@ -35,8 +35,8 @@ abstract class TestPaymentTypeModel extends TestCase implements CreatesServiceab
     public function retrieve_payment_type_instruments()
     {
         $wallet = Wallet::factory()->create([
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ]);
 
         $paymentType = PaymentType::factory()->create();

@@ -14,9 +14,9 @@ abstract class TestCheckoutProviderCommand extends TestCase implements CreatesSe
     #[Test]
     public function checkout_provider_command_injects_checkout_service_into_orchestrate_provider_command()
     {
-        $provider = $this->createProvider($this->checkoutService);
+        $provider = $this->createProvider($this->checkoutConfig);
 
-        $gateway = $this->gatewayPath($this->checkoutService, $provider);
+        $gateway = $this->gatewayPath($this->checkoutConfig, $provider);
 
         $ds = DIRECTORY_SEPARATOR;
         $this->artisan('checkout:provider', [
@@ -27,6 +27,6 @@ abstract class TestCheckoutProviderCommand extends TestCase implements CreatesSe
             ->expectsOutputToContain("Gateway [app{$ds}{$gateway->response}] created successfully.")
             ->assertSuccessful();
 
-        $this->assertGatewayExists($this->checkoutService, $provider);
+        $this->assertGatewayExists($this->checkoutConfig, $provider);
     }
 }

@@ -67,8 +67,8 @@ abstract class TestPaymentRailModel extends TestCase implements CreatesServiceab
     public function retrieve_payment_rail_payments()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $paymentRail = PaymentRail::factory()->create();

@@ -20,8 +20,8 @@ abstract class TestTransactionEventModel extends TestCase implements CreatesServ
     public function retrieve_transaction_event_payment()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $transactionEventWithPayment = TransactionEvent::factory()->for(Payment::factory()->create($usingServiceables))->create(['status_code' => CheckoutStatus::AUTHORIZED]);
@@ -36,8 +36,8 @@ abstract class TestTransactionEventModel extends TestCase implements CreatesServ
     public function retrieve_transaction_event_transactionable()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $transactionEvent = TransactionEvent::factory()->for(Payment::factory()->create($usingServiceables))->create(['status_code' => CheckoutStatus::AUTHORIZED]);

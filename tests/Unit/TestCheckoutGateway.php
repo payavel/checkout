@@ -26,15 +26,15 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     {
         parent::setUp();
 
-        $provider = $this->createProvider($this->checkoutService, [
+        $provider = $this->createProvider($this->checkoutConfig, [
             'gateway' => TestCheckoutRequest::class,
         ]);
 
-        $account = $this->createAccount($this->checkoutService);
+        $account = $this->createAccount($this->checkoutConfig);
 
         $this->linkAccountToProvider($account, $provider);
 
-        $this->setDefaultsForService($this->checkoutService, $account, $provider);
+        $this->setDefaultsForService($this->checkoutConfig, $account, $provider);
     }
 
     #[Test]
