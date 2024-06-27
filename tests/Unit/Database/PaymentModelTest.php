@@ -29,7 +29,7 @@ class PaymentModelTest extends TestPaymentModel
         $paymentWithProvider = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(Provider::class, $paymentWithProvider->provider);
 
-        ServiceConfig::find('checkout')->set('models.' . Provider::class, TestProvider::class);
+        $this->checkoutConfig->set('models.' . Provider::class, TestProvider::class);
         $paymentWithOverriddenProvider = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(TestProvider::class, $paymentWithOverriddenProvider->provider);
     }
@@ -45,7 +45,7 @@ class PaymentModelTest extends TestPaymentModel
         $paymentWithAccount = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(Account::class, $paymentWithAccount->account);
 
-        ServiceConfig::find('checkout')->set('models.' . Account::class, TestAccount::class);
+        $this->checkoutConfig->set('models.' . Account::class, TestAccount::class);
         $paymentWithOverriddenAccount = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(TestAccount::class, $paymentWithOverriddenAccount->account);
     }

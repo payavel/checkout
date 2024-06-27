@@ -29,7 +29,7 @@ class WalletModelTest extends TestWalletModel
         $walletWithProvider = Wallet::factory()->create($usingServiceables);
         $this->assertInstanceOf(Provider::class, $walletWithProvider->provider);
 
-        ServiceConfig::find('checkout')->set('models.' . Provider::class, TestProvider::class);
+        $this->checkoutConfig->set('models.' . Provider::class, TestProvider::class);
         $walletWithOverriddenProvider = Wallet::factory()->create($usingServiceables);
         $this->assertInstanceOF(TestProvider::class, $walletWithOverriddenProvider->provider);
     }
@@ -45,7 +45,7 @@ class WalletModelTest extends TestWalletModel
         $walletWithAccount = Wallet::factory()->create($usingServiceables);
         $this->assertInstanceOf(Account::class, $walletWithAccount->account);
 
-        ServiceConfig::find('checkout')->set('models.' . Account::class, TestAccount::class);
+        $this->checkoutConfig->set('models.' . Account::class, TestAccount::class);
         $walletWithOverriddenAccount = Wallet::factory()->create($usingServiceables);
         $this->assertInstanceOF(TestAccount::class, $walletWithOverriddenAccount->account);
     }

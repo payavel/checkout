@@ -25,7 +25,7 @@ abstract class TestBillableTrait extends TestCase implements CreatesServiceables
         $this->assertCount(2, $billableWith2Wallets->wallets);
         $this->assertContainsOnlyInstancesOf(Wallet::class, $billableWith2Wallets->wallets);
 
-        ServiceConfig::find('checkout')->set('models.'.Wallet::class, TestWallet::class);
+        $this->checkoutConfig->set('models.'.Wallet::class, TestWallet::class);
         $billableWith3OverriddenWallets = User::factory()->has(Wallet::factory()->count(3)->sequence(fn () => [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
             'account_id' => $this->createAccount($this->checkoutConfig)->getId(),

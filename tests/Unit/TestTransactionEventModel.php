@@ -27,7 +27,7 @@ abstract class TestTransactionEventModel extends TestCase implements CreatesServ
         $transactionEventWithPayment = TransactionEvent::factory()->for(Payment::factory()->create($usingServiceables))->create(['status_code' => CheckoutStatus::AUTHORIZED]);
         $this->assertInstanceOf(Payment::class, $transactionEventWithPayment->payment);
 
-        ServiceConfig::find('checkout')->set('models.' . Payment::class, TestPayment::class);
+        $this->checkoutConfig->set('models.' . Payment::class, TestPayment::class);
         $transactionEventWithOverriddenPayment = TransactionEvent::factory()->for(Payment::factory()->create($usingServiceables))->create(['status_code' => CheckoutStatus::AUTHORIZED]);
         $this->assertInstanceOf(TestPayment::class, $transactionEventWithOverriddenPayment->payment);
     }
@@ -46,7 +46,7 @@ abstract class TestTransactionEventModel extends TestCase implements CreatesServ
         $transactionEventWithTransactionable = TransactionEvent::factory()->for($paymentForTransactionEventWithTransactionable = Payment::factory()->create($usingServiceables))->for(Refund::factory()->for($paymentForTransactionEventWithTransactionable)->create(), 'transactionable')->create(['status_code' => CheckoutStatus::AUTHORIZED]);
         $this->assertInstanceOf(Refund::class, $transactionEventWithTransactionable->transactionable);
 
-        ServiceConfig::find('checkout')->set('models.' . Dispute::class, TestDispute::class);
+        $this->checkoutConfig->set('models.' . Dispute::class, TestDispute::class);
         $transactionEventWithOverriddenTransactionable = TransactionEvent::factory()->for($paymentForTransactionEventWithOverriddenTransactionable = Payment::factory()->create($usingServiceables))->create(['status_code' => CheckoutStatus::AUTHORIZED]);
         $transactionEventWithOverriddenTransactionable->transactionable()->associate(transform(Dispute::factory()->for($paymentForTransactionEventWithOverriddenTransactionable)->create(), fn ($dispute) => TestDispute::find($dispute->id)));
         $this->assertInstanceOf(TestDispute::class, $transactionEventWithOverriddenTransactionable->transactionable);

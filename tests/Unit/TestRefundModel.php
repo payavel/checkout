@@ -25,7 +25,7 @@ abstract class TestRefundModel extends TestCase implements CreatesServiceables
         $refundWithPayment = Refund::factory()->for(Payment::factory()->create($usingServiceables))->create();
         $this->assertInstanceOf(Payment::class, $refundWithPayment->payment);
 
-        ServiceConfig::find('checkout')->set('models.' . Payment::class, TestPayment::class);
+        $this->checkoutConfig->set('models.' . Payment::class, TestPayment::class);
         $refundWithOverriddenPayment = Refund::factory()->for(Payment::factory()->create($usingServiceables))->create();
         $this->assertInstanceOf(TestPayment::class, $refundWithOverriddenPayment->payment);
     }
@@ -45,7 +45,7 @@ abstract class TestRefundModel extends TestCase implements CreatesServiceables
         $this->assertCount(2, $refundWith2TransactionEvents->transactionEvents);
         $this->assertContainsOnlyInstancesOf(TransactionEvent::class, $refundWith2TransactionEvents->transactionEvents);
 
-        ServiceConfig::find('checkout')->set('models.' . TransactionEvent::class, TestTransactionEvent::class);
+        $this->checkoutConfig->set('models.' . TransactionEvent::class, TestTransactionEvent::class);
         $refundWith3OverriddenTransactionEvents = Refund::factory()->for($paymentForRefundWith3TransactionEvents = Payment::factory()->create($usingServiceables))->hasTransactionEvents(3, ['payment_id' => $paymentForRefundWith3TransactionEvents->id])->create();
         $this->assertCount(3, $refundWith3OverriddenTransactionEvents->transactionEvents);
         $this->assertContainsOnlyInstancesOf(TestTransactionEvent::class, $refundWith3OverriddenTransactionEvents->transactionEvents);
