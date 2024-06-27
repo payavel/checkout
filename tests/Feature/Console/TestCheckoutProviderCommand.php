@@ -16,15 +16,15 @@ abstract class TestCheckoutProviderCommand extends TestCase implements CreatesSe
     {
         $provider = $this->createProvider($this->checkoutConfig);
 
-        $gateway = $this->gatewayPath($this->checkoutConfig, $provider);
+        $providerGatewayPath = $this->gatewayPath($this->checkoutConfig, $provider);
 
         $ds = DIRECTORY_SEPARATOR;
         $this->artisan('checkout:provider', [
             'provider' => $provider->getName(),
             '--id' => $provider->getId(),
         ])
-            ->expectsOutputToContain("Gateway [app{$ds}{$gateway->request}] created successfully.")
-            ->expectsOutputToContain("Gateway [app{$ds}{$gateway->response}] created successfully.")
+            ->expectsOutputToContain("Gateway [app{$ds}{$providerGatewayPath->request}] created successfully.")
+            ->expectsOutputToContain("Gateway [app{$ds}{$providerGatewayPath->response}] created successfully.")
             ->assertSuccessful();
 
         $this->assertGatewayExists($this->checkoutConfig, $provider);

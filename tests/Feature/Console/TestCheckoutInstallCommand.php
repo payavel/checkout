@@ -20,10 +20,10 @@ abstract class TestCheckoutInstallCommand extends TestCase implements CreatesSer
         $provider = $this->createProvider($this->checkoutConfig);
         $account = $this->createAccount($this->checkoutConfig);
 
-        $checkoutServiceConfig = $this->configPath($this->checkoutConfig);
-        $checkoutServiceContract = $this->contractPath($this->checkoutConfig);
-        $fakeGateway = $this->gatewayPath($this->checkoutConfig);
-        $providerGateway = $this->gatewayPath($this->checkoutConfig, $provider);
+        $configPath = $this->configPath($this->checkoutConfig);
+        $contractPath = $this->contractPath($this->checkoutConfig);
+        $fakeGatewayPath = $this->gatewayPath($this->checkoutConfig);
+        $providerGatewayPath = $this->gatewayPath($this->checkoutConfig, $provider);
 
         $ds = DIRECTORY_SEPARATOR;
         $this->artisan('checkout:install')
@@ -34,30 +34,30 @@ abstract class TestCheckoutInstallCommand extends TestCase implements CreatesSer
             ->expectsQuestion("How should the {$this->checkoutConfig->name} account be named?", $account->getName())
             ->expectsQuestion("How should the {$this->checkoutConfig->name} account be identified?", $account->getId())
             ->expectsConfirmation("Would you like to add another {$this->checkoutConfig->name} account?", 'no')
-            ->expectsOutputToContain("Config [config{$ds}{$checkoutServiceConfig->orchestration}] created successfully.")
-            ->expectsOutputToContain("Config [config{$ds}{$checkoutServiceConfig->service}] created successfully.")
-            ->expectsOutputToContain("Contract [app{$ds}{$checkoutServiceContract->requester}] created successfully.")
-            ->expectsOutputToContain("Contract [app{$ds}{$checkoutServiceContract->responder}] created successfully.")
-            ->expectsOutputToContain("Gateway [app{$ds}{$fakeGateway->request}] created successfully.")
-            ->expectsOutputToContain("Gateway [app{$ds}{$fakeGateway->response}] created successfully.")
-            ->expectsOutputToContain("Gateway [app{$ds}{$providerGateway->request}] created successfully.")
-            ->expectsOutputToContain("Gateway [app{$ds}{$providerGateway->response}] created successfully.")
+            ->expectsOutputToContain("Config [config{$ds}{$configPath->orchestration}] created successfully.")
+            ->expectsOutputToContain("Config [config{$ds}{$configPath->service}] created successfully.")
+            ->expectsOutputToContain("Contract [app{$ds}{$contractPath->requester}] created successfully.")
+            ->expectsOutputToContain("Contract [app{$ds}{$contractPath->responder}] created successfully.")
+            ->expectsOutputToContain("Gateway [app{$ds}{$fakeGatewayPath->request}] created successfully.")
+            ->expectsOutputToContain("Gateway [app{$ds}{$fakeGatewayPath->response}] created successfully.")
+            ->expectsOutputToContain("Gateway [app{$ds}{$providerGatewayPath->request}] created successfully.")
+            ->expectsOutputToContain("Gateway [app{$ds}{$providerGatewayPath->response}] created successfully.")
             ->assertSuccessful();
 
-        $config = require(config_path($checkoutServiceConfig->service));
+        $serviceConfig = require(config_path($configPath->service));
 
         $this->assertContractExists($this->checkoutConfig);
         $this->assertGatewayExists($this->checkoutConfig);
         $this->assertGatewayExists($this->checkoutConfig, $provider);
 
-        $this->assertEquals($provider->getId(), $config['defaults']['provider']);
-        $this->assertEquals($account->getId(), $config['defaults']['account']);
+        $this->assertEquals($provider->getId(), $serviceConfig['defaults']['provider']);
+        $this->assertEquals($account->getId(), $serviceConfig['defaults']['account']);
 
         $this->makeSureProviderExists($provider);
         $this->makeSureAccountExists($account);
         $this->makeSureProviderIsLinkedToAccount($provider, $account);
 
-        $this->assertTrue(unlink(config_path($checkoutServiceConfig->service)));
+        $this->assertTrue(unlink(config_path($configPath->service)));
     }
 
     protected function makeSureProviderExists(Providable $provider)
