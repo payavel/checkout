@@ -25,7 +25,7 @@ abstract class TestPaymentTypeModel extends TestCase implements CreatesServiceab
         $this->assertCount(2, $paymentTypeWith2Rails->rails);
         $this->assertContainsOnlyInstancesOf(PaymentRail::class, $paymentTypeWith2Rails->rails);
 
-        ServiceConfig::find('checkout')->set('models.' . PaymentRail::class, TestPaymentRail::class);
+        $this->checkoutConfig->set('models.' . PaymentRail::class, TestPaymentRail::class);
         $paymentTypeWith3OverriddenRails = PaymentType::factory()->hasRails(3)->create();
         $this->assertCount(3, $paymentTypeWith3OverriddenRails->rails);
         $this->assertContainsOnlyInstancesOf(TestPaymentRail::class, $paymentTypeWith3OverriddenRails->rails);
@@ -46,7 +46,7 @@ abstract class TestPaymentTypeModel extends TestCase implements CreatesServiceab
         $this->assertCount(2, $paymentTypeWith2Instruments->instruments);
         $this->assertContainsOnlyInstancesOf(PaymentInstrument::class, $paymentTypeWith2Instruments->instruments);
 
-        ServiceConfig::find('checkout')->set('models.' . PaymentInstrument::class, TestPaymentInstrument::class);
+        $this->checkoutConfig->set('models.' . PaymentInstrument::class, TestPaymentInstrument::class);
         $paymentTypeWith3OverriddenInstruments = PaymentType::factory()->has(PaymentInstrument::factory()->count(3)->for($wallet), 'instruments')->create();
         $this->assertCount(3, $paymentTypeWith3OverriddenInstruments->instruments);
         $this->assertContainsOnlyInstancesOf(TestPaymentInstrument::class, $paymentTypeWith3OverriddenInstruments->instruments);

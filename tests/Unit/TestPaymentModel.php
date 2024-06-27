@@ -31,7 +31,7 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
         $paymentWithRail = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(PaymentRail::class, $paymentWithRail->rail);
 
-        ServiceConfig::find('checkout')->set('models.' . PaymentRail::class, TestPaymentRail::class);
+        $this->checkoutConfig->set('models.' . PaymentRail::class, TestPaymentRail::class);
         $paymentWithOverriddenRail = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(TestPaymentRail::class, $paymentWithOverriddenRail->rail);
     }
@@ -50,7 +50,7 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
         $paymentWithInstrument = Payment::factory()->for(PaymentInstrument::factory()->for(Wallet::factory()->create($usingServiceables))->create(), 'instrument')->create($usingServiceables);
         $this->assertInstanceOf(PaymentInstrument::class, $paymentWithInstrument->instrument);
 
-        ServiceConfig::find('checkout')->set('models.' . PaymentInstrument::class, TestPaymentInstrument::class);
+        $this->checkoutConfig->set('models.' . PaymentInstrument::class, TestPaymentInstrument::class);
         $paymentWithOverriddenInstrument = Payment::factory()->for(PaymentInstrument::factory()->for(Wallet::factory()->create($usingServiceables))->create(), 'instrument')->create($usingServiceables);
         $this->assertInstanceOf(TestPaymentInstrument::class, $paymentWithOverriddenInstrument->instrument);
     }
@@ -70,7 +70,7 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
         $this->assertCount(2, $paymentWith2Events->events);
         $this->assertContainsOnlyInstancesOf(TransactionEvent::class, $paymentWith2Events->events);
 
-        ServiceConfig::find('checkout')->set('models.' . TransactionEvent::class, TestTransactionEvent::class);
+        $this->checkoutConfig->set('models.' . TransactionEvent::class, TestTransactionEvent::class);
         $paymentWith3OverriddenEvents = Payment::factory()->hasEvents(3, ['status_code' => CheckoutStatus::AUTHORIZED])->create($usingServiceables);
         $this->assertCount(3, $paymentWith3OverriddenEvents->events);
         $this->assertContainsOnlyInstancesOf(TestTransactionEvent::class, $paymentWith3OverriddenEvents->events);
@@ -91,7 +91,7 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
         $this->assertCount(2, $paymentWith2TransactionEvents->transactionEvents);
         $this->assertContainsOnlyInstancesOf(TransactionEvent::class, $paymentWith2TransactionEvents->transactionEvents);
 
-        ServiceConfig::find('checkout')->set('models.' . TransactionEvent::class, TestTransactionEvent::class);
+        $this->checkoutConfig->set('models.' . TransactionEvent::class, TestTransactionEvent::class);
         $paymentWith3OverriddenTransactionEvents = Payment::factory()->hasTransactionEvents(3)->create($usingServiceables);
         $this->assertCount(3, $paymentWith3OverriddenTransactionEvents->transactionEvents);
         $this->assertContainsOnlyInstancesOf(TestTransactionEvent::class, $paymentWith3OverriddenTransactionEvents->transactionEvents);

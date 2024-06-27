@@ -47,7 +47,7 @@ abstract class TestWalletModel extends TestCase implements CreatesServiceables
         $this->assertCount(2, $walletWith2PaymentInstruments->paymentInstruments);
         $this->assertContainsOnlyInstancesOf(PaymentInstrument::class, $walletWith2PaymentInstruments->paymentInstruments);
 
-        ServiceConfig::find('checkout')->set('models.' . PaymentInstrument::class, TestPaymentInstrument::class);
+        $this->checkoutConfig->set('models.' . PaymentInstrument::class, TestPaymentInstrument::class);
         $walletWith3OverriddenPaymentInstruments = Wallet::factory()->hasPaymentInstruments(3)->create($usingServiceables);
         $this->assertCount(3, $walletWith3OverriddenPaymentInstruments->paymentInstruments);
         $this->assertContainsOnlyInstancesOf(TestPaymentInstrument::class, $walletWith3OverriddenPaymentInstruments->paymentInstruments);

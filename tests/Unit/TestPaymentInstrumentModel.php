@@ -27,7 +27,7 @@ abstract class TestPaymentInstrumentModel extends TestCase implements CreatesSer
         $paymentInstrumentWithWallet = PaymentInstrument::factory()->for($wallet)->create();
         $this->assertInstanceOf(Wallet::class, $paymentInstrumentWithWallet->wallet);
 
-        ServiceConfig::find('checkout')->set('models.' . Wallet::class, TestWallet::class);
+        $this->checkoutConfig->set('models.' . Wallet::class, TestWallet::class);
         $paymentInstrumentWithOverriddenWallet = PaymentInstrument::factory()->for($wallet)->create();
         $this->assertInstanceOf(TestWallet::class, $paymentInstrumentWithOverriddenWallet->wallet);
     }
@@ -43,7 +43,7 @@ abstract class TestPaymentInstrumentModel extends TestCase implements CreatesSer
         $paymentInstrumentWithType = PaymentInstrument::factory()->for($wallet)->create();
         $this->assertInstanceOf(PaymentType::class, $paymentInstrumentWithType->type);
 
-        ServiceConfig::find('checkout')->set('models.' . PaymentType::class, TestPaymentType::class);
+        $this->checkoutConfig->set('models.' . PaymentType::class, TestPaymentType::class);
         $paymentInstrumentWithOverriddenType = PaymentInstrument::factory()->for($wallet)->create();
         $this->assertInstanceOf(TestPaymentType::class, $paymentInstrumentWithOverriddenType->type);
     }
@@ -63,7 +63,7 @@ abstract class TestPaymentInstrumentModel extends TestCase implements CreatesSer
         $this->assertCount(2, $paymentInstrumentWith2Payments->payments);
         $this->assertContainsOnlyInstancesOf(Payment::class, $paymentInstrumentWith2Payments->payments);
 
-        ServiceConfig::find('checkout')->set('models.' . Payment::class, TestPayment::class);
+        $this->checkoutConfig->set('models.' . Payment::class, TestPayment::class);
         $paymentInstrumentWith3OverriddenPayments = PaymentInstrument::factory()->for($wallet)->hasPayments(3)->create();
         $this->assertCount(3, $paymentInstrumentWith3OverriddenPayments->payments);
         $this->assertContainsOnlyInstancesOf(TestPayment::class, $paymentInstrumentWith3OverriddenPayments->payments);
