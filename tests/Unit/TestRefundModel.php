@@ -18,8 +18,8 @@ abstract class TestRefundModel extends TestCase implements CreatesServiceables
     public function retrieve_refund_payment()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $refundWithPayment = Refund::factory()->for(Payment::factory()->create($usingServiceables))->create();
@@ -34,8 +34,8 @@ abstract class TestRefundModel extends TestCase implements CreatesServiceables
     public function retrieve_refund_transaction_events()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $refund = Refund::factory()->for(Payment::factory()->create($usingServiceables))->create();

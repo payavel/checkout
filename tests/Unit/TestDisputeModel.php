@@ -18,8 +18,8 @@ abstract class TestDisputeModel extends TestCase implements CreatesServiceables
     public function retrieve_dispute_payment()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getID(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getID(),
         ];
 
         $disputeWithPayment = Dispute::factory()->for(Payment::factory()->create($usingServiceables))->create();
@@ -34,8 +34,8 @@ abstract class TestDisputeModel extends TestCase implements CreatesServiceables
     public function retrieve_dispute_transaction_events()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getID(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getID(),
         ];
 
         $dispute = Dispute::factory()->for(Payment::factory()->create($usingServiceables))->create();

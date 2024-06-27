@@ -24,8 +24,8 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
     public function retrieve_payment_rail()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $paymentWithRail = Payment::factory()->create($usingServiceables);
@@ -40,8 +40,8 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
     public function retrieve_payment_instrument()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $payment = Payment::factory()->create($usingServiceables);
@@ -59,8 +59,8 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
     public function retrieve_payment_events()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $payment = Payment::factory()->create($usingServiceables);
@@ -80,8 +80,8 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
     public function retrieve_payment_transaction_events()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $payment = Payment::factory()->create($usingServiceables);
@@ -101,8 +101,8 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
     public function retrieve_payment_providable()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $payment = Payment::factory()->create($usingServiceables);
@@ -113,8 +113,8 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
     public function retrieve_payment_accountable()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $payment = Payment::factory()->create($usingServiceables);

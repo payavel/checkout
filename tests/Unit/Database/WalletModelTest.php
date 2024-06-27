@@ -22,8 +22,8 @@ class WalletModelTest extends TestWalletModel
     public function retrieve_wallet_provider()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $walletWithProvider = Wallet::factory()->create($usingServiceables);
@@ -38,8 +38,8 @@ class WalletModelTest extends TestWalletModel
     public function retrieve_wallet_account()
     {
         $usingServiceables = [
-            'provider_id' => $this->createProvider($this->checkoutService)->getId(),
-            'account_id' => $this->createAccount($this->checkoutService)->getId(),
+            'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $walletWithAccount = Wallet::factory()->create($usingServiceables);

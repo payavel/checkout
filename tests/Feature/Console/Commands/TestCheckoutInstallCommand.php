@@ -17,23 +17,23 @@ abstract class TestCheckoutInstallCommand extends TestCase implements CreatesSer
     #[Test]
     public function checkout_install_command_injects_checkout_service_into_orchestrate_service_command()
     {
-        $provider = $this->createProvider($this->checkoutService);
-        $account = $this->createAccount($this->checkoutService);
+        $provider = $this->createProvider($this->checkoutConfig);
+        $account = $this->createAccount($this->checkoutConfig);
 
-        $checkoutServiceConfig = $this->configPath($this->checkoutService);
-        $checkoutServiceContract = $this->contractPath($this->checkoutService);
-        $fakeGateway = $this->gatewayPath($this->checkoutService);
-        $providerGateway = $this->gatewayPath($this->checkoutService, $provider);
+        $checkoutServiceConfig = $this->configPath($this->checkoutConfig);
+        $checkoutServiceContract = $this->contractPath($this->checkoutConfig);
+        $fakeGateway = $this->gatewayPath($this->checkoutConfig);
+        $providerGateway = $this->gatewayPath($this->checkoutConfig, $provider);
 
         $ds = DIRECTORY_SEPARATOR;
         $this->artisan('checkout:install')
-            ->expectsQuestion("Choose a driver for the {$this->checkoutService->name} service.", Config::get('orchestration.defaults.driver'))
-            ->expectsQuestion("How should the {$this->checkoutService->name} provider be named?", $provider->getName())
-            ->expectsQuestion("How should the {$this->checkoutService->name} provider be identified?", $provider->getId())
-            ->expectsConfirmation("Would you like to add another {$this->checkoutService->name} provider?", 'no')
-            ->expectsQuestion("How should the {$this->checkoutService->name} account be named?", $account->getName())
-            ->expectsQuestion("How should the {$this->checkoutService->name} account be identified?", $account->getId())
-            ->expectsConfirmation("Would you like to add another {$this->checkoutService->name} account?", 'no')
+            ->expectsQuestion("Choose a driver for the {$this->checkoutConfig->name} service.", Config::get('orchestration.defaults.driver'))
+            ->expectsQuestion("How should the {$this->checkoutConfig->name} provider be named?", $provider->getName())
+            ->expectsQuestion("How should the {$this->checkoutConfig->name} provider be identified?", $provider->getId())
+            ->expectsConfirmation("Would you like to add another {$this->checkoutConfig->name} provider?", 'no')
+            ->expectsQuestion("How should the {$this->checkoutConfig->name} account be named?", $account->getName())
+            ->expectsQuestion("How should the {$this->checkoutConfig->name} account be identified?", $account->getId())
+            ->expectsConfirmation("Would you like to add another {$this->checkoutConfig->name} account?", 'no')
             ->expectsOutputToContain("Config [config{$ds}{$checkoutServiceConfig->orchestration}] created successfully.")
             ->expectsOutputToContain("Config [config{$ds}{$checkoutServiceConfig->service}] created successfully.")
             ->expectsOutputToContain("Contract [app{$ds}{$checkoutServiceContract->requester}] created successfully.")
@@ -46,9 +46,9 @@ abstract class TestCheckoutInstallCommand extends TestCase implements CreatesSer
 
         $config = require(config_path($checkoutServiceConfig->service));
 
-        $this->assertContractExists($this->checkoutService);
-        $this->assertGatewayExists($this->checkoutService);
-        $this->assertGatewayExists($this->checkoutService, $provider);
+        $this->assertContractExists($this->checkoutConfig);
+        $this->assertGatewayExists($this->checkoutConfig);
+        $this->assertGatewayExists($this->checkoutConfig, $provider);
 
         $this->assertEquals($provider->getId(), $config['defaults']['provider']);
         $this->assertEquals($account->getId(), $config['defaults']['account']);
