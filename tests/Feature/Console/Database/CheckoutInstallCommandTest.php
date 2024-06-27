@@ -1,8 +1,9 @@
 <?php
 
-namespace Payavel\Checkout\Tests\Feature\Console\Commands;
+namespace Payavel\Checkout\Tests\Feature\Console\Database;
 
 use Illuminate\Support\Str;
+use Payavel\Checkout\Tests\Feature\Console\TestCheckoutInstallCommand;
 use Payavel\Orchestration\Contracts\Accountable;
 use Payavel\Orchestration\Contracts\Providable;
 use Payavel\Orchestration\Models\Account;
@@ -10,7 +11,7 @@ use Payavel\Orchestration\Models\Provider;
 use Payavel\Orchestration\Tests\Traits\CreatesDatabaseServiceables;
 use Payavel\Orchestration\Tests\Traits\SetsDatabaseDriver;
 
-class DatabaseCheckoutInstallCommandTest extends TestCheckoutInstallCommand
+class CheckoutInstallCommandTest extends TestCheckoutInstallCommand
 {
     use CreatesDatabaseServiceables;
     use SetsDatabaseDriver;

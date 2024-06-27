@@ -1,14 +1,15 @@
 <?php
 
-namespace Payavel\Checkout\Tests\Feature\Console\Commands;
+namespace Payavel\Checkout\Tests\Feature\Console\Config;
 
 use Illuminate\Support\Str;
+use Payavel\Checkout\Tests\Feature\Console\TestCheckoutInstallCommand;
 use Payavel\Orchestration\Contracts\Accountable;
 use Payavel\Orchestration\Contracts\Providable;
 use Payavel\Orchestration\Tests\Traits\CreatesConfigServiceables;
 use Payavel\Orchestration\Tests\Traits\SetsConfigDriver;
 
-class ConfigCheckoutInstallCommandTest extends TestCheckoutInstallCommand
+class CheckoutInstallCommandTest extends TestCheckoutInstallCommand
 {
     use CreatesConfigServiceables;
     use SetsConfigDriver;
