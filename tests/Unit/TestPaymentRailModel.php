@@ -8,7 +8,7 @@ use Payavel\Checkout\Models\PaymentType;
 use Payavel\Checkout\Tests\Models\TestPayment;
 use Payavel\Checkout\Tests\Models\TestPaymentType;
 use Payavel\Checkout\Tests\TestCase;
-use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Fluent\ServiceConfig;
 use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -47,7 +47,7 @@ abstract class TestPaymentRailModel extends TestCase implements CreatesServiceab
         $paymentRail = PaymentRail::factory()->create();
         $this->assertInstanceOf(PaymentType::class, $paymentRail->parentType);
 
-        ServiceConfig::set('checkout', 'models.' . PaymentType::class, TestPaymentType::class);
+        ServiceConfig::find('checkout')->set('models.' . PaymentType::class, TestPaymentType::class);
         $paymentRailWithOverriddenParentType = PaymentRail::factory()->create();
         $this->assertInstanceOf(TestPaymentType::class, $paymentRailWithOverriddenParentType->parentType);
     }
@@ -58,7 +58,7 @@ abstract class TestPaymentRailModel extends TestCase implements CreatesServiceab
         $paymentRail = PaymentRail::factory()->create();
         $this->assertInstanceOf(PaymentType::class, $paymentRail->type);
 
-        ServiceConfig::set('checkout', 'models.' . PaymentType::class, TestPaymentType::class);
+        ServiceConfig::find('checkout')->set('models.' . PaymentType::class, TestPaymentType::class);
         $paymentRailWithOverriddenType = PaymentRail::factory()->create();
         $this->assertInstanceOf(TestPaymentType::class, $paymentRailWithOverriddenType->type);
     }
@@ -78,7 +78,7 @@ abstract class TestPaymentRailModel extends TestCase implements CreatesServiceab
         $this->assertCount(2, $paymentRailWith2Payments->payments);
         $this->assertContainsOnlyInstancesOf(Payment::class, $paymentRailWith2Payments->payments);
 
-        ServiceConfig::set('checkout', 'models.' . Payment::class, TestPayment::class);
+        ServiceConfig::find('checkout')->set('models.' . Payment::class, TestPayment::class);
         $paymentRailWith3OverriddenPayments = PaymentRail::factory()->hasPayments(3, $usingServiceables)->create();
         $this->assertCount(3, $paymentRailWith3OverriddenPayments->payments);
         $this->assertContainsOnlyInstancesOf(TestPayment::class, $paymentRailWith3OverriddenPayments->payments);

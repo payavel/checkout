@@ -8,7 +8,7 @@ use Payavel\Checkout\Tests\Models\TestProvider;
 use Payavel\Checkout\Tests\Unit\TestPaymentModel;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
-use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Fluent\ServiceConfig;
 use Payavel\Orchestration\Tests\Traits\CreatesDatabaseServiceables;
 use Payavel\Orchestration\Tests\Traits\SetsDatabaseDriver;
 use PHPUnit\Framework\Attributes\Test;
@@ -29,7 +29,7 @@ class PaymentModelTest extends TestPaymentModel
         $paymentWithProvider = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(Provider::class, $paymentWithProvider->provider);
 
-        ServiceConfig::set('checkout', 'models.' . Provider::class, TestProvider::class);
+        ServiceConfig::find('checkout')->set('models.' . Provider::class, TestProvider::class);
         $paymentWithOverriddenProvider = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(TestProvider::class, $paymentWithOverriddenProvider->provider);
     }
@@ -45,7 +45,7 @@ class PaymentModelTest extends TestPaymentModel
         $paymentWithAccount = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(Account::class, $paymentWithAccount->account);
 
-        ServiceConfig::set('checkout', 'models.' . Account::class, TestAccount::class);
+        ServiceConfig::find('checkout')->set('models.' . Account::class, TestAccount::class);
         $paymentWithOverriddenAccount = Payment::factory()->create($usingServiceables);
         $this->assertInstanceOf(TestAccount::class, $paymentWithOverriddenAccount->account);
     }

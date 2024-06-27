@@ -8,7 +8,7 @@ use Payavel\Checkout\Models\Dispute;
 use Payavel\Checkout\Models\Payment;
 use Payavel\Checkout\Models\Refund;
 use Payavel\Checkout\Models\TransactionEvent;
-use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Fluent\ServiceConfig;
 
 class TransactionEventFactory extends Factory
 {
@@ -38,7 +38,7 @@ class TransactionEventFactory extends Factory
      */
     public function configure()
     {
-        $this->model = ServiceConfig::get('checkout', 'models.' . $this->model, $this->model);
+        $this->model = ServiceConfig::find('checkout')->get('models.' . $this->model, $this->model);
 
         return $this->afterMaking(function (TransactionEvent $transactionEvent) {
             if (is_null($transactionEvent->payment_id)) {

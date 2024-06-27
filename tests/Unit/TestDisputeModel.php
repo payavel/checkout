@@ -8,7 +8,7 @@ use Payavel\Checkout\Models\TransactionEvent;
 use Payavel\Checkout\Tests\Models\TestPayment;
 use Payavel\Checkout\Tests\Models\TestTransactionEvent;
 use Payavel\Checkout\Tests\TestCase;
-use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Fluent\ServiceConfig;
 use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -25,7 +25,7 @@ abstract class TestDisputeModel extends TestCase implements CreatesServiceables
         $disputeWithPayment = Dispute::factory()->for(Payment::factory()->create($usingServiceables))->create();
         $this->assertInstanceOf(Payment::class, $disputeWithPayment->payment);
 
-        ServiceConfig::set('checkout', 'models.' . Payment::class, TestPayment::class);
+        ServiceConfig::find('checkout')->set('models.' . Payment::class, TestPayment::class);
         $disputeWithOverriddenPayment = Dispute::factory()->for(Payment::factory()->create($usingServiceables))->create();
         $this->assertInstanceOf(TestPayment::class, $disputeWithOverriddenPayment->payment);
     }
@@ -45,7 +45,7 @@ abstract class TestDisputeModel extends TestCase implements CreatesServiceables
         $this->assertCount(2, $disputeWith2TransactionEvents->transactionEvents);
         $this->assertContainsOnlyInstancesOf(TransactionEvent::class, $disputeWith2TransactionEvents->transactionEvents);
 
-        ServiceConfig::set('checkout', 'models.' . TransactionEvent::class, TestTransactionEvent::class);
+        ServiceConfig::find('checkout')->set('models.' . TransactionEvent::class, TestTransactionEvent::class);
         $disputeWith3OverriddenTransactionEvents = Dispute::factory()->for($paymentForDisputeWith3TransactionEvents = Payment::factory()->create($usingServiceables))->hasTransactionEvents(3, ['payment_id' => $paymentForDisputeWith3TransactionEvents->id])->create();
         $this->assertCount(3, $disputeWith3OverriddenTransactionEvents->transactionEvents);
         $this->assertContainsOnlyInstancesOf(TestTransactionEvent::class, $disputeWith3OverriddenTransactionEvents->transactionEvents);

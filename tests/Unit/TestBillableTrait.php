@@ -6,7 +6,7 @@ use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\Tests\Models\TestWallet;
 use Payavel\Checkout\Tests\TestCase;
 use Payavel\Checkout\Tests\User;
-use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Fluent\ServiceConfig;
 use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -25,7 +25,7 @@ abstract class TestBillableTrait extends TestCase implements CreatesServiceables
         $this->assertCount(2, $billableWith2Wallets->wallets);
         $this->assertContainsOnlyInstancesOf(Wallet::class, $billableWith2Wallets->wallets);
 
-        ServiceConfig::set('checkout', 'models.'.Wallet::class, TestWallet::class);
+        ServiceConfig::find('checkout')->set('models.'.Wallet::class, TestWallet::class);
         $billableWith3OverriddenWallets = User::factory()->has(Wallet::factory()->count(3)->sequence(fn () => [
             'provider_id' => $this->createProvider($this->checkoutService)->getId(),
             'account_id' => $this->createAccount($this->checkoutService)->getId(),

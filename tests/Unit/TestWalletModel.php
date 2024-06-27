@@ -14,7 +14,7 @@ use Payavel\Orchestration\Contracts\Accountable;
 use Payavel\Orchestration\Contracts\Providable;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
-use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Fluent\ServiceConfig;
 use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -51,7 +51,7 @@ abstract class TestWalletModel extends TestCase implements CreatesServiceables
         $this->assertCount(2, $walletWith2PaymentInstruments->paymentInstruments);
         $this->assertContainsOnlyInstancesOf(PaymentInstrument::class, $walletWith2PaymentInstruments->paymentInstruments);
 
-        ServiceConfig::set('checkout', 'models.' . PaymentInstrument::class, TestPaymentInstrument::class);
+        ServiceConfig::find('checkout')->set('models.' . PaymentInstrument::class, TestPaymentInstrument::class);
         $walletWith3OverriddenPaymentInstruments = Wallet::factory()->hasPaymentInstruments(3)->create($usingServiceables);
         $this->assertCount(3, $walletWith3OverriddenPaymentInstruments->paymentInstruments);
         $this->assertContainsOnlyInstancesOf(TestPaymentInstrument::class, $walletWith3OverriddenPaymentInstruments->paymentInstruments);

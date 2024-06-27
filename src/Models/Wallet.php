@@ -7,7 +7,7 @@ use Payavel\Orchestration\Contracts\Orchestrable;
 use Payavel\Orchestration\Traits\OrchestratesService;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
-use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Fluent\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class Wallet extends Model implements Orchestrable
@@ -63,7 +63,7 @@ class Wallet extends Model implements Orchestrable
      */
     public function provider()
     {
-        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . Provider::class, Provider::class));
+        return $this->belongsTo(ServiceConfig::find('checkout')->get('models.' . Provider::class, Provider::class));
     }
 
     /**
@@ -73,7 +73,7 @@ class Wallet extends Model implements Orchestrable
      */
     public function account()
     {
-        return $this->belongsTo(ServiceConfig::get('checkout', 'models.' . Account::class, Account::class));
+        return $this->belongsTo(ServiceConfig::find('checkout')->get('models.' . Account::class, Account::class));
     }
 
     /**
@@ -83,7 +83,7 @@ class Wallet extends Model implements Orchestrable
      */
     public function paymentInstruments()
     {
-        return $this->hasMany(ServiceConfig::get('checkout', 'models.' . PaymentInstrument::class, PaymentInstrument::class));
+        return $this->hasMany(ServiceConfig::find('checkout')->get('models.' . PaymentInstrument::class, PaymentInstrument::class));
     }
 
     /**

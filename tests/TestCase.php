@@ -5,7 +5,7 @@ namespace Payavel\Checkout\Tests;
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\CheckoutServiceProvider;
 use Payavel\Checkout\Traits\Billable as BillableTrait;
-use Payavel\Orchestration\Contracts\Serviceable;
+use Payavel\Orchestration\Fluent\ServiceConfig;
 use Payavel\Orchestration\OrchestrationServiceProvider;
 use Payavel\Orchestration\Tests\Traits\CreatesServices;
 
@@ -13,7 +13,7 @@ class TestCase extends \Payavel\Orchestration\Tests\TestCase
 {
     use CreatesServices;
 
-    protected Serviceable $checkoutService;
+    protected ServiceConfig $checkoutService;
 
     protected function getPackageProviders($app)
     {
@@ -30,6 +30,7 @@ class TestCase extends \Payavel\Orchestration\Tests\TestCase
             'driver' => 'sqlite',
             'database' => ':memory:',
         ]);
+        $app['config']->set('orchestration.services.checkout', 'checkout');
     }
 
     /**
@@ -41,7 +42,7 @@ class TestCase extends \Payavel\Orchestration\Tests\TestCase
     {
         parent::setUp();
 
-        $this->checkoutService = $this->createService([
+        $this->checkoutService = $this->createServiceConfig([
             'name' => 'Checkout',
             'id' => 'checkout',
         ]);

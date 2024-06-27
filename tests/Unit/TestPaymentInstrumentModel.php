@@ -10,7 +10,7 @@ use Payavel\Checkout\Tests\Models\TestPayment;
 use Payavel\Checkout\Tests\Models\TestPaymentType;
 use Payavel\Checkout\Tests\Models\TestWallet;
 use Payavel\Checkout\Tests\TestCase;
-use Payavel\Orchestration\Support\ServiceConfig;
+use Payavel\Orchestration\Fluent\ServiceConfig;
 use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -27,7 +27,7 @@ abstract class TestPaymentInstrumentModel extends TestCase implements CreatesSer
         $paymentInstrumentWithWallet = PaymentInstrument::factory()->for($wallet)->create();
         $this->assertInstanceOf(Wallet::class, $paymentInstrumentWithWallet->wallet);
 
-        ServiceConfig::set('checkout', 'models.' . Wallet::class, TestWallet::class);
+        ServiceConfig::find('checkout')->set('models.' . Wallet::class, TestWallet::class);
         $paymentInstrumentWithOverriddenWallet = PaymentInstrument::factory()->for($wallet)->create();
         $this->assertInstanceOf(TestWallet::class, $paymentInstrumentWithOverriddenWallet->wallet);
     }
@@ -43,7 +43,7 @@ abstract class TestPaymentInstrumentModel extends TestCase implements CreatesSer
         $paymentInstrumentWithType = PaymentInstrument::factory()->for($wallet)->create();
         $this->assertInstanceOf(PaymentType::class, $paymentInstrumentWithType->type);
 
-        ServiceConfig::set('checkout', 'models.' . PaymentType::class, TestPaymentType::class);
+        ServiceConfig::find('checkout')->set('models.' . PaymentType::class, TestPaymentType::class);
         $paymentInstrumentWithOverriddenType = PaymentInstrument::factory()->for($wallet)->create();
         $this->assertInstanceOf(TestPaymentType::class, $paymentInstrumentWithOverriddenType->type);
     }
@@ -63,7 +63,7 @@ abstract class TestPaymentInstrumentModel extends TestCase implements CreatesSer
         $this->assertCount(2, $paymentInstrumentWith2Payments->payments);
         $this->assertContainsOnlyInstancesOf(Payment::class, $paymentInstrumentWith2Payments->payments);
 
-        ServiceConfig::set('checkout', 'models.' . Payment::class, TestPayment::class);
+        ServiceConfig::find('checkout')->set('models.' . Payment::class, TestPayment::class);
         $paymentInstrumentWith3OverriddenPayments = PaymentInstrument::factory()->for($wallet)->hasPayments(3)->create();
         $this->assertCount(3, $paymentInstrumentWith3OverriddenPayments->payments);
         $this->assertContainsOnlyInstancesOf(TestPayment::class, $paymentInstrumentWith3OverriddenPayments->payments);
