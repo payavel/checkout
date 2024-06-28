@@ -9,7 +9,7 @@ use Payavel\Checkout\Models\Wallet;
 use Payavel\Checkout\Tests\Models\TestPaymentInstrument;
 use Payavel\Checkout\Tests\Models\TestPaymentRail;
 use Payavel\Checkout\Tests\TestCase;
-use Payavel\Orchestration\Fluent\ServiceConfig;
+use Payavel\Orchestration\ServiceConfig;
 use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 

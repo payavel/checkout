@@ -5,7 +5,7 @@ namespace Payavel\Checkout\Tests;
 use Payavel\Checkout\Contracts\Billable;
 use Payavel\Checkout\CheckoutServiceProvider;
 use Payavel\Checkout\Traits\Billable as BillableTrait;
-use Payavel\Orchestration\Fluent\ServiceConfig;
+use Payavel\Orchestration\ServiceConfig;
 use Payavel\Orchestration\OrchestrationServiceProvider;
 use Payavel\Orchestration\Tests\Traits\CreatesServices;
 

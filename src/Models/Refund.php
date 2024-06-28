@@ -3,7 +3,7 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Orchestration\Fluent\ServiceConfig;
+use Payavel\Orchestration\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class Refund extends Model

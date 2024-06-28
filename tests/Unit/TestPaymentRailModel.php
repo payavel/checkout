@@ -8,7 +8,7 @@ use Payavel\Checkout\Models\PaymentType;
 use Payavel\Checkout\Tests\Models\TestPayment;
 use Payavel\Checkout\Tests\Models\TestPaymentType;
 use Payavel\Checkout\Tests\TestCase;
-use Payavel\Orchestration\Fluent\ServiceConfig;
+use Payavel\Orchestration\ServiceConfig;
 use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 
