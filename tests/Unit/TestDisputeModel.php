@@ -8,7 +8,7 @@ use Payavel\Checkout\Models\TransactionEvent;
 use Payavel\Checkout\Tests\Models\TestPayment;
 use Payavel\Checkout\Tests\Models\TestTransactionEvent;
 use Payavel\Checkout\Tests\TestCase;
-use Payavel\Orchestration\Fluent\ServiceConfig;
+use Payavel\Orchestration\ServiceConfig;
 use Payavel\Orchestration\Tests\Contracts\CreatesServiceables;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -19,7 +19,7 @@ abstract class TestDisputeModel extends TestCase implements CreatesServiceables
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
-            'account_id' => $this->createAccount($this->checkoutConfig)->getID(),
+            'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ];
 
         $disputeWithPayment = Dispute::factory()->for(Payment::factory()->create($usingServiceables))->create();

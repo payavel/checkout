@@ -3,7 +3,7 @@
 namespace Payavel\Checkout\Traits;
 
 use Payavel\Checkout\Models\Wallet;
-use Payavel\Orchestration\Fluent\ServiceConfig;
+use Payavel\Orchestration\ServiceConfig;
 
 trait Billable
 {

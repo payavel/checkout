@@ -8,7 +8,7 @@ use Payavel\Checkout\Models\Dispute;
 use Payavel\Checkout\Models\Payment;
 use Payavel\Checkout\Models\Refund;
 use Payavel\Checkout\Models\TransactionEvent;
-use Payavel\Orchestration\Fluent\ServiceConfig;
+use Payavel\Orchestration\ServiceConfig;
 
 class TransactionEventFactory extends Factory
 {

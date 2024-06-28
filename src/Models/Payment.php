@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Payavel\Orchestration\Contracts\Orchestrable;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
-use Payavel\Orchestration\Fluent\ServiceConfig;
+use Payavel\Orchestration\ServiceConfig;
 use Payavel\Orchestration\Traits\OrchestratesService;
 use Payavel\Orchestration\Traits\HasFactory;
 
