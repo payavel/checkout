@@ -3,10 +3,10 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Payavel\Checkout\Facades\Checkout;
 use Payavel\Orchestration\Contracts\Orchestrable;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
-use Payavel\Orchestration\ServiceConfig;
 use Payavel\Orchestration\Traits\OrchestratesService;
 use Payavel\Orchestration\Traits\HasFactory;
 
@@ -64,7 +64,7 @@ class Payment extends Model implements Orchestrable
      */
     public function provider()
     {
-        return $this->belongsTo(ServiceConfig::find('checkout')->get('models.' . Provider::class, Provider::class));
+        return $this->belongsTo(Checkout::config('models.' . Provider::class, Provider::class));
     }
 
     /**
@@ -74,7 +74,7 @@ class Payment extends Model implements Orchestrable
      */
     public function account()
     {
-        return $this->belongsTo(ServiceConfig::find('checkout')->get('models.' . Account::class, Account::class));
+        return $this->belongsTo(Checkout::config('models.' . Account::class, Account::class));
     }
 
     /**
@@ -84,7 +84,7 @@ class Payment extends Model implements Orchestrable
      */
     public function rail()
     {
-        return $this->belongsTo(ServiceConfig::find('checkout')->get('models.' . PaymentRail::class, PaymentRail::class));
+        return $this->belongsTo(Checkout::config('models.' . PaymentRail::class, PaymentRail::class));
     }
 
     /**
@@ -94,7 +94,7 @@ class Payment extends Model implements Orchestrable
      */
     public function instrument()
     {
-        return $this->belongsTo(ServiceConfig::find('checkout')->get('models.' . PaymentInstrument::class, PaymentInstrument::class));
+        return $this->belongsTo(Checkout::config('models.' . PaymentInstrument::class, PaymentInstrument::class));
     }
 
     /**
@@ -104,7 +104,7 @@ class Payment extends Model implements Orchestrable
      */
     public function events()
     {
-        return $this->hasMany(ServiceConfig::find('checkout')->get('models.' . TransactionEvent::class, TransactionEvent::class));
+        return $this->hasMany(Checkout::config('models.' . TransactionEvent::class, TransactionEvent::class));
     }
 
     /**
@@ -114,7 +114,7 @@ class Payment extends Model implements Orchestrable
      */
     public function transactionEvents()
     {
-        return $this->morphMany(ServiceConfig::find('checkout')->get('models.' . TransactionEvent::class, TransactionEvent::class), 'transactionable');
+        return $this->morphMany(Checkout::config('models.' . TransactionEvent::class, TransactionEvent::class), 'transactionable');
     }
 
     /**
