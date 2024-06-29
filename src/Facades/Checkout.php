@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Facade;
 use Payavel\Checkout\CheckoutGateway;
 
 /**
+ * @method static mixed config($key, $default)
  * @method static \Payavel\Checkout\CheckoutGateway provider($provider)
  * @method static \Payavel\Orchestration\Contracts\Providable getProvider()
  * @method static void setProvider($provider)
@@ -13,8 +14,8 @@ use Payavel\Checkout\CheckoutGateway;
  * @method static \Payavel\Checkout\CheckoutGateway account($account)
  * @method static \Payavel\Orchestration\Contracts\Accountable getAccount()
  * @method static void setAccount($account, $strict = true)
- * @method static void reset()
  * @method static string|int|\Payavel\Orchestration\Contracts\Accountable getDefaultAccount()
+ * @method static void reset()
  * @method static \Payavel\Checkout\CheckoutResponse getWallet(\Payavel\Checkout\Models\Wallet $wallet)
  * @method static \Payavel\Checkout\CheckoutResponse getPaymentInstrument(\Payavel\Checkout\Models\PaymentInstrument $paymentInstrument)
  * @method static \Payavel\Checkout\CheckoutResponse tokenizePaymentInstrument(\Payavel\Checkout\Contracts\Billable $billable, $data)

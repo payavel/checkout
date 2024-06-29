@@ -3,7 +3,7 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Orchestration\ServiceConfig;
+use Payavel\Checkout\Facades\Checkout;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class Dispute extends Model
@@ -52,7 +52,7 @@ class Dispute extends Model
      */
     public function payment()
     {
-        return $this->belongsTo(ServiceConfig::find('checkout')->get('models.' . Payment::class, Payment::class));
+        return $this->belongsTo(Checkout::config('models.' . Payment::class, Payment::class));
     }
 
     /**
@@ -62,6 +62,6 @@ class Dispute extends Model
      */
     public function transactionEvents()
     {
-        return $this->morphMany(ServiceConfig::find('checkout')->get('models.' . TransactionEvent::class, TransactionEvent::class), 'transactionable');
+        return $this->morphMany(Checkout::config('models.' . TransactionEvent::class, TransactionEvent::class), 'transactionable');
     }
 }

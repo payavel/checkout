@@ -3,7 +3,7 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Orchestration\ServiceConfig;
+use Payavel\Checkout\Facades\Checkout;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class PaymentRail extends Model
@@ -54,7 +54,7 @@ class PaymentRail extends Model
      */
     public function parentType()
     {
-        return $this->belongsTo(ServiceConfig::find('checkout')->get('models.' . PaymentType::class, PaymentType::class));
+        return $this->belongsTo(Checkout::config('models.' . PaymentType::class, PaymentType::class));
     }
 
     /**
@@ -64,7 +64,7 @@ class PaymentRail extends Model
      */
     public function type()
     {
-        return $this->belongsTo(ServiceConfig::find('checkout')->get('models.' . PaymentType::class, PaymentType::class));
+        return $this->belongsTo(Checkout::config('models.' . PaymentType::class, PaymentType::class));
     }
 
     /**
@@ -74,6 +74,6 @@ class PaymentRail extends Model
      */
     public function payments()
     {
-        return $this->hasMany(ServiceConfig::find('checkout')->get('models.' . Payment::class, Payment::class), 'rail_id');
+        return $this->hasMany(Checkout::config('models.' . Payment::class, Payment::class), 'rail_id');
     }
 }

@@ -3,11 +3,11 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Payavel\Checkout\Facades\Checkout;
 use Payavel\Orchestration\Contracts\Orchestrable;
 use Payavel\Orchestration\Traits\OrchestratesService;
 use Payavel\Orchestration\Models\Account;
 use Payavel\Orchestration\Models\Provider;
-use Payavel\Orchestration\ServiceConfig;
 use Payavel\Orchestration\Traits\HasFactory;
 
 class Wallet extends Model implements Orchestrable
@@ -63,7 +63,7 @@ class Wallet extends Model implements Orchestrable
      */
     public function provider()
     {
-        return $this->belongsTo(ServiceConfig::find('checkout')->get('models.' . Provider::class, Provider::class));
+        return $this->belongsTo(Checkout::config('models.' . Provider::class, Provider::class));
     }
 
     /**
@@ -73,7 +73,7 @@ class Wallet extends Model implements Orchestrable
      */
     public function account()
     {
-        return $this->belongsTo(ServiceConfig::find('checkout')->get('models.' . Account::class, Account::class));
+        return $this->belongsTo(Checkout::config('models.' . Account::class, Account::class));
     }
 
     /**
@@ -83,7 +83,7 @@ class Wallet extends Model implements Orchestrable
      */
     public function paymentInstruments()
     {
-        return $this->hasMany(ServiceConfig::find('checkout')->get('models.' . PaymentInstrument::class, PaymentInstrument::class));
+        return $this->hasMany(Checkout::config('models.' . PaymentInstrument::class, PaymentInstrument::class));
     }
 
     /**
