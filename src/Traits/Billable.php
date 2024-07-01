@@ -2,8 +2,8 @@
 
 namespace Payavel\Checkout\Traits;
 
+use Payavel\Checkout\Facades\Checkout;
 use Payavel\Checkout\Models\Wallet;
-use Payavel\Orchestration\ServiceConfig;
 
 trait Billable
 {
@@ -14,6 +14,6 @@ trait Billable
      */
     public function wallets()
     {
-        return $this->morphMany(ServiceConfig::find('checkout')->get('models.' . Wallet::class, Wallet::class), 'billable');
+        return $this->morphMany(Checkout::config('models.' . Wallet::class, Wallet::class), 'billable');
     }
 }
