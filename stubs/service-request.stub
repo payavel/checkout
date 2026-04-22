@@ -16,7 +16,7 @@ class {{ Provider }}CheckoutRequest extends CheckoutRequest implements CheckoutR
      *
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         //
     }

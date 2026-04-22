@@ -27,10 +27,10 @@ class CheckoutInstall extends Command
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $this->call('vendor:publish', ['--tag' => 'payavel-checkout-stubs']);
 
-        return parent::handle();
+        parent::handle();
     }
 }

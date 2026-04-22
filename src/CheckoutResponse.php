@@ -15,7 +15,7 @@ abstract class CheckoutResponse extends ServiceResponse implements CheckoutRespo
      *
      * @var array
      */
-    protected $successStatuses = [
+    protected array $successStatuses = [
         CheckoutStatus::AUTHORIZED,
         CheckoutStatus::APPROVED,
         CheckoutStatus::CAPTURED,
@@ -37,7 +37,7 @@ abstract class CheckoutResponse extends ServiceResponse implements CheckoutRespo
      *
      * @return string|null
      */
-    public function getStatusMessage()
+    public function getStatusMessage(): ?string
     {
         return CheckoutStatus::get($this->getStatusCode());
     }
@@ -47,7 +47,7 @@ abstract class CheckoutResponse extends ServiceResponse implements CheckoutRespo
      *
      * @return string|null
      */
-    public function getStatusDescription()
+    public function getStatusDescription(): ?string
     {
         return CheckoutStatus::getMessage($this->getStatusCode());
     }

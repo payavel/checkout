@@ -330,7 +330,7 @@ class TestCheckoutResponse extends CheckoutResponse
         ];
     }
 
-    public function getStatusCode()
+    public function getStatusCode(): string|int
     {
         return CheckoutStatus::AUTHORIZED;
     }
