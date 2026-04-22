@@ -35,8 +35,6 @@ class TestCase extends \Payavel\Orchestration\Tests\TestCase
 
     /**
      * Setup the test environment.
-     *
-     * @return void
      */
     protected function setUp(): void
     {

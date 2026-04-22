@@ -3,6 +3,7 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Payavel\Checkout\Facades\Checkout;
 use Payavel\Orchestration\Traits\HasFactory;
 
@@ -26,30 +27,24 @@ class PaymentType extends Model
 
     /**
      * Custom factory namespace fallback.
-     *
-     * @return string
      */
-    protected static function getFactoryNamespace()
+    protected static function getFactoryNamespace(): string
     {
         return 'Payavel\\Checkout\\Database\\Factories';
     }
 
     /**
      * Get the payment rail this type could potentially use.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function rails()
+    public function rails(): HasMany
     {
         return $this->hasMany(Checkout::config('models.' . PaymentRail::class, PaymentRail::class), 'parent_type_id');
     }
 
     /**
      * Get the payment instruments that inherit this type.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function instruments()
+    public function instruments(): HasMany
     {
         return $this->hasMany(Checkout::config('models.' . PaymentInstrument::class, PaymentInstrument::class), 'type_id');
     }

@@ -18,7 +18,7 @@ class PaymentModelTest extends TestPaymentModel
     use SetsDatabaseDriver;
 
     #[Test]
-    public function retrieve_payment_provider()
+    public function retrieve_payment_provider(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -34,7 +34,7 @@ class PaymentModelTest extends TestPaymentModel
     }
 
     #[Test]
-    public function retrieve_payment_account()
+    public function retrieve_payment_account(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),

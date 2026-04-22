@@ -9,68 +9,52 @@ interface CheckoutResponder
      *
      * @return array|mixed
      */
-    public function getWalletResponse();
+    public function getWalletResponse(): mixed;
 
     /**
      * Maps details from the getPaymentInstrument() response to the expected format.
      *
      * @return array|mixed
      */
-    public function getPaymentInstrumentResponse();
+    public function getPaymentInstrumentResponse(): mixed;
 
     /**
      * Maps details from the tokenizePaymentInstrument() response to the expected format.
-     *
-     * @return array|mixed
      */
-    public function tokenizePaymentInstrumentResponse();
+    public function tokenizePaymentInstrumentResponse(): mixed;
 
     /**
      * Maps details from the updatePaymentInstrument() response to the expected format.
-     *
-     * @return array|mixed
      */
-    public function updatePaymentInstrumentResponse();
+    public function updatePaymentInstrumentResponse(): mixed;
 
     /**
      * Maps details from the deletePaymentInstrument() response to the expected format.
-     *
-     * @return array|mixed
      */
-    public function deletePaymentInstrumentResponse();
+    public function deletePaymentInstrumentResponse(): mixed;
 
     /**
      * Maps details from the authorize() response to the expected format.
-     *
-     * @return array|mixed
      */
-    public function authorizeResponse();
+    public function authorizeResponse(): mixed;
 
     /**
      * Maps details from the capture() response to the expected format.
-     *
-     * @return array|mixed
      */
-    public function captureResponse();
+    public function captureResponse(): mixed;
 
     /**
      * Maps details from the getTransaction() response to the expected format.
-     *
-     * @return array|mixed
      */
-    public function getTransactionResponse();
+    public function getTransactionResponse(): mixed;
 
     /**
      * Maps details from the void() response to the expected format.
-     *
-     * @return array|mixed
      */
-    public function voidResponse();
+    public function voidResponse(): mixed;
 
     /**
      * Maps details from the refund() response to the expected format.
-     *
-     * @return array|mixed
      */
-    public function refundResponse();
+    public function refundResponse(): mixed;
 }

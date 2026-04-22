@@ -19,8 +19,6 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
 {
     /**
      * Setup the test environment.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
@@ -38,7 +36,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 
     #[Test]
-    public function get_wallet_method_returns_configured_response()
+    public function get_wallet_method_returns_configured_response(): void
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
@@ -53,7 +51,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 
     #[Test]
-    public function get_payment_instrument_method_returns_configured_response()
+    public function get_payment_instrument_method_returns_configured_response(): void
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
@@ -72,7 +70,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 
     #[Test]
-    public function tokenize_payment_instrument_method_returns_configured_response()
+    public function tokenize_payment_instrument_method_returns_configured_response(): void
     {
         $user = User::factory()->create();
 
@@ -84,7 +82,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 
     #[Test]
-    public function update_payment_instrument_method_returns_configured_response()
+    public function update_payment_instrument_method_returns_configured_response(): void
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
@@ -103,7 +101,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 
     #[Test]
-    public function delete_payment_instrument_method_returns_configured_response()
+    public function delete_payment_instrument_method_returns_configured_response(): void
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
@@ -122,7 +120,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 
     #[Test]
-    public function authorize_method_returns_configured_response()
+    public function authorize_method_returns_configured_response(): void
     {
         $response = Checkout::authorize([]);
 
@@ -132,7 +130,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 
     #[Test]
-    public function capture_method_returns_configured_response()
+    public function capture_method_returns_configured_response(): void
     {
         $payment = Payment::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
@@ -147,7 +145,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 
     #[Test]
-    public function get_transaction_method_returns_configured_response()
+    public function get_transaction_method_returns_configured_response(): void
     {
         $payment = Payment::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
@@ -162,7 +160,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 
     #[Test]
-    public function void_method_returns_configured_response()
+    public function void_method_returns_configured_response(): void
     {
         $payment = Payment::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
@@ -177,7 +175,7 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
     }
 
     #[Test]
-    public function refund_method_returns_configured_response()
+    public function refund_method_returns_configured_response(): void
     {
         $payment = Payment::factory()->create([
             'provider_id' => Checkout::getProvider()->getId(),
@@ -193,12 +191,8 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
 
     /**
      * Assert the response is configured automatically.
-     *
-     * @param string $requestMethod
-     * @param \Payavel\Checkout\CheckoutResponse $response
-     * @return void
      */
-    protected function assertResponseIsConfigured(CheckoutResponse $response)
+    protected function assertResponseIsConfigured(CheckoutResponse $response): void
     {
         $this->assertEquals(Checkout::getProvider()->getId(), $response->provider->id);
         $this->assertEquals(Checkout::getAccount()->getId(), $response->account->id);
@@ -207,52 +201,52 @@ abstract class TestCheckoutGateway extends TestCase implements CreatesServiceabl
 
 class TestCheckoutRequest extends CheckoutRequest
 {
-    public function getWallet(Wallet $wallet)
+    public function getWallet(Wallet $wallet): CheckoutResponse
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function getPaymentInstrument(PaymentInstrument $paymentInstrument)
+    public function getPaymentInstrument(PaymentInstrument $paymentInstrument): CheckoutResponse
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function tokenizePaymentInstrument(Billable $billable, $data)
+    public function tokenizePaymentInstrument(Billable $billable, $data): CheckoutResponse
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function updatePaymentInstrument(PaymentInstrument $paymentInstrument, $data)
+    public function updatePaymentInstrument(PaymentInstrument $paymentInstrument, $data): CheckoutResponse
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function deletePaymentInstrument(PaymentInstrument $paymentInstrument)
+    public function deletePaymentInstrument(PaymentInstrument $paymentInstrument): CheckoutResponse
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function authorize($data, Billable $billable = null)
+    public function authorize($data, ?Billable $billable = null): CheckoutResponse
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function capture(Payment $payment, $data = [])
+    public function capture(Payment $payment, $data = []): CheckoutResponse
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function getTransaction(Payment $transaction)
+    public function getTransaction(Payment $transaction): CheckoutResponse
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function void(Payment $payment, $data = [])
+    public function void(Payment $payment, $data = []): CheckoutResponse
     {
         return new TestCheckoutResponse([]);
     }
 
-    public function refund(Payment $payment, $data = [])
+    public function refund(Payment $payment, $data = []): CheckoutResponse
     {
         return new TestCheckoutResponse([]);
     }
@@ -260,70 +254,70 @@ class TestCheckoutRequest extends CheckoutRequest
 
 class TestCheckoutResponse extends CheckoutResponse
 {
-    public function getWalletResponse()
+    public function getWalletResponse(): array
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function getPaymentInstrumentResponse()
+    public function getPaymentInstrumentResponse(): array
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function tokenizePaymentInstrumentResponse()
+    public function tokenizePaymentInstrumentResponse(): array
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function updatePaymentInstrumentResponse()
+    public function updatePaymentInstrumentResponse(): array
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function deletePaymentInstrumentResponse()
+    public function deletePaymentInstrumentResponse(): array
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function authorizeResponse()
+    public function authorizeResponse(): array
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function captureResponse()
+    public function captureResponse(): array
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function getTransactionResponse()
+    public function getTransactionResponse(): array
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function voidResponse()
+    public function voidResponse(): array
     {
         return [
             'requestMethod' => $this->requestMethod,
         ];
     }
 
-    public function refundResponse()
+    public function refundResponse(): array
     {
         return [
             'requestMethod' => $this->requestMethod,

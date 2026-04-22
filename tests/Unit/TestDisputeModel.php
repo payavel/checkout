@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\Test;
 abstract class TestDisputeModel extends TestCase implements CreatesServiceables
 {
     #[Test]
-    public function retrieve_dispute_payment()
+    public function retrieve_dispute_payment(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -30,7 +30,7 @@ abstract class TestDisputeModel extends TestCase implements CreatesServiceables
     }
 
     #[Test]
-    public function retrieve_dispute_transaction_events()
+    public function retrieve_dispute_transaction_events(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),

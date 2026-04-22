@@ -20,7 +20,7 @@ use PHPUnit\Framework\Attributes\Test;
 abstract class TestPaymentModel extends TestCase implements CreatesServiceables
 {
     #[Test]
-    public function retrieve_payment_rail()
+    public function retrieve_payment_rail(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -36,7 +36,7 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
     }
 
     #[Test]
-    public function retrieve_payment_instrument()
+    public function retrieve_payment_instrument(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -55,7 +55,7 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
     }
 
     #[Test]
-    public function retrieve_payment_events()
+    public function retrieve_payment_events(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -76,7 +76,7 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
     }
 
     #[Test]
-    public function retrieve_payment_transaction_events()
+    public function retrieve_payment_transaction_events(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -97,7 +97,7 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
     }
 
     #[Test]
-    public function retrieve_payment_providable()
+    public function retrieve_payment_providable(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -109,7 +109,7 @@ abstract class TestPaymentModel extends TestCase implements CreatesServiceables
     }
 
     #[Test]
-    public function retrieve_payment_accountable()
+    public function retrieve_payment_accountable(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),

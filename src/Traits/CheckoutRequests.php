@@ -14,81 +14,56 @@ trait CheckoutRequests
 
     /**
      * Retrieve the wallet's details from the provider.
-     *
-     * @param \Payavel\Checkout\Models\Wallet $wallet
-     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function getWallet(Wallet $wallet)
+    public function getWallet(Wallet $wallet): mixed
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
      * Retrieve the payment instrument's details from the provider.
-     *
-     * @param \Payavel\Checkout\Models\PaymentInstrument $paymentInstrument
-     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function getPaymentInstrument(PaymentInstrument $paymentInstrument)
+    public function getPaymentInstrument(PaymentInstrument $paymentInstrument): mixed
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
      * Store the payment instrument details at the provider.
-     *
-     * @param \Payavel\Checkout\Contracts\Billable $billable
-     * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function tokenizePaymentInstrument(Billable $billable, $data)
+    public function tokenizePaymentInstrument(Billable $billable, $data): mixed
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
      * Update the payment instrument's details at the provider.
-     *
-     * @param \Payavel\Checkout\Models\PaymentInstrument $paymentInstrument
-     * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function updatePaymentInstrument(PaymentInstrument $paymentInstrument, $data)
+    public function updatePaymentInstrument(PaymentInstrument $paymentInstrument, $data): mixed
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
      * Delete the payment instrument at the provider.
-     *
-     * @param \Payavel\Checkout\Models\PaymentInstrument $paymentInstrument
-     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function deletePaymentInstrument(PaymentInstrument $paymentInstrument)
+    public function deletePaymentInstrument(PaymentInstrument $paymentInstrument): mixed
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
      * Authorize a payment.
-     *
-     * @param array|mixed $data
-     * @param \Payavel\Checkout\Contracts\Billable|null $billable
-     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function authorize($data, Billable $billable = null)
+    public function authorize($data, ?Billable $billable): mixed
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
      * Capture an authorized payment.
-     *
-     * @param \Payavel\Checkout\Models\Payment $payment
-     * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function capture(Payment $payment, $data = [])
+    public function capture(Payment $payment, $data = []): mixed
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
@@ -96,35 +71,24 @@ trait CheckoutRequests
     // ToDo: The param should be an instance of Transactionable (Payment, Refund or Dispute)
     /**
      * Retrieve the transaction details from the provider.
-     *
-     * @param \Payavel\Checkout\Models\Payment $transaction
-     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function getTransaction(Payment $transaction)
+    public function getTransaction(Payment $transaction): mixed
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
      * Void an authorized payment.
-     *
-     * @param \Payavel\Checkout\Models\Payment $payment
-     * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function void(Payment $payment, $data = [])
+    public function void(Payment $payment, $data = []): mixed
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
      * Refund a payment.
-     *
-     * @param \Payavel\Checkout\Models\Payment $payment
-     * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse|mixed
      */
-    public function refund(Payment $payment, $data = [])
+    public function refund(Payment $payment, $data = []): mixed
     {
         $this->throwRuntimeException(__FUNCTION__);
     }

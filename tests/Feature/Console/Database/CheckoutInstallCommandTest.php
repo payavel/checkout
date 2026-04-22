@@ -18,12 +18,10 @@ class CheckoutInstallCommandTest extends TestCheckoutInstallCommand
 
     /**
      * Determines if the generated migration has already been executed.
-     *
-     * @var boolean
      */
     private bool $migrated = false;
 
-    protected function makeSureProviderExists(Providable $provider)
+    protected function makeSureProviderExists(Providable $provider): void
     {
         $this->migrate();
 
@@ -36,7 +34,7 @@ class CheckoutInstallCommandTest extends TestCheckoutInstallCommand
         );
     }
 
-    protected function makeSureAccountExists(Accountable $account)
+    protected function makeSureAccountExists(Accountable $account): void
     {
         $this->migrate();
 
@@ -46,7 +44,7 @@ class CheckoutInstallCommandTest extends TestCheckoutInstallCommand
         $this->assertNotEmpty($account->providers);
     }
 
-    protected function makeSureProviderIsLinkedToAccount(Providable $provider, Accountable $account)
+    protected function makeSureProviderIsLinkedToAccount(Providable $provider, Accountable $account): void
     {
         $this->migrate();
 
@@ -57,7 +55,7 @@ class CheckoutInstallCommandTest extends TestCheckoutInstallCommand
         $this->assertNotNull($account->providers()->where('providers.id', $provider->id)->first());
     }
 
-    private function migrate()
+    private function migrate(): void
     {
         if ($this->migrated) {
             return;

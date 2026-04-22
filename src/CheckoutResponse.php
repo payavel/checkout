@@ -12,8 +12,6 @@ abstract class CheckoutResponse extends ServiceResponse implements CheckoutRespo
 
     /**
      * Statuses in this array are considered successful.
-     *
-     * @var array
      */
     protected array $successStatuses = [
         CheckoutStatus::AUTHORIZED,
@@ -34,8 +32,6 @@ abstract class CheckoutResponse extends ServiceResponse implements CheckoutRespo
 
     /**
      * Get a string representation of the response's status.
-     *
-     * @return string|null
      */
     public function getStatusMessage(): ?string
     {
@@ -44,8 +40,6 @@ abstract class CheckoutResponse extends ServiceResponse implements CheckoutRespo
 
     /**
      * Get a description of the response's status.
-     *
-     * @return string|null
      */
     public function getStatusDescription(): ?string
     {

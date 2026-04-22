@@ -3,6 +3,9 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Payavel\Checkout\CheckoutResponse;
 use Payavel\Checkout\Facades\Checkout;
 use Payavel\Orchestration\Traits\HasFactory;
 
@@ -38,71 +41,56 @@ class PaymentInstrument extends Model
 
     /**
      * Custom factory namespace fallback.
-     *
-     * @return string
      */
-    protected static function getFactoryNamespace()
+    protected static function getFactoryNamespace(): string
     {
         return 'Payavel\\Checkout\\Database\\Factories';
     }
 
     /**
      * Get the wallet the payment instrument belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function wallet()
+    public function wallet(): BelongsTo
     {
         return $this->belongsTo(Checkout::config('models.' . Wallet::class, Wallet::class));
     }
 
     /**
      * Get the payment instrument's type
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function type()
+    public function type(): BelongsTo
     {
         return $this->belongsTo(Checkout::config('models.' . PaymentType::class, PaymentType::class));
     }
 
     /**
      * Get the payments that this instrument has been used for.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function payments()
+    public function payments(): HasMany
     {
         return $this->hasMany(Checkout::config('models.' . Payment::class, Payment::class), 'instrument_id');
     }
 
     /**
      * Fetch the payment instrument details from the provider.
-     *
-     * @return \Payavel\Checkout\CheckoutResponse
      */
-    public function fetch()
+    public function fetch(): CheckoutResponse
     {
         return $this->wallet->service->getPaymentInstrument($this);
     }
 
     /**
      * Request the provider to update the payment instrument's details.
-     *
-     * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse
      */
-    public function patch($data)
+    public function patch($data): CheckoutResponse
     {
         return $this->wallet->service->updatePaymentInstrument($this, $data);
     }
 
     /**
      * Request the provider to remove the payment instrument from their system.
-     *
-     * @return \Payavel\Checkout\CheckoutResponse
      */
-    public function disable()
+    public function disable(): CheckoutResponse
     {
         return $this->wallet->service->deletePaymentInstrument($this);
     }

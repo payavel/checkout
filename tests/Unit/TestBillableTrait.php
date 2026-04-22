@@ -12,12 +12,12 @@ use PHPUnit\Framework\Attributes\Test;
 abstract class TestBillableTrait extends TestCase implements CreatesServiceables
 {
     #[Test]
-    public function retrieve_billable_wallets()
+    public function retrieve_billable_wallets(): void
     {
         $billable = User::factory()->create();
         $this->assertEmpty($billable->wallets);
 
-        $billableWith2Wallets = User::factory()->has(Wallet::factory()->count(2)->sequence(fn () => [
+        $billableWith2Wallets = User::factory()->has(Wallet::factory()->count(2)->sequence(fn (): array => [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
             'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ]))->create();
@@ -25,7 +25,7 @@ abstract class TestBillableTrait extends TestCase implements CreatesServiceables
         $this->assertContainsOnlyInstancesOf(Wallet::class, $billableWith2Wallets->wallets);
 
         $this->checkoutConfig->set('models.'.Wallet::class, TestWallet::class);
-        $billableWith3OverriddenWallets = User::factory()->has(Wallet::factory()->count(3)->sequence(fn () => [
+        $billableWith3OverriddenWallets = User::factory()->has(Wallet::factory()->count(3)->sequence(fn (): array => [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
             'account_id' => $this->createAccount($this->checkoutConfig)->getId(),
         ]))->create();

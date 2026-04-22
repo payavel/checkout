@@ -15,7 +15,7 @@ abstract class TestCheckoutInstallCommand extends TestCase implements CreatesSer
     use AssertsServiceExists;
 
     #[Test]
-    public function checkout_install_command_injects_checkout_service_into_orchestrate_service_command()
+    public function checkout_install_command_injects_checkout_service_into_orchestrate_service_command(): void
     {
         $provider = $this->createProvider($this->checkoutConfig);
         $account = $this->createAccount($this->checkoutConfig);

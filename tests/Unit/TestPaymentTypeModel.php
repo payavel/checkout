@@ -15,7 +15,7 @@ use PHPUnit\Framework\Attributes\Test;
 abstract class TestPaymentTypeModel extends TestCase implements CreatesServiceables
 {
     #[Test]
-    public function retrieve_payment_type_rails()
+    public function retrieve_payment_type_rails(): void
     {
         $paymentType = PaymentType::factory()->create();
         $this->assertEmpty($paymentType->rails);
@@ -31,7 +31,7 @@ abstract class TestPaymentTypeModel extends TestCase implements CreatesServiceab
     }
 
     #[Test]
-    public function retrieve_payment_type_instruments()
+    public function retrieve_payment_type_instruments(): void
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),

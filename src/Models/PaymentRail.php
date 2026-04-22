@@ -3,6 +3,8 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Payavel\Checkout\Facades\Checkout;
 use Payavel\Orchestration\Traits\HasFactory;
 
@@ -26,11 +28,10 @@ class PaymentRail extends Model
 
     /**
      * Set the rail's id.
-     * @return void
      */
     protected static function booted(): void
     {
-        static::saving(function (PaymentRail $paymentRail) {
+        static::saving(function (PaymentRail $paymentRail): void {
             $paymentRail->id = $paymentRail->parent_type_id === $paymentRail->type_id
                 ? $paymentRail->type_id
                 : "{$paymentRail->parent_type_id}:{$paymentRail->type_id}";
@@ -39,40 +40,32 @@ class PaymentRail extends Model
 
     /**
      * Custom factory namespace fallback.
-     *
-     * @return string
      */
-    protected static function getFactoryNamespace()
+    protected static function getFactoryNamespace(): string
     {
         return 'Payavel\\Checkout\\Database\\Factories';
     }
 
     /**
      * Get the parent payment type.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function parentType()
+    public function parentType(): BelongsTo
     {
         return $this->belongsTo(Checkout::config('models.' . PaymentType::class, PaymentType::class));
     }
 
     /**
      * Get the rail's payment type.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function type()
+    public function type(): BelongsTo
     {
         return $this->belongsTo(Checkout::config('models.' . PaymentType::class, PaymentType::class));
     }
 
     /**
      * Get the payments that were processed over this rail.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function payments()
+    public function payments(): HasMany
     {
         return $this->hasMany(Checkout::config('models.' . Payment::class, Payment::class), 'rail_id');
     }

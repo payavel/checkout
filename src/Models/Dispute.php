@@ -3,6 +3,8 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Payavel\Checkout\Facades\Checkout;
 use Payavel\Orchestration\Traits\HasFactory;
 
@@ -37,30 +39,24 @@ class Dispute extends Model
 
     /**
      * Custom factory namespace fallback.
-     *
-     * @return string
      */
-    protected static function getFactoryNamespace()
+    protected static function getFactoryNamespace(): string
     {
         return 'Payavel\\Checkout\\Database\\Factories';
     }
 
     /**
      * Get the payment that is being disputed.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function payment()
+    public function payment(): BelongsTo
     {
         return $this->belongsTo(Checkout::config('models.' . Payment::class, Payment::class));
     }
 
     /**
      * Get the transaction specific events.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function transactionEvents()
+    public function transactionEvents(): MorphMany
     {
         return $this->morphMany(Checkout::config('models.' . TransactionEvent::class, TransactionEvent::class), 'transactionable');
     }

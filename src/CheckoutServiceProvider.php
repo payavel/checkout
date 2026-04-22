@@ -8,7 +8,7 @@ use Payavel\Checkout\Console\Commands\CheckoutProvider;
 
 class CheckoutServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         if (! $this->app->runningInConsole()) {
             return;
@@ -21,11 +21,11 @@ class CheckoutServiceProvider extends ServiceProvider
         $this->registerMigrations();
     }
 
-    public function register()
+    public function register(): void
     {
         $this->app->singleton(
             CheckoutGateway::class,
-            fn ($app) => new CheckoutGateway()
+            fn ($app): CheckoutGateway => new CheckoutGateway()
         );
 
         $this->mergeConfigFrom(

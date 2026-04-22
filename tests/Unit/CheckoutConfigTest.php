@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\Test;
 class CheckoutConfigTest extends TestCase
 {
     #[Test]
-    public function get_checkout_config_via_facade()
+    public function get_checkout_config_via_facade(): void
     {
         Config::set('checkout.test', true);
 
@@ -18,7 +18,7 @@ class CheckoutConfigTest extends TestCase
     }
 
     #[Test]
-    public function set_checkout_config_via_facade()
+    public function set_checkout_config_via_facade(): void
     {
         Checkout::config([
             'test' => [

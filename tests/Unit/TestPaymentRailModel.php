@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\Test;
 abstract class TestPaymentRailModel extends TestCase implements CreatesServiceables
 {
     #[Test]
-    public function payment_rail_generates_id_before_committing()
+    public function payment_rail_generates_id_before_committing(): void
     {
         $parentPaymentType = PaymentType::factory()->create();
         $paymentType = PaymentType::factory()->create();
@@ -28,7 +28,7 @@ abstract class TestPaymentRailModel extends TestCase implements CreatesServiceab
     }
 
     #[Test]
-    public function payment_rail_generates_the_same_id_before_committing_when_parent_type_is_equal_to_type()
+    public function payment_rail_generates_the_same_id_before_committing_when_parent_type_is_equal_to_type(): void
     {
         $paymentType = PaymentType::factory()->create();
 
@@ -41,7 +41,7 @@ abstract class TestPaymentRailModel extends TestCase implements CreatesServiceab
     }
 
     #[Test]
-    public function retrieve_payment_rail_parent_type()
+    public function retrieve_payment_rail_parent_type(): void
     {
         $paymentRail = PaymentRail::factory()->create();
         $this->assertInstanceOf(PaymentType::class, $paymentRail->parentType);
@@ -52,7 +52,7 @@ abstract class TestPaymentRailModel extends TestCase implements CreatesServiceab
     }
 
     #[Test]
-    public function retrieve_payment_rail_type()
+    public function retrieve_payment_rail_type(): void
     {
         $paymentRail = PaymentRail::factory()->create();
         $this->assertInstanceOf(PaymentType::class, $paymentRail->type);
@@ -63,7 +63,7 @@ abstract class TestPaymentRailModel extends TestCase implements CreatesServiceab
     }
 
     #[Test]
-    public function retrieve_payment_rail_payments()
+    public function retrieve_payment_rail_payments(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),

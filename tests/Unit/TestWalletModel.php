@@ -16,7 +16,7 @@ use PHPUnit\Framework\Attributes\Test;
 abstract class TestWalletModel extends TestCase implements CreatesServiceables
 {
     #[Test]
-    public function retrieve_wallet_billable()
+    public function retrieve_wallet_billable(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -32,7 +32,7 @@ abstract class TestWalletModel extends TestCase implements CreatesServiceables
     }
 
     #[Test]
-    public function retrieve_wallet_payment_instruments()
+    public function retrieve_wallet_payment_instruments(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -53,7 +53,7 @@ abstract class TestWalletModel extends TestCase implements CreatesServiceables
     }
 
     #[Test]
-    public function retrieve_wallet_providable()
+    public function retrieve_wallet_providable(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -65,7 +65,7 @@ abstract class TestWalletModel extends TestCase implements CreatesServiceables
     }
 
     #[Test]
-    public function retrieve_wallet_accountable()
+    public function retrieve_wallet_accountable(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),

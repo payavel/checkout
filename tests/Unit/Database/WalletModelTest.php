@@ -18,7 +18,7 @@ class WalletModelTest extends TestWalletModel
     use SetsDatabaseDriver;
 
     #[Test]
-    public function retrieve_wallet_provider()
+    public function retrieve_wallet_provider(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -34,7 +34,7 @@ class WalletModelTest extends TestWalletModel
     }
 
     #[Test]
-    public function retrieve_wallet_account()
+    public function retrieve_wallet_account(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),

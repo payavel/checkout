@@ -15,8 +15,6 @@ class TestPaymentType extends PaymentType
 
     /**
      * Check if model is overridden for testing purposes.
-     *
-     * @var bool
      */
     public bool $overridden = true;
 }

@@ -3,6 +3,10 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Payavel\Checkout\CheckoutResponse;
 use Payavel\Checkout\Facades\Checkout;
 use Payavel\Orchestration\Contracts\Orchestrable;
 use Payavel\Orchestration\Models\Account;
@@ -42,109 +46,85 @@ class Payment extends Model implements Orchestrable
 
     /**
      * The orchestra's service id.
-     *
-     * @var string
      */
-    protected $serviceId = 'checkout';
+    protected string $serviceId = 'checkout';
 
     /**
      * Custom factory namespace fallback.
-     *
-     * @return string
      */
-    protected static function getFactoryNamespace()
+    protected static function getFactoryNamespace(): string
     {
         return 'Payavel\\Checkout\\Database\\Factories';
     }
 
     /**
      * Get the provider that processed the payment.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function provider()
+    public function provider(): BelongsTo
     {
         return $this->belongsTo(Checkout::config('models.' . Provider::class, Provider::class));
     }
 
     /**
      * Get the account the payment belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function account()
+    public function account(): BelongsTo
     {
         return $this->belongsTo(Checkout::config('models.' . Account::class, Account::class));
     }
 
     /**
      * Get the rail the payment was processed on.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function rail()
+    public function rail(): BelongsTo
     {
         return $this->belongsTo(Checkout::config('models.' . PaymentRail::class, PaymentRail::class));
     }
 
     /**
      * Get the instrument used to process this payment.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function instrument()
+    public function instrument(): BelongsTo
     {
         return $this->belongsTo(Checkout::config('models.' . PaymentInstrument::class, PaymentInstrument::class));
     }
 
     /**
      * Get the payment event full history.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function events()
+    public function events(): HasMany
     {
         return $this->hasMany(Checkout::config('models.' . TransactionEvent::class, TransactionEvent::class));
     }
 
     /**
      * Get the transaction specific events.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function transactionEvents()
+    public function transactionEvents(): MorphMany
     {
         return $this->morphMany(Checkout::config('models.' . TransactionEvent::class, TransactionEvent::class), 'transactionable');
     }
 
     /**
      * Fetch the payment details from the provider.
-     *
-     * @return \Payavel\Checkout\CheckoutResponse
      */
-    public function fetch()
+    public function fetch(): CheckoutResponse
     {
         return $this->service->getTransaction($this);
     }
 
     /**
      * Request the provider to void the payment.
-     *
-     * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse
      */
-    public function void($data = [])
+    public function void($data = []): CheckoutResponse
     {
         return $this->service->void($this, $data);
     }
 
     /**
      * Request the provider to refund the payment.
-     *
-     * @param array|mixed $data
-     * @return \Payavel\Checkout\CheckoutResponse
      */
-    public function refund($data = [])
+    public function refund($data = []): CheckoutResponse
     {
         return $this->service->refund($this, $data);
     }

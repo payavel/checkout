@@ -13,11 +13,9 @@ trait CheckoutResponses
     /**
      * Maps details from the getWallet() response to the expected format.
      *
-     * @return array|mixed
-     *
      * @throws \RuntimeException|Exception
      */
-    public function getWalletResponse()
+    public function getWalletResponse(): mixed
     {
         return $this->genericResponse(__FUNCTION__);
     }
@@ -25,11 +23,9 @@ trait CheckoutResponses
     /**
      * Maps details from the getPaymentInstrument() response to the expected format.
      *
-     * @return array|mixed
-     *
      * @throws \RuntimeException|Exception
      */
-    public function getPaymentInstrumentResponse()
+    public function getPaymentInstrumentResponse(): mixed
     {
         return $this->genericResponse(__FUNCTION__);
     }
@@ -37,11 +33,9 @@ trait CheckoutResponses
     /**
      * Maps details from the tokenizePaymentInstrument() response to the expected format.
      *
-     * @return array|mixed
-     *
      * @throws \RuntimeException|Exception
      */
-    public function tokenizePaymentInstrumentResponse()
+    public function tokenizePaymentInstrumentResponse(): mixed
     {
         return $this->genericResponse(__FUNCTION__);
     }
@@ -49,11 +43,9 @@ trait CheckoutResponses
     /**
      * Maps details from the updatePaymentInstrument() response to the expected format.
      *
-     * @return array|mixed
-     *
      * @throws \RuntimeException|Exception
      */
-    public function updatePaymentInstrumentResponse()
+    public function updatePaymentInstrumentResponse(): mixed
     {
         return $this->genericResponse(__FUNCTION__);
     }
@@ -61,11 +53,9 @@ trait CheckoutResponses
     /**
      * Maps details from the deletePaymentInstrument() response to the expected format.
      *
-     * @return array|mixed
-     *
      * @throws \RuntimeException|Exception
      */
-    public function deletePaymentInstrumentResponse()
+    public function deletePaymentInstrumentResponse(): mixed
     {
         return $this->genericResponse(__FUNCTION__);
     }
@@ -73,11 +63,9 @@ trait CheckoutResponses
     /**
      * Maps details from the authorize() response to the expected format.
      *
-     * @return array|mixed
-     *
      * @throws \RuntimeException|Exception
      */
-    public function authorizeResponse()
+    public function authorizeResponse(): mixed
     {
         return $this->genericResponse(__FUNCTION__);
     }
@@ -85,21 +73,19 @@ trait CheckoutResponses
     /**
      * Maps details from the capture() response to the expected format.
      *
-     * @return array|mixed
-     *
      * @throws \RuntimeException|Exception
      */
-    public function captureResponse()
+    public function captureResponse(): mixed
     {
         return $this->genericResponse(__FUNCTION__);
     }
 
     /**
      * Maps details from the getTransaction() response to the expected format.
-     *
-     * @return array|mixed
-     */
-    public function getTransactionResponse()
+    *
+     * @throws \RuntimeException|Exception 
+    */
+    public function getTransactionResponse(): mixed
     {
         $this->throwRuntimeException(__FUNCTION__);
     }
@@ -107,11 +93,9 @@ trait CheckoutResponses
     /**
      * Maps details from the void() response to the expected format.
      *
-     * @return array|mixed
-     *
      * @throws \RuntimeException|Exception
      */
-    public function voidResponse()
+    public function voidResponse(): mixed
     {
         return $this->genericResponse(__FUNCTION__);
     }
@@ -119,11 +103,9 @@ trait CheckoutResponses
     /**
      * Maps details from the refund() response to the expected format.
      *
-     * @return array|mixed
-     *
      * @throws \RuntimeException|Exception
      */
-    public function refundResponse()
+    public function refundResponse(): mixed
     {
         return $this->genericResponse(__FUNCTION__);
     }
@@ -131,12 +113,9 @@ trait CheckoutResponses
     /**
      * Attempts to call the generic response Instrument, else throws RuntimeException.
      *
-     * @param string $function
-     * @return array|mixed
-     *
      * @throws \RuntimeException|Exception
      */
-    private function genericResponse($function)
+    private function genericResponse(string $function): mixed
     {
         try {
             return $this->response();
@@ -154,7 +133,7 @@ trait CheckoutResponses
      *
      * @throws \RuntimeException
      */
-    public function response()
+    public function response(): mixed
     {
         return $this->throwRuntimeException(__FUNCTION__);
     }

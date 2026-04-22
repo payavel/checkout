@@ -15,8 +15,6 @@ class TestProvider extends Provider
 
     /**
      * Check if model is overridden for testing purposes.
-     *
-     * @var bool
      */
     public bool $overridden = true;
 }

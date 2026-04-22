@@ -16,7 +16,7 @@ use PHPUnit\Framework\Attributes\Test;
 abstract class TestPaymentInstrumentModel extends TestCase implements CreatesServiceables
 {
     #[Test]
-    public function retrieve_payment_instrument_wallet()
+    public function retrieve_payment_instrument_wallet(): void
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -32,7 +32,7 @@ abstract class TestPaymentInstrumentModel extends TestCase implements CreatesSer
     }
 
     #[Test]
-    public function retrieve_payment_instrument_type()
+    public function retrieve_payment_instrument_type(): void
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -48,7 +48,7 @@ abstract class TestPaymentInstrumentModel extends TestCase implements CreatesSer
     }
 
     #[Test]
-    public function retrieve_payment_instrument_payments()
+    public function retrieve_payment_instrument_payments(): void
     {
         $wallet = Wallet::factory()->create([
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),

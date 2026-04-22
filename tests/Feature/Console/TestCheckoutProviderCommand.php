@@ -12,7 +12,7 @@ abstract class TestCheckoutProviderCommand extends TestCase implements CreatesSe
     use AssertsServiceExists;
 
     #[Test]
-    public function checkout_provider_command_injects_checkout_service_into_orchestrate_provider_command()
+    public function checkout_provider_command_injects_checkout_service_into_orchestrate_provider_command(): void
     {
         $provider = $this->createProvider($this->checkoutConfig);
 

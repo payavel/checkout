@@ -16,7 +16,7 @@ use PHPUnit\Framework\Attributes\Test;
 abstract class TestTransactionEventModel extends TestCase implements CreatesServiceables
 {
     #[Test]
-    public function retrieve_transaction_event_payment()
+    public function retrieve_transaction_event_payment(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),
@@ -32,7 +32,7 @@ abstract class TestTransactionEventModel extends TestCase implements CreatesServ
     }
 
     #[Test]
-    public function retrieve_transaction_event_transactionable()
+    public function retrieve_transaction_event_transactionable(): void
     {
         $usingServiceables = [
             'provider_id' => $this->createProvider($this->checkoutConfig)->getId(),

@@ -3,6 +3,8 @@
 namespace Payavel\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Payavel\Checkout\Facades\Checkout;
 use Payavel\Orchestration\Traits\HasFactory;
 
@@ -37,30 +39,24 @@ class TransactionEvent extends Model
 
     /**
      * Custom factory namespace fallback.
-     *
-     * @return string
      */
-    protected static function getFactoryNamespace()
+    protected static function getFactoryNamespace(): string
     {
         return 'Payavel\\Checkout\\Database\\Factories';
     }
 
     /**
      * Get the event's originating payment.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function payment()
+    public function payment(): BelongsTo
     {
         return $this->belongsTo(Checkout::config('models.' . Payment::class, Payment::class));
     }
 
     /**
      * Get the event's originating transaction.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function transactionable()
+    public function transactionable(): MorphTo
     {
         return $this->morphTo();
     }
